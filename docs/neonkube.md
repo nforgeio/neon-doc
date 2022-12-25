@@ -1,13 +1,14 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
+displayed_sidebar: neonkube
 title: Intro
 hide_title: false
 hide_table_of_contents: false
 description: Introduction.
 keywords:
-  - neonforge
+  - neonkube
 last_update:
   author: Marcus Bowyer
 ---
 
-# Intro
+# neonkube intro

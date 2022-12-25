@@ -1,0 +1,16 @@
+---
+sidebar_position: 1
+displayed_sidebar: neonsdk
+title: Intro
+hide_title: false
+hide_table_of_contents: false
+description: Introduction.
+keywords:
+  - neonsdk
+last_update:
+  author: Marcus Bowyer
+---
+
+# Intro
+
+NeonSDK is an open source project released under the Apache 2.0 license. This project includes several class general purpose libraries published as nuget packages (known as the Neon libraries).

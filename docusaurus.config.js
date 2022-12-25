@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'NeonKUBE Docs',
+  title: 'NeonFORGE Documentation',
   tagline: 'kubernetes for the rest of us',
   url: 'https://docs.neonkube.io',
   baseUrl: '/',
@@ -69,12 +69,15 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Docs',
+            to: '/docs/neonkube', 
+            label: 'neonkube', 
+            position: 'left'
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            to: '/docs/neonsdk', 
+            label: 'neonsdk', 
+            position: 'left'
+          },
           {
             href: 'https://github.com/nforgeio',
             label: 'GitHub',
