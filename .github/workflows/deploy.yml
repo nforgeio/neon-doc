@@ -28,7 +28,8 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.PAGES_TOKEN }}
+          personal_token: ${{ secrets.PAGES_TOKEN }}
+          external_repository: nforgeio-docs/nforgeio-docs.github.io
           # Build output to publish to the `gh-pages` branch:
           publish_dir: ./build
           # The following lines assign commit authorship to the official
