@@ -6,13 +6,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'NeonFORGE Documentation',
-  tagline: 'kubernetes for the rest of us',
+  title: 'neonFORGE Documentation',
+  tagline: 'Explanation and usage information for neonFORGE projects.',
   url: 'https://docs.neonkube.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -38,14 +38,14 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/nforgeio/documentation/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/nforgeio/documentation/edit/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/nforgeio/documentation/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/nforgeio/documentation/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -59,24 +59,24 @@ const config = {
     ({
       colorMode: {
         defaultMode: 'dark',
-        disableSwitch: false,
+        disableSwitch: true,
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'NeonFORGE',
+        title: 'neonFORGE',
         logo: {
           alt: 'NeonKUBE Logo',
-          src: 'img/logo.png',
+          src: 'img/favicon.png',
         },
         items: [
           {
             to: '/docs/neonkube', 
-            label: 'neonkube', 
+            label: 'neonKUBE', 
             position: 'left'
           },
           {
             to: '/docs/neonsdk', 
-            label: 'neonsdk', 
+            label: 'neonSDK', 
             position: 'left'
           },
           {
@@ -101,31 +101,27 @@ const config = {
           {
             title: 'Community',
             items: [
-              // {
-              //   label: 'Stack Overflow',
-              //   href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              // },
-              // {
-              //   label: 'Discord',
-              //   href: 'https://discordapp.com/invite/docusaurus',
-              // },
-              // {
-              //   label: 'Twitter',
-              //   href: 'https://twitter.com/docusaurus',
-              // },
+              {
+                label: 'GitHub',
+                href: 'https://github.com/orgs/nforgeio',
+              },
+              {
+                label: 'Slack',
+                href: 'https://communityinviter.com/apps/neonforge/neonforge',
+              },
+              {
+                label: 'Linkedin',
+                href: 'https://www.linkedin.com/company/82780366/admin/',
+              },
             ],
           },
           {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/nforgeio',
-              },
+                label: 'neonKUBE',
+                href: 'https://neonkube.io/',
+              }
             ],
           },
         ],
