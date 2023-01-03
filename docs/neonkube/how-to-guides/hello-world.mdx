@@ -1,0 +1,50 @@
+---
+sidebar_position: 1
+displayed_sidebar: neonkube
+title: Hello World Example
+hide_title: false
+hide_table_of_contents: false
+description: Demonstrates how to deploy a simple application to a NeonKUBE cluster.
+keywords:
+  - neonkube
+last_update:
+  author: Marcus Bowyer
+---
+
+# Hello World Example
+
+This tutorial demonstrates how to deploy a simple application to a NeonKUBE cluster.
+
+#### Clone demo repository
+```
+git clone https://github.com/nforgeio/neonKUBE-demos.git
+
+set DEMO_DIR=C:\<CURRENT-DIRECTORY>\neonKUBE-demos
+set CLUSTER_ID=<YOUR_CLUSTER_ID>
+```
+
+#### Build Hello World image
+
+In this step, we build the hello-world container image and publish it to the local cluster registry.
+
+```
+cd %DEMO_DIR%\Services\hello-world
+dotnet publish hello-world.csproj -c Release -o .\bin\Release\net6.0\publish
+unix-text docker-entrypoint.sh
+docker build -t neon-registry.%CLUSTER_ID%.neoncluster.io/library/hello-world .
+docker push neon-registry.%CLUSTER_ID%.neoncluster.io/library/hello-world
+```
+
+#### Deploy hello World
+
+Here we are creating a Kubernetes [Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) from the yaml manifest.
+```
+cd %DEMO_DIR%
+cp helloworld.yaml "%TEMP%\helloworld.yaml"
+neon-build replace "%TEMP%\helloworld.yaml" "$<CLUSTER_ID>" %CLUSTER_ID%
+neon apply -f "%TEMP%\helloworld.yaml"
+rm "%TEMP%\helloworld.yaml"
+```
+
+Hello World can now be accessed at `https://hello-world.CLUSTER-ID.neoncluster.io`. Replace CLUSTER-ID with your cluster ID.
+
