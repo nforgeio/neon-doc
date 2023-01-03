@@ -104,7 +104,7 @@ const config = {
               },
               {
                 label: 'Linkedin',
-                href: 'https://www.linkedin.com/company/82780366/admin/',
+                href: 'https://www.linkedin.com/company/neonforge',
               },
             ],
           },
