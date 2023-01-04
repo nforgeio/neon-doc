@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'neonFORGE Documentation',
   tagline: 'Explanation and usage information for neonFORGE projects.',
-  url: 'https://docs.neonkube.io',
+  url: 'https://docs.neonforge.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
