@@ -30,7 +30,7 @@ const sidebars = {
         {
           type: "link",
           label: "API Reference",
-          href: "https://api-docs.neonkube.io/neonkube/overview.html",
+          href: "https://api-docs.neonforge.com/neonkube/api/Neon.Kube.html",
         }
       ]
     }
@@ -47,7 +47,7 @@ const sidebars = {
           {
             type: "link",
             label: "API Reference",
-            href: "https://api-docs.neonkube.io/neonsdk/overview.html",
+            href: "https://api-docs.neonforge.com/neonsdk/api/Neon.html",
           }
         ]
       }
