@@ -4,7 +4,7 @@ displayed_sidebar: neonkube
 title: Controllers
 hide_title: false
 hide_table_of_contents: false
-description: Resource controllers.
+description: Resource Controllers are responsible for reconciling resources.
 keywords:
   - neonkube kubernetes operator sdk resource controllers
 last_update:
@@ -13,7 +13,21 @@ last_update:
 
 # Resource Controllers
 
-## Example controller
+## Introduction
+
+Resource controllers are responsible for bringing the actual state of a resource to the desired state, which is expressed in the Custom Resource object specification.
+As users update the desired state of the resource, the Controller
+
+```mermaid
+flowchart TD
+    A[User] -- kubectl apply resource.yaml --> K{Kubernetes API}
+    C[ResourceManager] -- watch resources --> K
+    C -- schedule resource --> R[Reconciler]
+    R -- result --> C
+    R -- update state --> K
+```
+
+## Example
 ```csharp
 public class ExampleController : IResourceController<V1ExampleEntity>
 {
@@ -93,18 +107,6 @@ public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
 }
 ```
 
-## Filtering
-
-To filter out resources, add the optional `Filter` method to the controller.
-
-```csharp
-public bool Filter(V1Secret resource)
-{
-    return (resource.Name() == "foo");
-}
-
-```
-
 ## Leader election
 
 The following methods are provided for reacting to leadership events.
@@ -124,4 +126,16 @@ public async Task OnNewLeaderAsyncc(string identity)
 {
     logger.LogInformation($"NEW LEADER: {identity}");
 }
+```
+
+## Filtering
+
+To filter out resources, add the optional `Filter` method to the controller.
+
+```csharp
+public bool Filter(V1Secret resource)
+{
+    return (resource.Name() == "foo");
+}
+
 ```

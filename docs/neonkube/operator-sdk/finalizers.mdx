@@ -4,7 +4,7 @@ displayed_sidebar: neonkube
 title: Finalizers
 hide_title: false
 hide_table_of_contents: false
-description: Resource finalizers.
+description: Finalizers are run after an object is deleted.
 keywords:
   - neonkube kubernetes operator sdk resource finalizers
 last_update:
@@ -12,6 +12,8 @@ last_update:
 ---
 
 # Resource Finalizers
+
+## Introduction
 
 Finalizers are namespaced keys that tell Kubernetes to wait until specific conditions are met before it fully deletes resources marked for deletion.
 When you tell Kubernetes to delete an object that has finalizers specified for it, the Kubernetes API will mark the object for deletion. The object
@@ -22,7 +24,7 @@ the target resource.
 
 Finalizers can also be used to prevent accidental deletion of resources.
 
-## Example Finalizer
+## Example
 
 ```csharp
 public class ExampleFinalizer : IResourceFinalizer<V1ExampleEntity>

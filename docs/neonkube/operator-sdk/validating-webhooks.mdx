@@ -4,7 +4,7 @@ displayed_sidebar: neonkube
 title: Validating Webhooks
 hide_title: false
 hide_table_of_contents: false
-description: Validating Webhooks.
+description: Validating Webhooks can validate resources when created/updated.
 keywords:
   - neonkube kubernetes operator sdk resource validating webhooks
 last_update:
@@ -13,7 +13,19 @@ last_update:
 
 # Validating Webhooks
 
-## Example Validating Webhook
+## Introduction
+
+Validating webhooks can be used to perform validations that go beyond the capabilities of OpenAPI schema validation.
+A validating Webhook can reject the request, but it cannot modify the object received in the request.
+
+```mermaid
+flowchart TD
+    A[User] -- kubectl apply resource.yaml --> K[Kubernetes API] --> V{ValidatingWebhook} --> B[Is it?]
+    B -->|Ok| K
+    B -->|Fail| K
+```
+
+## Example
 
 ```csharp
 [Webhook(

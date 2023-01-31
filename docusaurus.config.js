@@ -125,6 +125,9 @@ const config = {
         darkTheme: darkCodeTheme,
         additionalLanguages: ['powershell', 'csharp'],
       },
+      mermaid: {
+        theme: {light: 'neutral', dark: 'dark'},
+      },
     }),
     plugins: [
       require.resolve('docusaurus-lunr-search'),
@@ -135,7 +138,11 @@ const config = {
           anonymizeIP: true,
         },
       ],
-    ]
+    ],
+    markdown: {
+      mermaid: true,
+    },
+    themes: ['@docusaurus/theme-mermaid'],
 };
 
 module.exports = config;

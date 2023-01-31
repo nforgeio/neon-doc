@@ -4,7 +4,7 @@ displayed_sidebar: neonkube
 title: Mutating Webhooks
 hide_title: false
 hide_table_of_contents: false
-description: Mutating Webhooks.
+description: Mutating Webhooks can modify resources when created/updated.
 keywords:
   - neonkube kubernetes operator sdk resource mutating webhooks
 last_update:
@@ -12,6 +12,16 @@ last_update:
 ---
 
 # Mutating Webhooks
+
+## Introduction
+
+Mutating webhooks are most frequently used for setting default values. 
+They can modify objects by creating a patch that will be sent back in the admission response.
+
+```mermaid
+flowchart TD
+    A[User] -- kubectl apply resource.yaml --> K[Kubernetes API] --> M{MutatingWebhook} -- update state --> K
+```
 
 ## Example Mutating Webhook
 
