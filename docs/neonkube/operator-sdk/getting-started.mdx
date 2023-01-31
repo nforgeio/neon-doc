@@ -1,0 +1,36 @@
+---
+sidebar_position: 2
+displayed_sidebar: neonkube
+title: Getting Started
+hide_title: false
+hide_table_of_contents: false
+description: Getting Started.
+keywords:
+  - neonkube kubernetes operator sdk getting started
+last_update:
+  author: Marcus Bowyer
+---
+
+# Getting Started
+
+
+## Installation
+```
+dotnet add package Neon.Kube.Operator
+```
+
+## How to use
+
+### Startup.cs
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddKubernetesOperator();
+}
+
+public void Configure(IApplicationBuilder app)
+{
+    app.UseKubernetesOperator();
+}
+```
+By default, all Controllers, Finalizers and Webhooks in your assembly will be added to the operator.

@@ -1,0 +1,127 @@
+---
+sidebar_position: 3
+displayed_sidebar: neonkube
+title: Controllers
+hide_title: false
+hide_table_of_contents: false
+description: Resource controllers.
+keywords:
+  - neonkube kubernetes operator sdk resource controllers
+last_update:
+  author: Marcus Bowyer
+---
+
+# Resource Controllers
+
+## Example controller
+```csharp
+public class ExampleController : IResourceController<V1ExampleEntity>
+{
+    private ILogger logger;
+
+    public ExampleController(ILogger logger)
+    {
+        this.logger = logger;
+    }
+
+    public static async Task StartAsync(IServiceProvider serviceProvider)
+    {
+        // Runs only once at startup. Use this to configure your operator if needed.
+
+        logger.LogInformation($"RECONCILED: {resource.Name()}");
+    }
+
+    public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
+    {
+        logger.LogInformation($"RECONCILED: {resource.Name()}");
+
+        return ResourceControllerResult.Ok();
+    }
+
+    public async Task StatusModifiedAsync(V1ExampleEntity resource)
+    {
+        logger.LogInformation($"STATUS MODIFIED: {resource.Name()}");
+    }
+
+    public async Task DeletedAsync(V1ExampleEntity resource)
+    {
+        logger.LogInformation($"DELETED: {resource.Name()}");
+    }
+}
+```
+
+## Requeuing
+
+If a function throws an error, the event will be requeued. You can configure requeue settings in two ways.
+
+### Global defaults
+```csharp
+services.AddKubernetesOperator(settings =>
+{
+    settings.ResourceManagerOptions = new ResourceManagerOptions()
+    {
+        ErrorMinRequeueInterval = TimeSpan.FromSeconds(1),
+        ErrorMaxRequeueInterval = TimeSpan.FromSeconds(1),
+        ErrorMaxRetryCount = 10,
+    };
+})
+````
+
+### Per controller
+```csharp
+services.AddKubernetesOperator(options =>
+{
+    options.AssemblyScanningEnabled = false;
+})
+        .AddController<ExampleController>(options: new ResourceManagerOptions()
+        {
+            ErrorMinRequeueInterval = TimeSpan.FromSeconds(1),
+            ErrorMaxRequeueInterval = TimeSpan.FromSeconds(1),
+            ErrorMaxRetryCount      = 10,
+        })
+````
+
+### Manual
+
+
+```csharp
+public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
+{
+    logger.LogInformation($"RECONCILED: {resource.Name()}");
+
+    return ResourceControllerResult.RequeueEvent(TimeSpan.FromSeconds(10));
+}
+```
+
+## Filtering
+
+To filter out resources, add the optional `Filter` method to the controller.
+
+```csharp
+public bool Filter(V1Secret resource)
+{
+    return (resource.Name() == "foo");
+}
+
+```
+
+## Leader election
+
+The following methods are provided for reacting to leadership events.
+
+```csharp
+public async Task OnPromotionAsync()
+{
+    logger.LogInformation($"PROMOTED");
+}
+
+public async Task OnDemotionAsync()
+{
+    logger.LogInformation($"DEMOTED");
+}
+
+public async Task OnNewLeaderAsyncc(string identity)
+{
+    logger.LogInformation($"NEW LEADER: {identity}");
+}
+```

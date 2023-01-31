@@ -1,0 +1,43 @@
+---
+sidebar_position: 4
+displayed_sidebar: neonkube
+title: Finalizers
+hide_title: false
+hide_table_of_contents: false
+description: Resource finalizers.
+keywords:
+  - neonkube kubernetes operator sdk resource finalizers
+last_update:
+  author: Marcus Bowyer
+---
+
+# Resource Finalizers
+
+Finalizers are namespaced keys that tell Kubernetes to wait until specific conditions are met before it fully deletes resources marked for deletion.
+When you tell Kubernetes to delete an object that has finalizers specified for it, the Kubernetes API will mark the object for deletion. The object
+will only be deleted once the finalizers have run successfully.
+
+Finalizers can be used for garbage collection of resources. For example, you can define a finalizer to clean up any related resources before deleting
+the target resource.
+
+Finalizers can also be used to prevent accidental deletion of resources.
+
+## Example Finalizer
+
+```csharp
+public class ExampleFinalizer : IResourceFinalizer<V1ExampleEntity>
+{
+    private ILogger logger;
+
+    public ExampleFinalizer(ILogger logger)
+    {
+        this.logger = logger;
+    }
+
+    public async Task FinalizeAsync(V1ExampleEntity resource)
+    {
+        logger.LogInformation($"FINALIZED: {resource.Name()}");
+    }
+}
+```
+

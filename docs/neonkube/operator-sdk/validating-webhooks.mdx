@@ -1,0 +1,64 @@
+---
+sidebar_position: 6
+displayed_sidebar: neonkube
+title: Validating Webhooks
+hide_title: false
+hide_table_of_contents: false
+description: Validating Webhooks.
+keywords:
+  - neonkube kubernetes operator sdk resource validating webhooks
+last_update:
+  author: Marcus Bowyer
+---
+
+# Validating Webhooks
+
+## Example Validating Webhook
+
+```csharp
+[Webhook(
+    name: "pod-policy.neonkube.io",
+    serviceName: "example-operator",
+    @namespace: "default",
+    admissionReviewVersions: "v1",
+    failurePolicy: "Ignore")]
+[WebhookRule(
+    apiGroups: V1Pod.KubeGroup,
+    apiVersions: V1Pod.KubeApiVersion, 
+    operations: AdmissionOperations.Create | AdmissionOperations.Update, 
+    resources: V1Pod.KubePluralName,
+    scope: "*")]
+public class PodWebhook : IValidatingWebhook<V1Pod>
+{
+    private Ilogger logger { get; set; }
+
+    public PodWebhook(Ilogger logger)
+        : base()
+    {
+        this.logger = logger;
+    }
+
+    public async Task<ValidationResult> CreateAsync(V1Pod entity, bool dryRun)
+    {
+        if (entity.Metadata.Name == "invalid-entity")
+        {
+            logger.LogInformation($"Entity name is not valid. [{entity.Namespace()}/{entity.Name()}]");
+
+            return ValidationResult.Fail(statusCode: 500, statusMessage: "Entity name is not valid.");
+        }
+
+        return ValidationResult.Success();
+    }
+
+    public async Task<ValidationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun)
+    {
+        if (entity.Metadata.Name == "invalid-entity")
+        {
+            logger.LogInformation($"Entity name is not valid. [{entity.Namespace()}/{entity.Name()}]");
+
+            return ValidationResult.Fail(statusCode: 500, statusMessage: "Entity name is not valid.");
+        }
+
+        return ValidationResult.Success();
+    }
+```
