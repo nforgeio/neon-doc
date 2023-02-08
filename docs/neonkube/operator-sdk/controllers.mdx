@@ -209,8 +209,8 @@ using Neon.Kube.Operator;
 using Neon.Kube.Operator.Controller;
 using Neon.Kube.Resources;
 
-[DependentResource<V1Pod>(Scope = EntityScope.Namespaced)]
-[DependentResource<V1Service>(Scope = EntityScope.Namespaced)]
+[DependentResource<V1Pod>]
+[DependentResource<V1Service>]
 public class EtcdController : IResourceController<V1EtcdCluster>
 {
     // Controller implementation.
@@ -238,8 +238,8 @@ public void ConfigureServices(IServiceCollection services)
             {
                 DependentResources = new List<IDependentResource>()
                 {
-                    new DependentResource<V1Pod>(scope: EntityScope.Namespaced),
-                    new DependentResource<V1Service>(scope: EntityScope.Namespaced)
+                    new DependentResource<V1Pod>(),
+                    new DependentResource<V1Service>()
                 }
             });
 }
