@@ -21,6 +21,29 @@ dotnet add package Neon.Kube.Operator
 
 ## How to use
 
+### Program.cs
+
+```csharp
+public static partial class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var operator = KubernetesOperatorHost
+            .CreateDefaultBuilder(args)
+            .ConfigureOperator(configure =>
+            {
+                configure.Name = "example-operator";
+                configure.Namespace = "default";
+            })
+            .ConfigureNeonKube() // for operators running in NeonKUBE clusters.
+            .UseStartup<Startup>()
+            .Build();
+
+        await operator.RunAsync();
+    }
+}
+```
+
 ### Startup.cs
 ```csharp
 public void ConfigureServices(IServiceCollection services)

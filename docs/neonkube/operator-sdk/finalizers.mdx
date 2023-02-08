@@ -29,16 +29,9 @@ Finalizers can also be used to prevent accidental deletion of resources.
 ```csharp
 public class ExampleFinalizer : IResourceFinalizer<V1ExampleEntity>
 {
-    private ILogger logger;
-
-    public ExampleFinalizer(ILogger logger)
-    {
-        this.logger = logger;
-    }
-
     public async Task FinalizeAsync(V1ExampleEntity resource)
     {
-        logger.LogInformation($"FINALIZED: {resource.Name()}");
+        // Run finalizer for given entity.
     }
 }
 ```

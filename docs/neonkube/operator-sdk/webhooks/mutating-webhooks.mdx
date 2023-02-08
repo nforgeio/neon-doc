@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 1
 displayed_sidebar: neonkube
 title: Mutating Webhooks
 hide_title: false
@@ -28,8 +28,6 @@ flowchart TD
 ```csharp
 [Webhook(
     name: "pod-policy.neonkube.io",
-    serviceName: "example-operator",
-    @namespace: "default",
     admissionReviewVersions: "v1",
     failurePolicy: "Ignore")]
 [WebhookRule(
@@ -40,20 +38,10 @@ flowchart TD
     scope: "*")]
 public class PodWebhook : IMutatingWebhook<V1Pod>
 {
-    private Ilogger logger { get; set; }
-
     private bool modified = false;
-
-    public PodWebhook(Ilogger logger)
-        : base()
-    {
-        this.logger = logger;
-    }
 
     public async Task<MutationResult> CreateAsync(V1Pod entity, bool dryRun)
     {
-        logger.LogInformation($"Received create request for pod {entity.Namespace()}/{entity.Name()}");
-
         if (modified)
         {
             return await Task.FromResult(MutationResult.Modified(entity));
@@ -64,8 +52,6 @@ public class PodWebhook : IMutatingWebhook<V1Pod>
 
     public async Task<MutationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun)
     {
-        logger.LogInformation($"Received update request for pod {entity.Namespace()}/{entity.Name()}");
-
         if (modified)
         {
             return await Task.FromResult(MutationResult.Modified(entity));
@@ -73,4 +59,5 @@ public class PodWebhook : IMutatingWebhook<V1Pod>
 
         return await Task.FromResult(MutationResult.NoChanges());
     }
+}
 ```

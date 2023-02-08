@@ -15,8 +15,8 @@ last_update:
 
 ## Introduction
 
-Resource controllers are responsible for bringing the actual state of a resource to the desired state, which is expressed in the Custom Resource object specification.
-As users update the desired state of the resource, the Controller
+Resource Controllers are called when Kubernetes resources are created, modified, or deleted.
+They are configured to watch specific resource types, have methods for responding to such updates.
 
 ```mermaid
 flowchart TD
@@ -27,104 +27,160 @@ flowchart TD
     R -- update state --> K
 ```
 
-## Example
+## Reconciler
+
+Reconcilers are responsible for bringing the actual state of a resource to the desired state, which is expressed in the 
+Custom Resource object specification.
+
+When a reconcile event is triggered, it is always passed the current state of the resource to be reconciled.
+
+:::danger A reconciler must be [idempotent](https://en.wikipedia.org/wiki/Idempotence)
+
+A function is said to be idempotent if it can be applied multiple times without changing the result beyond the initial application.
+:::
+
+### Triggers
+Reconcile is triggered by the following events: 
+- A resource has been created.
+- A resource has been updated.
+- A resource failed reconciliation and was requeued.
+- An object with an [`ownerReference`](https://kubernetes.io/docs/concepts/overview/working-with-objects/owners-dependents/#owner-references-in-object-specifications)
+to the resource.
+
+### Example
+
+In its simplest form, this is what the `ReconcileAsync` method looks like:
 ```csharp
-public class ExampleController : IResourceController<V1ExampleEntity>
+public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
 {
-    private ILogger logger;
+    // TODO: apply logic
 
-    public ExampleController(ILogger logger)
-    {
-        this.logger = logger;
-    }
+    return ResourceControllerResult.Ok();
+}
+```
 
-    public static async Task StartAsync(IServiceProvider serviceProvider)
-    {
-        // Runs only once at startup. Use this to configure your operator if needed.
+## Status Updates
 
-        logger.LogInformation($"RECONCILED: {resource.Name()}");
-    }
+`StatusModifiedAsync` is called when the status of a resource has changed.
 
-    public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
-    {
-        logger.LogInformation($"RECONCILED: {resource.Name()}");
-
-        return ResourceControllerResult.Ok();
-    }
-
-    public async Task StatusModifiedAsync(V1ExampleEntity resource)
-    {
-        logger.LogInformation($"STATUS MODIFIED: {resource.Name()}");
-    }
-
-    public async Task DeletedAsync(V1ExampleEntity resource)
-    {
-        logger.LogInformation($"DELETED: {resource.Name()}");
-    }
+```csharp
+public async Task StatusModifiedAsync(V1ExampleEntity resource)
+{
+    // react to status update
 }
 ```
 
 ## Requeuing
 
-If a function throws an error, the event will be requeued. You can configure requeue settings in two ways.
+When a reconcile event throws an exception, it will be requeued. 
 
 ### Global defaults
+
+Global defaults can be configured by setting `ResourceManagerOptions` in `ConfigureOperator`.
+
 ```csharp
-services.AddKubernetesOperator(settings =>
-{
-    settings.ResourceManagerOptions = new ResourceManagerOptions()
-    {
-        ErrorMinRequeueInterval = TimeSpan.FromSeconds(1),
-        ErrorMaxRequeueInterval = TimeSpan.FromSeconds(1),
-        ErrorMaxRetryCount = 10,
-    };
-})
-````
+var k8s = KubernetesOperatorHost
+            .CreateDefaultBuilder()
+            .ConfigureOperator(configure =>
+            {
+                configure.Port = 443;
+                configure.AssemblyScanningEnabled = true;
+                configure.Name = "example-operator";
+                configure.Namespace = "default";
+                configure.ResourceManagerOptions = new ResourceManagerOptions()
+                {
+                    ErrorMaxRequeueInterval = TimeSpan.FromMinutes(1),
+                    ErrorMaxRetryCount      = 10,
+                    ErrorMinRequeueInterval = TimeSpan.FromSeconds(1)
+                };
+            })
+            .UseStartup<Startup>()
+            .Build();
 
-### Per controller
+await = k8s.RunAsync();
+```
+
+### Controller specific
+
+Controllers are configurable by passing `ResourceManagerOptions` to your controller when calling `AddController` in `Startup.cs`. 
+
+:::note
+
+To do this, assembly scanning should be disabled or add the `[Controller(Ignore = true)]` attribute to the controller.
+
+:::
 ```csharp
-services.AddKubernetesOperator(options =>
+using Neon.Kube.Operator;
+using Neon.Kube.Operator.ResourceManager;
+
+public void ConfigureServices(IServiceCollection services)
 {
-    options.AssemblyScanningEnabled = false;
-})
-        .AddController<ExampleController>(options: new ResourceManagerOptions()
-        {
-            ErrorMinRequeueInterval = TimeSpan.FromSeconds(1),
-            ErrorMaxRequeueInterval = TimeSpan.FromSeconds(1),
-            ErrorMaxRetryCount      = 10,
-        })
-````
+    services.AddKubernetesOperator()
+            .AddController<ExampleController>(
+            options: new ResourceManagerOptions()
+            {
+                ErrorMaxRequeueInterval = TimeSpan.FromMinutes(1),
+                ErrorMaxRetryCount = 10,
+                ErrorMinRequeueInterval = TimeSpan.FromSeconds(1)
+            });
+}
+```
 
-### Manual
-
+### Manual requeue
 
 ```csharp
 public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
 {
-    logger.LogInformation($"RECONCILED: {resource.Name()}");
-
     return ResourceControllerResult.RequeueEvent(TimeSpan.FromSeconds(10));
 }
 ```
 
 ## Leader election
 
+### Events
+
 The following methods are provided for reacting to leadership events.
 
 ```csharp
 public async Task OnPromotionAsync()
 {
-    logger.LogInformation($"PROMOTED");
+    // Controller was promoted to leader.
 }
 
 public async Task OnDemotionAsync()
 {
-    logger.LogInformation($"DEMOTED");
+    // Controller is no longer leader.
 }
 
 public async Task OnNewLeaderAsyncc(string identity)
 {
-    logger.LogInformation($"NEW LEADER: {identity}");
+    // There is a new leader. The identity of the new leader is given.
+}
+```
+
+### Configuring 
+
+Leader election can be configured by setting `LeaderElectionConfig` when adding a controller via `AddController` in `Startup.cs`. 
+
+:::note
+
+To do this, assembly scanning should be disabled or add the `[Controller(Ignore = true)]` attribute to the controller.
+
+:::
+
+```csharp
+using Neon.Kube;
+using Neon.Kube.Operator;
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddKubernetesOperator()
+            .AddController<ExampleController>(
+                leaderConfig: new LeaderElectionConfig(
+                    k8s:           K8s,
+                    @namespace:    "default",
+                    leaseName:     $"example.controller",
+                    identity:      Pod.Name))
 }
 ```
 
@@ -133,9 +189,59 @@ public async Task OnNewLeaderAsyncc(string identity)
 To filter out resources, add the optional `Filter` method to the controller.
 
 ```csharp
-public bool Filter(V1Secret resource)
+public static bool Filter(V1ExampleResource resource)
 {
-    return (resource.Name() == "foo");
+    return (resource.Name() == "my-resource");
 }
 
 ```
+
+## Dependent Resources
+
+In many cases, an operator creates a bunch of Kubernetes resources in the cluster, as a result of reconciling a `Resource`. For instance, the etcd-operator creates
+ two services and a number of pods for a single EtcdCluster CR. In this case, all the Kubernetes resources created by the operator for a CR is defined as 
+ dependent resources. The etcd-operator may want to watch the pods that it created in case it needs to reconcile again.
+ 
+ `DependentResources` can be defined by adding an annotation to the `Controller`. 
+
+ ```csharp
+using Neon.Kube.Operator;
+using Neon.Kube.Operator.Controller;
+using Neon.Kube.Resources;
+
+[DependentResource<V1Pod>(Scope = EntityScope.Namespaced)]
+[DependentResource<V1Service>(Scope = EntityScope.Namespaced)]
+public class EtcdController : IResourceController<V1EtcdCluster>
+{
+    // Controller implementation.
+}
+ ```
+
+Controllers are configurable by setting `DependentResources` in `ResourceManagerOptions` when adding a controller via `AddController` in `Startup.cs`. 
+
+:::note
+
+To do this, assembly scanning should be disabled or add the `[Controller(Ignore = true)]` attribute to the controller.
+
+:::
+
+```csharp
+using Neon.Kube.Operator;
+using Neon.Kube.Operator.ResourceManager;
+using Neon.Kube.Resources;
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddKubernetesOperator()
+        .AddController<EtcdController>(
+            options: new ResourceManagerOptions()
+            {
+                DependentResources = new List<IDependentResource>()
+                {
+                    new DependentResource<V1Pod>(scope: EntityScope.Namespaced),
+                    new DependentResource<V1Service>(scope: EntityScope.Namespaced)
+                }
+            });
+}
+
+ ```

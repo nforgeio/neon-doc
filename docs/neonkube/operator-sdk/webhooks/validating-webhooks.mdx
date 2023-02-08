@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 2
 displayed_sidebar: neonkube
 title: Validating Webhooks
 hide_title: false
@@ -30,8 +30,6 @@ flowchart TD
 ```csharp
 [Webhook(
     name: "pod-policy.neonkube.io",
-    serviceName: "example-operator",
-    @namespace: "default",
     admissionReviewVersions: "v1",
     failurePolicy: "Ignore")]
 [WebhookRule(
@@ -42,20 +40,10 @@ flowchart TD
     scope: "*")]
 public class PodWebhook : IValidatingWebhook<V1Pod>
 {
-    private Ilogger logger { get; set; }
-
-    public PodWebhook(Ilogger logger)
-        : base()
-    {
-        this.logger = logger;
-    }
-
     public async Task<ValidationResult> CreateAsync(V1Pod entity, bool dryRun)
     {
         if (entity.Metadata.Name == "invalid-entity")
         {
-            logger.LogInformation($"Entity name is not valid. [{entity.Namespace()}/{entity.Name()}]");
-
             return ValidationResult.Fail(statusCode: 500, statusMessage: "Entity name is not valid.");
         }
 
@@ -66,11 +54,10 @@ public class PodWebhook : IValidatingWebhook<V1Pod>
     {
         if (entity.Metadata.Name == "invalid-entity")
         {
-            logger.LogInformation($"Entity name is not valid. [{entity.Namespace()}/{entity.Name()}]");
-
             return ValidationResult.Fail(statusCode: 500, statusMessage: "Entity name is not valid.");
         }
 
         return ValidationResult.Success();
     }
+}
 ```

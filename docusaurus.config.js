@@ -63,13 +63,13 @@ const config = {
         },
         items: [
           {
-            to: '/docs/neonkube', 
-            label: 'neonKUBE', 
+            to: '/docs/neonkube',
+            label: 'neonKUBE',
             position: 'left'
           },
           {
-            to: '/docs/neonsdk', 
-            label: 'neonSDK', 
+            to: '/docs/neonsdk',
+            label: 'neonSDK',
             position: 'left'
           },
           {
@@ -123,26 +123,40 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['powershell', 'csharp'],
+        defaultLanguage: 'csharp',
+        additionalLanguages: [
+          'powershell',
+          'csharp',
+          'aspnet',
+          'markup',
+          'cshtml',
+          'docker',
+          'json',
+          'promql',
+          'regex',
+          'bash',
+          'shell-session',
+          'yaml'
+        ],
       },
       mermaid: {
-        theme: {light: 'neutral', dark: 'dark'},
+        theme: { light: 'neutral', dark: 'dark' },
       },
     }),
-    plugins: [
-      require.resolve('docusaurus-lunr-search'),
-      [
-        '@docusaurus/plugin-google-gtag',
-        {
-          trackingID: 'G-N1JLG2HDHZ',
-          anonymizeIP: true,
-        },
-      ],
+  plugins: [
+    require.resolve('docusaurus-lunr-search'),
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-N1JLG2HDHZ',
+        anonymizeIP: true,
+      },
     ],
-    markdown: {
-      mermaid: true,
-    },
-    themes: ['@docusaurus/theme-mermaid'],
+  ],
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
 };
 
 module.exports = config;
