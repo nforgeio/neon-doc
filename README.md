@@ -7,18 +7,26 @@ NeonFORGE Documentation
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
 
-### Local Development
+## Local Development
+
+### Install yarn
+```bash
+npm install --global yarn
+```
+
+### Add npm to the path
 
 ```
-$ yarn run start
+C:\Users\<User>\AppData\Roaming\npm
+```
+
+### To run the Dev server
+```bash
+yarn run start
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-### Build
+### Helpers
 
-```
-$ yarn run build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+- [Live mermaid editor](https://mermaid.live/edit)
