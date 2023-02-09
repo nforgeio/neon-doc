@@ -30,11 +30,6 @@ public static partial class Program
     {
         var operator = KubernetesOperatorHost
             .CreateDefaultBuilder(args)
-            .ConfigureOperator(configure =>
-            {
-                configure.Name = "example-operator";
-                configure.Namespace = "default";
-            })
             .ConfigureNeonKube() // for operators running in NeonKUBE clusters.
             .UseStartup<Startup>()
             .Build();

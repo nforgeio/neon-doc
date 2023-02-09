@@ -83,10 +83,6 @@ var k8s = KubernetesOperatorHost
             .CreateDefaultBuilder()
             .ConfigureOperator(configure =>
             {
-                configure.Port = 443;
-                configure.AssemblyScanningEnabled = true;
-                configure.Name = "example-operator";
-                configure.Namespace = "default";
                 configure.ResourceManagerOptions = new ResourceManagerOptions()
                 {
                     ErrorMaxRequeueInterval = TimeSpan.FromMinutes(1),
