@@ -1,0 +1,46 @@
+---
+sidebar_position: 6
+displayed_sidebar: neonkube
+title: Monitoring
+hide_title: false
+hide_table_of_contents: false
+description: Monitoring information.
+keywords:
+  - neonkube kubernetes operator sdk metrics prometheus grafana
+last_update:
+  author: Marcus Bowyer
+---
+
+# Monitoring
+
+## Metrics
+
+By default, operators will emit a collection of performance metrics for each controller.
+
+### Grafana Dashboard
+
+Here is a sample dashboard to get started: [operator-dashboard.json](./assets/operator-dashboard.json)
+
+## Tracing
+
+To enable OpenTelemetry tracing, there is a `AddKubernetesOperatorInstrumentation` extension method to the `TracerProviderBuilder` class.
+
+```csharp
+using Neon.Kube.Operator;
+using OpenTelemetry;
+using OpenTelemetry.Resources;
+
+var builder = Sdk.CreateTracerProviderBuilder()
+                  .SetResourceBuilder(ResourceBuilder.CreateDefault()
+                  .AddService("my-operator", serviceVersion: "1.0.0"))
+                  .AddKubernetesOperatorInstrumentation()
+                  .AddOtlpExporter(
+                      options =>
+                      {
+                          options.ExportProcessorType         = ExportProcessorType.Batch;
+                          options.BatchExportProcessorOptions = new BatchExportProcessorOptions<Activity>();
+                          options.Endpoint                    = new Uri("otel-collector-uri");
+                          options.Protocol                    = OpenTelemetry.Exporter.OtlpExportProtocol.Grpc;
+                      })
+                  .Build();
+```
