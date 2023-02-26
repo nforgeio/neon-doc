@@ -182,13 +182,26 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Filtering
 
-To filter out resources, add the optional `Filter` method to the controller.
+Filtering resources can be achieved by applying [field selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/) and/or [label selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).
+Both label selectors and field selectors are comma-separated `key=value` strings.
+
+### Field Selectors
+
+Field selectors can be set either by the `Controller` attribute, or by the `ResourceManagerOptions.FieldSelector` property.
 
 ```csharp
-public static bool Filter(V1ExampleResource resource)
-{
-    return (resource.Name() == "my-resource");
-}
+[Controller(FieldSelector = "metadata.name=my-resource")]
+public class ExampleController : IResourceController<ExampleResource>
+
+```
+
+### Label Selectors
+
+Field selectors can be set either by the `Controller` attribute, or by the `ResourceManagerOptions.FieldSelector` property.
+
+```csharp
+[Controller(LabelSelector = "neonkube.io/managed-by=my-operator,neonkube.io/controlled-by=example-controller")]
+public class ExampleController : IResourceController<ExampleResource>
 
 ```
 
