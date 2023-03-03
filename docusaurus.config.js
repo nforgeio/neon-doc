@@ -150,8 +150,18 @@ const config = {
       {
         trackingID: 'G-N1JLG2HDHZ',
         anonymizeIP: true,
-      },
+      }
     ],
+    [
+      '@docusaurus/plugin-ideal-image',
+      {
+        quality: 70,
+        max: 1030, // max resized image's size.
+        min: 100, // min resized image's size. if original is lower, use that size.
+        steps: 5, // the max number of images generated between min and max (inclusive)
+        disableInDev: false,
+      }
+    ]
   ],
   markdown: {
     mermaid: true,
