@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-displayed_sidebar: neonkube
+displayed_sidebar: operatorsdk
 title: Controllers
 hide_title: false
 hide_table_of_contents: false
@@ -29,7 +29,7 @@ flowchart TD
 
 ## Reconciler
 
-Reconcilers are responsible for bringing the actual state of a resource to the desired state, which is expressed in the 
+Reconcilers are responsible for bringing the actual state of a resource to the desired state, which is expressed in the
 Custom Resource object specification.
 
 When a reconcile event is triggered, it is always passed the current state of the resource to be reconciled.
@@ -40,16 +40,19 @@ A function is said to be idempotent if it can be applied multiple times without 
 :::
 
 ### Triggers
-Reconcile is triggered by the following events: 
+
+Reconcile is triggered by the following events:
+
 - A resource has been created.
 - A resource has been updated.
 - A resource failed reconciliation and was requeued.
 - An object with an [`ownerReference`](https://kubernetes.io/docs/concepts/overview/working-with-objects/owners-dependents/#owner-references-in-object-specifications)
-to the resource.
+  to the resource.
 
 ### Example
 
 In its simplest form, this is what the `ReconcileAsync` method looks like:
+
 ```csharp
 public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
 {
@@ -72,7 +75,7 @@ public async Task StatusModifiedAsync(V1ExampleEntity resource)
 
 ## Requeuing
 
-When a reconcile event throws an exception, it will be requeued. 
+When a reconcile event throws an exception, it will be requeued.
 
 ### Global defaults
 
@@ -98,13 +101,14 @@ await = k8s.RunAsync();
 
 ### Controller specific
 
-Controllers are configurable by passing `ResourceManagerOptions` to your controller when calling `AddController` in `Startup.cs`. 
+Controllers are configurable by passing `ResourceManagerOptions` to your controller when calling `AddController` in `Startup.cs`.
 
 :::note
 
 To do this, assembly scanning should be disabled or add the `[Controller(Ignore = true)]` attribute to the controller.
 
 :::
+
 ```csharp
 using Neon.Kube.Operator;
 using Neon.Kube.Operator.ResourceManager;
@@ -154,9 +158,9 @@ public async Task OnNewLeaderAsyncc(string identity)
 }
 ```
 
-### Configuring 
+### Configuring
 
-Leader election can be configured by setting `LeaderElectionConfig` when adding a controller via `AddController` in `Startup.cs`. 
+Leader election can be configured by setting `LeaderElectionConfig` when adding a controller via `AddController` in `Startup.cs`.
 
 :::note
 
@@ -208,12 +212,12 @@ public class ExampleController : IResourceController<ExampleResource>
 ## Dependent Resources
 
 In many cases, an operator creates a bunch of Kubernetes resources in the cluster, as a result of reconciling a `Resource`. For instance, the etcd-operator creates
- two services and a number of pods for a single EtcdCluster CR. In this case, all the Kubernetes resources created by the operator for a CR is defined as 
- dependent resources. The etcd-operator may want to watch the pods that it created in case it needs to reconcile again.
- 
- `DependentResources` can be defined by adding an annotation to the `Controller`. 
+two services and a number of pods for a single EtcdCluster CR. In this case, all the Kubernetes resources created by the operator for a CR is defined as
+dependent resources. The etcd-operator may want to watch the pods that it created in case it needs to reconcile again.
 
- ```csharp
+`DependentResources` can be defined by adding an annotation to the `Controller`.
+
+```csharp
 using Neon.Kube.Operator;
 using Neon.Kube.Operator.Controller;
 using Neon.Kube.Resources;
@@ -222,11 +226,11 @@ using Neon.Kube.Resources;
 [DependentResource<V1Service>]
 public class EtcdController : IResourceController<V1EtcdCluster>
 {
-    // Controller implementation.
+   // Controller implementation.
 }
- ```
+```
 
-Controllers are configurable by setting `DependentResources` in `ResourceManagerOptions` when adding a controller via `AddController` in `Startup.cs`. 
+Controllers are configurable by setting `DependentResources` in `ResourceManagerOptions` when adding a controller via `AddController` in `Startup.cs`.
 
 :::note
 
@@ -253,4 +257,4 @@ public void ConfigureServices(IServiceCollection services)
             });
 }
 
- ```
+```

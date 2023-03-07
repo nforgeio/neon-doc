@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-displayed_sidebar: neonkube
+displayed_sidebar: operatorsdk
 title: Mutating Webhooks
 hide_title: false
 hide_table_of_contents: false
@@ -15,7 +15,7 @@ last_update:
 
 ## Introduction
 
-Mutating webhooks are most frequently used for setting default values. 
+Mutating webhooks are most frequently used for setting default values.
 They can modify objects by creating a patch that will be sent back in the admission response.
 
 ```mermaid
@@ -32,8 +32,8 @@ flowchart TD
     failurePolicy: "Ignore")]
 [WebhookRule(
     apiGroups: V1Pod.KubeGroup,
-    apiVersions: V1Pod.KubeApiVersion, 
-    operations: AdmissionOperations.Create | AdmissionOperations.Update, 
+    apiVersions: V1Pod.KubeApiVersion,
+    operations: AdmissionOperations.Create | AdmissionOperations.Update,
     resources: V1Pod.KubePluralName,
     scope: "*")]
 public class PodWebhook : IMutatingWebhook<V1Pod>

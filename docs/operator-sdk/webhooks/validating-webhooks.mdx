@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-displayed_sidebar: neonkube
+displayed_sidebar: operatorsdk
 title: Validating Webhooks
 hide_title: false
 hide_table_of_contents: false
@@ -34,8 +34,8 @@ flowchart TD
     failurePolicy: "Ignore")]
 [WebhookRule(
     apiGroups: V1Pod.KubeGroup,
-    apiVersions: V1Pod.KubeApiVersion, 
-    operations: AdmissionOperations.Create | AdmissionOperations.Update, 
+    apiVersions: V1Pod.KubeApiVersion,
+    operations: AdmissionOperations.Create | AdmissionOperations.Update,
     resources: V1Pod.KubePluralName,
     scope: "*")]
 public class PodWebhook : IValidatingWebhook<V1Pod>

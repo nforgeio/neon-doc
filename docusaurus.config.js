@@ -1,47 +1,46 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'neonFORGE Documentation',
-  tagline: 'Explanation and usage information for neonFORGE projects.',
-  url: 'https://docs.neonforge.com',
-  baseUrl: '/',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.png',
+  title: "neonFORGE Documentation",
+  tagline: "Explanation and usage information for neonFORGE projects.",
+  url: "https://docs.neonforge.com",
+  baseUrl: "/",
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
+  favicon: "img/favicon.png",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'nforgeio-docs', // Usually your GitHub org/user name.
-  projectName: 'nforgeio-docs.github.io', // Usually your repo name.
-  deploymentBranch: 'master',
+  organizationName: "nforgeio-docs", // Usually your GitHub org/user name.
+  projectName: "nforgeio-docs.github.io", // Usually your repo name.
+  deploymentBranch: "master",
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/nforgeio/documentation/edit/master/',
+          editUrl: "https://github.com/nforgeio/documentation/edit/master/",
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve("./src/css/custom.css"),
         },
       }),
     ],
@@ -51,70 +50,75 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       colorMode: {
-        defaultMode: 'dark',
+        defaultMode: "dark",
         disableSwitch: true,
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'neonFORGE',
+        title: "neonFORGE",
         logo: {
-          alt: 'NeonKUBE Logo',
-          src: 'img/favicon.png',
+          alt: "NeonKUBE Logo",
+          src: "img/favicon.png",
         },
         items: [
           {
-            to: '/docs/neonkube',
-            label: 'neonKUBE',
-            position: 'left'
+            to: "/docs/neonkube",
+            label: "neonKUBE",
+            position: "left",
           },
           {
-            to: '/docs/neonsdk',
-            label: 'neonSDK',
-            position: 'left'
+            to: "/docs/neonsdk",
+            label: "neonSDK",
+            position: "left",
           },
           {
-            href: 'https://github.com/nforgeio',
-            label: 'GitHub',
-            position: 'right',
+            to: "/docs/operator-sdk",
+            label: "Operator SDK",
+            position: "left",
+          },
+          {
+            href: "https://github.com/nforgeio",
+            label: "GitHub",
+            position: "right",
           },
         ],
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            title: 'Docs',
+            title: "Docs",
             items: [
               {
-                label: 'Getting Started',
-                to: '/docs/category/getting-started',
+                label: "Getting Started",
+                to: "/docs/category/getting-started",
               },
             ],
           },
           {
-            title: 'Community',
+            title: "Community",
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/orgs/nforgeio',
+                label: "GitHub",
+                href: "https://github.com/orgs/nforgeio",
               },
               {
-                label: 'Slack',
-                href: 'https://communityinviter.com/apps/neonforge/neonforge',
+                label: "Slack",
+                href: "https://communityinviter.com/apps/neonforge/neonforge",
               },
               {
-                label: 'Linkedin',
-                href: 'https://www.linkedin.com/company/neonforge',
+                label: "Linkedin",
+                href: "https://www.linkedin.com/company/neonforge",
               },
             ],
           },
           {
-            title: 'More',
+            title: "More",
             items: [
               {
-                label: 'neonKUBE',
-                href: 'https://neonkube.io/',
-              }
+                label: "neonKUBE",
+                href: "https://neonkube.io/",
+              },
             ],
           },
         ],
@@ -123,24 +127,24 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        defaultLanguage: 'csharp',
+        defaultLanguage: "csharp",
         additionalLanguages: [
-          'powershell',
-          'csharp',
-          'aspnet',
-          'markup',
-          'cshtml',
-          'docker',
-          'json',
-          'promql',
-          'regex',
-          'bash',
-          'shell-session',
-          'yaml'
+          "powershell",
+          "csharp",
+          "aspnet",
+          "markup",
+          "cshtml",
+          "docker",
+          "json",
+          "promql",
+          "regex",
+          "bash",
+          "shell-session",
+          "yaml",
         ],
       },
       mermaid: {
-        theme: { light: 'neutral', dark: 'dark' },
+        theme: { light: "neutral", dark: "dark" },
       },
     }),
   plugins: [
@@ -155,29 +159,29 @@ const config = {
         },
       };
     },
-    require.resolve('docusaurus-lunr-search'),
+    require.resolve("docusaurus-lunr-search"),
     [
-      '@docusaurus/plugin-google-gtag',
+      "@docusaurus/plugin-google-gtag",
       {
-        trackingID: 'G-N1JLG2HDHZ',
+        trackingID: "G-N1JLG2HDHZ",
         anonymizeIP: true,
-      }
+      },
     ],
     [
-      '@docusaurus/plugin-ideal-image',
+      "@docusaurus/plugin-ideal-image",
       {
         quality: 70,
         max: 1030, // max resized image's size.
         min: 100, // min resized image's size. if original is lower, use that size.
         steps: 5, // the max number of images generated between min and max (inclusive)
         disableInDev: false,
-      }
-    ]
+      },
+    ],
   ],
   markdown: {
     mermaid: true,
   },
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ["@docusaurus/theme-mermaid"],
 };
 
 module.exports = config;
