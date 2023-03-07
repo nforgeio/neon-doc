@@ -1,14 +1,10 @@
 {
-    "terminal.integrated.profiles.windows": {
-        "Cmder": {
-            "path": "${env:windir}\\System32\\cmd.exe",
-            "args": [
-                "/k",
-                "C:\\bin\\cmder\\vendor\\bin\\vscode_init.cmd"
-            ]
-        }
-    },
-    "terminal.integrated.defaultProfile.windows": "Cmder",
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+    "editor.formatOnPaste": false, // required 
+    "editor.formatOnType": false, // required
+    "editor.formatOnSave": true, // optional 
+    "editor.formatOnSaveMode": "file", // required to format on save
+    "files.autoSave": "onFocusChange", // optional but recommended
     "eslint.options": {
         "extensions": [
             ".js",

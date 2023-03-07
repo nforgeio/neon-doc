@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "redhat.vscode-yaml",
+    "esbenp.prettier-vscode",
+    "rvest.vs-code-prettier-eslint",
+    "unifiedjs.vscode-mdx"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "label": "Persistence",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Persistence in NeonKUBE."
+  }
+}
