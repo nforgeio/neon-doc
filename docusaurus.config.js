@@ -91,7 +91,7 @@ const config = {
             items: [
               {
                 label: "Getting Started",
-                to: "/docs/category/getting-started",
+                to: "/docs/neonkube",
               },
             ],
           },
