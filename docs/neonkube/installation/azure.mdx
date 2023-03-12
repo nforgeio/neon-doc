@@ -1,0 +1,92 @@
+---
+sidebar_position: 4
+displayed_sidebar: neonkube
+title: Azure Cluster
+hide_title: false
+hide_table_of_contents: false
+description: Getting started with NeonKUBE on Azure.
+keywords:
+  - azure
+  - neonkube
+last_update:
+  author: Marcus Bowyer
+---
+
+import Image from "@theme/IdealImage";
+
+# Neon Desktop
+
+## Prerquisites
+
+Make sure you have neon-desktop installed. To install, follow the neon-desktop installation instructions [here](./installation)
+
+## Creating a cluster
+
+### Azure CLI
+
+Install the [Azure CLI](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html).
+
+### Azure RBAC
+
+Run the following command:
+
+```bash
+az ad sp create-for-rbac --name USER --role owner --scopes /subscriptions/SUBSCRIPTION_ID
+```
+
+The output will be something like:
+
+```json
+{
+  "appId": "generated-app-ID",
+  "displayName": "example-app-name",
+  "name": "http://example-app-name",
+  "password": "random-password",
+  "tenant": "tenant-ID"
+}
+```
+
+### Cluster Definition
+
+Create a [Cluster Definition](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html) that describes the cluster.
+
+```yaml
+name: azure-small
+datacenter: westus2
+purpose: development
+timeSources:
+  - pool.ntp.org
+kubernetes:
+  allowPodsOnControlPlane: true
+storage:
+  openEbs:
+    engine: cstor
+hosting:
+  environment: azure
+  cloud:
+    prefixResourceNames: default
+  azure:
+    subscriptionId: AZURE_SUBSCRIPTION_ID
+    tenantId: AZURE_TENANT_ID
+    clientId: AZURE_CLIENT_ID
+    clientSecret: AZURE_CLIENT_SECRET
+    region: westus2
+    disableProximityPlacement: false
+    defaultVmSize: Standard_E4vs_v5
+nodes:
+  control-0:
+    role: control-plane
+    openEbsStorage: true
+```
+
+Save the Cluster Definition. The extension must me `*.cluster.yaml`
+
+### Creating the Cluster
+
+1. Right click the neon-desktop icon in the taskbar > Deploy cluster
+   <Image
+     img={require("./assets/azure/deploy-azure-cluster.png")}
+     style={{ width: 300 }}
+   />
+2. When the dialog pops up, select the Cluster Definition file you saved earlier.
+3. Grab a coffee and wait for neon-desktop to create the cluster.

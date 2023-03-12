@@ -1,0 +1,51 @@
+---
+sidebar_position: 5
+displayed_sidebar: neonkube
+title: Networking
+hide_title: false
+hide_table_of_contents: false
+description: Networking in NeonKUBE
+keywords:
+  - neonkube kubernetes networking
+last_update:
+  author: Marcus Bowyer
+---
+
+# Networking
+
+## Istio
+
+Istio is an open source service mesh that provides a uniform way to connect, secure, control and
+observe services running on Kubernetes clusters. By using Istio on neonKUBE clusters, developers can
+benefit from advanced features such as traffic management, security policies, telemetry and
+observability.
+
+### Ingress
+
+Ingress can be configured by creating `Gateway` and `VirtualService` resources. All NeonKUBE clusters
+are configured with a secure `Gateway` by default to allow users to get up and running quickly
+without having to manage DNS and certificates.
+
+Here is an example `VirtualService` that uses the default `neoncluster-gateway`.
+
+```yaml
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: example
+  namespace: default
+spec:
+  gateways:
+    - neon-ingress/neoncluster-gateway
+  hosts:
+    - example.CLUSTER_ID.neoncluster.io
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: example.default.svc.cluster.local
+            port:
+              number: 80
+```

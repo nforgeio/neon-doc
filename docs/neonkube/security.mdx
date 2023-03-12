@@ -1,0 +1,25 @@
+---
+sidebar_position: 6
+displayed_sidebar: neonkube
+title: Security
+hide_title: false
+hide_table_of_contents: false
+description: Ne.
+keywords:
+  - neonkube kubernetes security
+last_update:
+  author: Marcus Bowyer
+---
+
+# Security
+
+The `neon-cluster-operator` is a service that runs in every NeonKUBE cluster. It is responsible for
+managing the lifecycle of the cluster, including certificate rotation and security updates.
+Certificate rotation is the process of periodically generating new cryptographic keys and certificates
+for the cluster components, such as the API server, the etcd database, and the kubelet agents.
+This ensures that the communication between these components is secure and authenticated, and that
+any compromised or expired certificates are replaced. Security updates are patches or fixes that
+address vulnerabilities or bugs in the cluster software or operating system. The `neon-cluster-operator`
+monitors for available security updates and applies them to all nodes in the cluster automatically
+or on demand. This ensures that the cluster is protected from potential attacks and runs smoothly
+and reliably.

@@ -1,0 +1,82 @@
+---
+sidebar_position: 4
+displayed_sidebar: neonkube
+title: Volumes and Storage
+hide_title: false
+hide_table_of_contents: false
+description: Persistent storage on neonKUBE.
+keywords:
+  - neonkube kubernetes storage volumes persistence
+last_update:
+  author: Marcus Bowyer
+---
+
+import NfsSvg from "./assets/nfs-storage.svg";
+import BlockSvg from "./assets/block-storage.svg";
+
+# Volumes and Storage
+
+For applications that need to retain data, persistent storage is needed. NeonKUBE provides an out-of-the-box solution for persistent storage
+by including [OpenEBS](https://openebs.io/) for [container attached storage](https://openebs.io/docs/concepts/cas) (CAS), and
+[Minio](https://min.io/) for [object storage](https://blog.min.io/object-storage-what-is-it-all-about/).
+
+## Persistence Types
+
+neonKUBE provides multiple persistence types for different applications.
+
+### Network File System
+
+The most commonly used storage type is Network File System (NFS). NFS supports `ReadWriteMany` and can be used for small applications requiring
+shared access to files.
+
+:::note
+
+NFS is relatively slow and is not a good option for complex applications requiring fast operations.
+
+:::
+
+<NfsSvg className="h-96" />
+
+### Block Storage
+
+Block Storage volumes are dynamically provisioned storage volumes. Using this mode, each pod in the application will have a separate Persistent Volume.
+
+<BlockSvg className="h-96 " />
+
+There are different block storage engines and they each have different strengths outlined here:
+
+#### OpenEBS cStor
+
+cStor is the most commonly used and provides enterprise grade features such as synchronous data replication, snapshots, clones,
+thin provisioning of data, high resiliency of data, data consistency and on-demand increase of capacity or performance.
+
+#### OpenEBS Jiva
+
+Jiva is a lightweight distributed storage engine. It is not as performant as cStor but is great for use on smaller clusters.
+
+#### OpenEBS LocalPV
+
+LocalPV provides dynamic provisioning of [Kubernetes Local Volumes](https://kubernetes.io/docs/concepts/storage/volumes/#local).
+This is great for applications that require the best performance and can tolerate reducad availability. A good use case for LocalPV
+is a distributed database.
+
+### Object Storage
+
+NeonKUBE provides [Minio](https://min.io/) which provides high-performance, S3 compatible object storage. NeonKUBE also provides
+a [Minio Bucket](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.Resources.Minio.V1MinioBucket.html) custom resource for
+easily managing buckets.
+
+#### bucket.yaml
+
+```yaml
+apiVersion: minio.neonkube.io/v1alpha1
+kind: MinioBucket
+metadata:
+  name: my-minio-bucket
+  namespace: default
+spec:
+  objectLocking: false
+  region: us-west-2
+  tenant: minio
+  versioning: "Off"
+```
