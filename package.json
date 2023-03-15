@@ -12,7 +12,7 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "watch-docusaurus": "docusaurus start",
+    "watch-docusaurus": "docusaurus start --host 0.0.0.0",
     "watch-tailwind": "tailwind -i src/css/main.css -o src/css/custom.css --watch"
   },
   "dependencies": {

@@ -35,15 +35,20 @@ NFS is relatively slow and is not a good option for complex applications requiri
 
 :::
 
-<NfsSvg className="h-96" />
+<div className="flex w-full justify-center">
+  <NfsSvg className="mb-4 h-auto w-full max-w-2xl object-center" />
+</div>
 
 ### Block Storage
 
 Block Storage volumes are dynamically provisioned storage volumes. Using this mode, each pod in the application will have a separate Persistent Volume.
 
-<BlockSvg className="h-96 " />
+<div className="flex w-full justify-center">
+  <BlockSvg className="mb-4 h-auto w-full max-w-2xl object-center" />
+</div>
 
-There are different block storage engines and they each have different strengths outlined here:
+There are different block storage engines and they each have different strengths
+outlined here:
 
 #### OpenEBS cStor
 
