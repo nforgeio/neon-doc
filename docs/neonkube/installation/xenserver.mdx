@@ -15,7 +15,7 @@ last_update:
 
 import Image from "@theme/IdealImage";
 
-# Neon Desktop
+# Deploy An XenServer/XCP-ng Cluster
 
 ## Prerquisites
 
@@ -28,42 +28,46 @@ Make sure you have neon-desktop installed. To install, follow the neon-desktop i
 Create a [Cluster Definition](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html) that describes the cluster.
 
 ```yaml
-name: azure-small
-datacenter: westus2
+name: xcp-tiny
+datacenter: wrt-00
 purpose: development
 timeSources:
   - pool.ntp.org
 kubernetes:
   allowPodsOnControlPlane: true
-storage:
-  openEbs:
-    engine: cstor
 hosting:
-  environment: azure
-  cloud:
-    prefixResourceNames: default
-  azure:
-    subscriptionId: AZURE_SUBSCRIPTION_ID
-    tenantId: AZURE_TENANT_ID
-    clientId: AZURE_CLIENT_ID
-    clientSecret: AZURE_CLIENT_SECRET
-    region: westus2
-    disableProximityPlacement: false
-    defaultVmSize: Standard_E4vs_v5
+  environment: xenserver
+  vm:
+    hostUsername: XEN_HOST_USERNAME
+    hostPassword: XEN_HOST_PASSWORD
+    namePrefix: vm_prefix
+    hosts:
+      - name: WRT-00-XEN-00
+        address: 10.100.128.1
+  xenServer:
+    snapshot: true
+network:
+  nameservers:
+    - 8.8.8.8
+    - 8.8.4.4
+  gateway: 10.100.0.1
+  premiseSubnet: 10.100.0.0/16
 nodes:
   control-0:
     role: control-plane
-    openEbsStorage: true
+    address: 10.100.10.1
+    vm:
+      host: WRT-00-XEN-00
+      cores: 4
+      memory: 8GiB
+      osDisk: 64GiB
 ```
 
-Save the Cluster Definition. The extension must me `*.cluster.yaml`
+Save the Cluster Definition.
 
 ### Creating the Cluster
 
 1. Right click the neon-desktop icon in the taskbar > Deploy cluster
-   <Image
-     img={require("./assets/azure/deploy-azure-cluster.png")}
-     style={{ width: 300 }}
-   />
+   <Image img={require("./assets/deploy-cluster.png")} style={{ width: 300 }} />
 2. When the dialog pops up, select the Cluster Definition file you saved earlier.
 3. Grab a coffee and wait for neon-desktop to create the cluster.
