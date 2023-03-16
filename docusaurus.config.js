@@ -49,6 +49,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {
+          name: "keywords",
+          content:
+            "neon, neonforge, neonkube, neondesktop, neon-desktop, neon-cli, kubernetes, documentation",
+        },
+      ],
       colorMode: {
         defaultMode: "dark",
         disableSwitch: true,
@@ -122,7 +129,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} NEONFORGE LLC.`,
+        copyright: `Copyright © 2005-${new Date().getFullYear()} NEONFORGE LLC.`,
       },
       prism: {
         theme: lightCodeTheme,
