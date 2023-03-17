@@ -30,18 +30,18 @@ Install the [Azure CLI](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.Cl
 Run the following command:
 
 ```bash
-az ad sp create-for-rbac --name USER --role owner --scopes /subscriptions/SUBSCRIPTION_ID
+az ad sp create-for-rbac --name USER --role owner --scopes /subscriptions/AZURE_SUBSCRIPTION_ID
 ```
 
 The output will be something like:
 
 ```json
 {
-  "appId": "generated-app-ID",
+  "appId": "AZURE_CLIENT_ID",
   "displayName": "example-app-name",
   "name": "http://example-app-name",
-  "password": "random-password",
-  "tenant": "tenant-ID"
+  "password": "AZURE_CLIENT_SECRET",
+  "tenant": "AZURE_TENANT_ID"
 }
 ```
 
@@ -49,8 +49,22 @@ The output will be something like:
 
 Create a [Cluster Definition](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html) that describes the cluster.
 
+:::caution Warning
+
+Make sure that the Azure account has enough [Resource Quota](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+to deploy the cluster.
+
+:::
+
+Be sure to substitute the following from the previous steps:
+
+- `AZURE_SUBSCRIPTION_ID`
+- `AZURE_TENANT_ID`
+- `AZURE_CLIENT_ID`
+- `AZURE_CLIENT_SECRET`
+
 ```yaml
-name: azure-small
+name: azure-tiny
 datacenter: westus2
 purpose: development
 timeSources:
@@ -58,8 +72,6 @@ timeSources:
 kubernetes:
   allowPodsOnControlPlane: true
 storage:
-  openEbs:
-    engine: cstor
 hosting:
   environment: azure
   cloud:
@@ -75,7 +87,6 @@ hosting:
 nodes:
   control-0:
     role: control-plane
-    openEbsStorage: true
 ```
 
 Save the Cluster Definition.
