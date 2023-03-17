@@ -46,12 +46,6 @@ Future:
 
 <Tabs groupId="operating-systems">
   <TabItem value="win" label="Windows">
-    <Admonition type="note">
-      <p>
-        Windows Pro users should enable Hyper-V before installing. This is due
-        to a bug that will be fixed in the next release.
-      </p>
-    </Admonition>
     <ol>
       <li>
         Download the installer from{" "}
@@ -62,6 +56,10 @@ Future:
         the installer.
       </li>
       <li>Follow the prompts on the neon-desktop installer to proceed.</li>
+      <li>
+        If Hyper-V was not enabled before installation. You must restart before
+        creating a cluster.
+      </li>
     </ol>
   </TabItem>
   <TabItem value="macos" label="MacOS">
