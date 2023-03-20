@@ -3,7 +3,7 @@ sidebar_position: 1
 displayed_sidebar: neonkube
 title: Hello World Example
 hide_title: false
-hide_table_of_contents: true
+hide_table_of_contents: false
 description: Demonstrates how to deploy a simple application to a NeonKUBE cluster.
 keywords:
   - helloworld
@@ -83,3 +83,47 @@ neon apply -f helloworlddemo.yaml
     </CodeBlock>
   </TabItem>
 </Tabs>
+
+## HelloWorldDemo Options
+
+The `HelloWorldDemo` Custom Resource `spec` allows for configuration of the demo.
+
+### `logLevel`
+
+`logLevel` can be set to the following:
+
+- Debug
+- Info
+- Warn
+- Error
+
+### `helloWorldReplicas`
+
+This is the number of replicas that will be deployed for the `hello-world` web app.
+
+### `loadGeneratorReplicas`
+
+This is the number of replicas for the load generator app. Increase this to generate more load.
+
+### `storageType`
+
+storageType can be set to `ephemeral` or `nfs`.
+
+The `hello-world` app has a `/storage` page where users can update a text file. This can be used to verify the behaviours described below.
+Try updating the text file and killing some pods with the "Kill Pods" button to see what happens.
+
+- `ephemeral`
+  does not create any Kubernetes [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). Each pod has its own ephemeral
+  volume, and any data stored on it will be lost when the pod is deleted.
+- `nfs`
+  Creates a persistent volume that is shared between all `hello-world` pods as described [here](http://localhost:3000/docs/neonkube/volumes-storage#network-file-system).
+  In this mode, any data stored on the Volume will be persisted.
+
+### `ssoEnabled`
+
+If set to true, the Operator will configure the `hello-world` demo to use the Cluster built-in Single Sign On. Users will need to have cluster
+credentials to access the demo.
+
+### `neonDashboardEnabled`
+
+If set to true, the Operator will add a link to the `hello-world` dashboard to the NeonKUBE dashboard.
