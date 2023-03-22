@@ -27,10 +27,20 @@ This tutorial demonstrates how to deploy a simple application to a NeonKUBE clus
 git clone https://github.com/nforgeio/neonKUBE-demos.git
 ```
 
-## Build and Publish images
+## Publish images
+
+NeonKUBE Clusters include a built-in container registry to store images for deployment. In this step we'll publish
+the necessary container images to the Cluster Registry.
+
+:::note
+
+You can optionally build the containers yourself, rather than using the public images. To do this, add the `-build` flag to the following
+command. You'll need to have [Visual Studio](https://visualstudio.microsoft.com/) and the .NET SDK installed to do this.
+
+:::
 
 ```bash
-pwsh -f publish.ps1
+powershell -f publish.ps1
 ```
 
 ## Deploy hello-world-operator
@@ -41,7 +51,7 @@ neon apply -f hello-world-operator.yaml
 
 ## Deploy hello-world
 
-You can edit the `helloworlddemo.yaml` spec to change the deployment behaviour.
+You can edit the `hello-world.yaml` spec to change the deployment behaviour.
 
 ```yaml
 apiVersion: demo.neonkube.io/v1alpha1
@@ -60,10 +70,17 @@ spec:
 ```
 
 ```bash
-neon apply -f helloworlddemo.yaml
+neon apply -f hello-world.yaml
 ```
 
 ## View Hello, World!
+
+:::info HTTPS!
+
+Every NeonKUBE Cluster comes with an SSL certificate to make it easy to deploy new services.
+The Hello World demo is deployed using this certificate.
+
+:::
 
 <Tabs groupId="deployment">
   <TabItem value="desktop" label="neonDESKTOP">
@@ -79,14 +96,15 @@ neon apply -f helloworlddemo.yaml
     <br />
     <br />
     <CodeBlock language="bash">
-      {`pwsh -c "Write-Host (('https://hello-world.', (neon cluster info | ConvertFrom-Json).Domain) -join '')"`}
+      {`powershell -c "Write-Host (('https://hello-world.', (neon cluster info | ConvertFrom-Json).Domain) -join '')"`}
     </CodeBlock>
   </TabItem>
 </Tabs>
 
 ## HelloWorldDemo Options
 
-The `HelloWorldDemo` Custom Resource `spec` allows for configuration of the demo.
+The `HelloWorldDemo` Custom Resource `spec` allows for configuration of the demo. These options can be changed at any time by modifying
+the `hello-world.yaml` manifest and applying the changes with `neon apply -f hello-world.yaml`.
 
 ### `logLevel`
 
@@ -121,8 +139,7 @@ Try updating the text file and killing some pods with the "Kill Pods" button to 
 
 ### `ssoEnabled`
 
-If set to true, the Operator will configure the `hello-world` demo to use the Cluster built-in Single Sign On. Users will need to have cluster
-credentials to access the demo.
+If set to true, the Operator will configure the `hello-world` demo to use Neon Single Sign On. Users will need cluster credentials to access the demo.
 
 ### `neonDashboardEnabled`
 
