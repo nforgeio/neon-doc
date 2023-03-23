@@ -84,6 +84,11 @@ const config = {
             position: "left",
           },
           {
+            href: "https://neonkube.io",
+            label: "neonKUBE",
+            position: "right",
+          },
+          {
             href: "https://github.com/nforgeio",
             label: "GitHub",
             position: "right",
