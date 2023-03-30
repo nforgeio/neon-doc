@@ -6,9 +6,9 @@ hide_title: false
 hide_table_of_contents: false
 description: How to develop and test webhooks locally.
 keywords:
-  - operator 
-  - sdk 
-  - webhooks 
+  - operator
+  - sdk
+  - webhooks
   - tunnel
   - development
   - environment
@@ -20,21 +20,28 @@ last_update:
 
 ## Visual Studio Dev Tunnels
 
-When running your Operator in Visual Studio, it's possible to create a tunnel using [Visual Studio Dev Tunnels](https://devblogs.microsoft.com/visualstudio/dev-tunnels-in-visual-studio-for-asp-net-core-projects/).
+When running your Operator in Visual Studio, it's possible to create a tunnel
+using
+[Visual Studio Dev Tunnels](https://devblogs.microsoft.com/visualstudio/dev-tunnels-in-visual-studio-for-asp-net-core-projects/).
 This will allow you to debug your webhooks live in Visual Studio.
 
 ### Prerequisites
 
-- Download [Visual Studio 2022 version 17.4.](https://visualstudio.microsoft.com/vs/)
-- You will also need to be signed into Visual Studio to create and use dev tunnels.
-- Enable the dev tunnels preview feature. You can find this at <strong>Tools</strong> -> <strong>Options</strong> -> <strong>Environment</strong> -> <strong>Preview Features</strong>, 
-and select the option Enable dev tunnels for Web Applications.
+- Download
+  [Visual Studio 2022 version 17.4.](https://visualstudio.microsoft.com/vs/)
+- You will also need to be signed into Visual Studio to create and use dev
+  tunnels.
+- Enable the dev tunnels preview feature. You can find this at
+  <strong>Tools</strong> -> <strong>Options</strong> ->
+  <strong>Environment</strong> -> <strong>Preview Features</strong>, and select
+  the option Enable dev tunnels for Web Applications.
 
 ![](./assets/enable-dev-tunnels.png)
 
 ### Setup
 
 Add the following properties to your profile in `launchsettings.json`
+
 ```json
 "devTunnelEnabled": true,
 "devTunnelAccess": "Public"

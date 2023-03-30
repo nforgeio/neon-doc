@@ -6,10 +6,10 @@ hide_title: false
 hide_table_of_contents: false
 description: Monitoring information.
 keywords:
-  - operator 
-  - sdk 
-  - metrics 
-  - prometheus 
+  - operator
+  - sdk
+  - metrics
+  - prometheus
   - grafana
   - observability
 last_update:
@@ -20,15 +20,19 @@ last_update:
 
 ## Metrics
 
-By default, operators will emit a collection of performance metrics for each controller.
+By default, operators will emit a collection of performance metrics for each
+controller.
 
 ### Grafana Dashboard
 
-Here is a sample dashboard to get started: [operator-dashboard.json](./assets/operator-dashboard.json)
+Here is a sample dashboard to get started:
+[operator-dashboard.json](./assets/operator-dashboard.json)
 
 ## Tracing
 
-To enable OpenTelemetry tracing, there is a `AddKubernetesOperatorInstrumentation` extension method to the `TracerProviderBuilder` class.
+To enable OpenTelemetry tracing, there is a
+`AddKubernetesOperatorInstrumentation` extension method to the
+`TracerProviderBuilder` class.
 
 ```csharp
 using Neon.Kube.Operator;

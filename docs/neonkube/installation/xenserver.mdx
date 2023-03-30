@@ -4,7 +4,9 @@ displayed_sidebar: neonkube
 title: XenServer Cluster
 hide_title: false
 hide_table_of_contents: false
-description: Getting started with NeonKUBE on XenServer.Getting started with NeonKUBE on XenServer.Getting started with NeonKUBE on XenServer.
+description:
+  Getting started with NeonKUBE on XenServer.Getting started with NeonKUBE on
+  XenServer.Getting started with NeonKUBE on XenServer.
 keywords:
   - XenServer
   - XCP
@@ -19,13 +21,16 @@ import Image from "@theme/IdealImage";
 
 ## Prerquisites
 
-Make sure you have neon-desktop installed. To install, follow the neon-desktop installation instructions [here](./neon-desktop)
+Make sure you have neon-desktop installed. To install, follow the neon-desktop
+installation instructions [here](./neon-desktop)
 
 ## Creating a cluster
 
 ### Cluster Definition
 
-Create a [Cluster Definition](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html) that describes the cluster.
+Create a
+[Cluster Definition](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html)
+that describes the cluster.
 
 Be sure to substitute the following:
 
@@ -74,5 +79,6 @@ Save the Cluster Definition.
 
 1. Right click the neon-desktop icon in the taskbar > Deploy cluster
    <Image img={require("./assets/deploy-cluster.png")} style={{ width: 300 }} />
-2. When the dialog pops up, select the Cluster Definition file you saved earlier.
+2. When the dialog pops up, select the Cluster Definition file you saved
+   earlier.
 3. Grab a coffee and wait for neon-desktop to create the cluster.

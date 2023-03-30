@@ -9,7 +9,8 @@
     "*.svg": "hediet.vscode-drawio-text"
   },
   "eslint.options": {
-    "extensions": [".js", ".jsx", ".md", ".mdx", ".ts", ".tsx"]
+    "extensions": [".js", ".jsx", ".md", ".mdx", ".ts", ".tsx"],
+    "max-len": ["error", { "code": 80 }]
   },
   "eslint.validate": [
     "markdown",

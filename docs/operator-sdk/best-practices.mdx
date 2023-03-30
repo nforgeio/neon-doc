@@ -22,35 +22,49 @@ last_update:
 
 ### Idempotency
 
-Reconcile is called for every event received from the Controller, which could be multiple times for the same resource. This includes listing all resources
-the first time the Operator starts or restarts. It is important that reconciliation is [idempotent](https://en.wikipedia.org/wiki/Idempotence).
+Reconcile is called for every event received from the Controller, which could be
+multiple times for the same resource. This includes listing all resources the
+first time the Operator starts or restarts. It is important that reconciliation
+is [idempotent](https://en.wikipedia.org/wiki/Idempotence).
 
-A function is said to be idempotent if it can be applied multiple times without changing the result beyond the initial application.
+A function is said to be idempotent if it can be applied multiple times without
+changing the result beyond the initial application.
 
 ### Reconcile All Resources All the Time
 
-Reconciliation can be triggered from many different event sources. It could be tempting to check the event to try to figure out what needs reconciling, but this is considered
-to be an anti-pattern for Operators. Because of the distributed nature of Kubernetes, it's possible that the Operator did not receive all events and in this situation making
-assumptions about the current state could be dangerous. For this reason it is best practice to reconcile all resources all the time.
+Reconciliation can be triggered from many different event sources. It could be
+tempting to check the event to try to figure out what needs reconciling, but
+this is considered to be an anti-pattern for Operators. Because of the
+distributed nature of Kubernetes, it's possible that the Operator did not
+receive all events and in this situation making assumptions about the current
+state could be dangerous. For this reason it is best practice to reconcile all
+resources all the time.
 
 ### Owner References
 
-Dependent objects created by the Reconciler should have an Owner Reference that references their owner resource.
-This will allow Kubernetes to clean up resources when the parent resource is deleted.
+Dependent objects created by the Reconciler should have an Owner Reference that
+references their owner resource. This will allow Kubernetes to clean up
+resources when the parent resource is deleted.
 
 :::info
 
-Cross-namespace owner references are disallowed by design. Namespaced dependents can specify cluster-scoped or namespaced owners. A namespaced owner must exist in
-the same namespace as the dependent. If it does not, the owner reference is treated as absent, and the dependent is subject to deletion once all owners are verified absent.
+Cross-namespace owner references are disallowed by design. Namespaced dependents
+can specify cluster-scoped or namespaced owners. A namespaced owner must exist
+in the same namespace as the dependent. If it does not, the owner reference is
+treated as absent, and the dependent is subject to deletion once all owners are
+verified absent.
 
-Cluster-scoped dependents can only specify cluster-scoped owners. In v1.20+, if a cluster-scoped dependent specifies a namespaced kind as an owner, it is treated as
-having an unresolvable owner reference, and is not able to be garbage collected.
+Cluster-scoped dependents can only specify cluster-scoped owners. In v1.20+, if
+a cluster-scoped dependent specifies a namespaced kind as an owner, it is
+treated as having an unresolvable owner reference, and is not able to be garbage
+collected.
 
 For cross-namespace garbage collection, use a [`Finalizer`](./finalizers).
 
 :::
 
-Owner references can be created by calling the `MakeOwnerReference()` extension method on any resource.
+Owner references can be created by calling the `MakeOwnerReference()` extension
+method on any resource.
 
 ```csharp
 var pod = new V1Pod().Initialize()

@@ -21,12 +21,15 @@ last_update:
 
 ## Introduction
 
-Finalizers are namespaced keys that tell Kubernetes to wait until specific conditions are met before it fully deletes resources marked for deletion.
-When you tell Kubernetes to delete an object that has finalizers specified for it, the Kubernetes API will mark the object for deletion. The object
-will only be deleted once the finalizers have run successfully.
+Finalizers are namespaced keys that tell Kubernetes to wait until specific
+conditions are met before it fully deletes resources marked for deletion. When
+you tell Kubernetes to delete an object that has finalizers specified for it,
+the Kubernetes API will mark the object for deletion. The object will only be
+deleted once the finalizers have run successfully.
 
-Finalizers can be used for garbage collection of resources. For example, you can define a finalizer to clean up any related resources before deleting
-the target resource.
+Finalizers can be used for garbage collection of resources. For example, you can
+define a finalizer to clean up any related resources before deleting the target
+resource.
 
 Finalizers can also be used to prevent accidental deletion of resources.
 

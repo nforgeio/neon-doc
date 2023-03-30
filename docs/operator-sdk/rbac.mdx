@@ -6,8 +6,8 @@ hide_title: false
 hide_table_of_contents: false
 description: How to configure RBAC rules.
 keywords:
-  - operator 
-  - sdk 
+  - operator
+  - sdk
   - rbac
   - security
   - access control
@@ -19,13 +19,15 @@ last_update:
 
 ## Introduction
 
-Role-based access control (RBAC) is a method of regulating access to your Operator. When debugging, the Operator will automatically apply
-configured RBAC rules, and use them. This allows you to verify configuration before deployment.
+Role-based access control (RBAC) is a method of regulating access to your
+Operator. When debugging, the Operator will automatically apply configured RBAC
+rules, and use them. This allows you to verify configuration before deployment.
 
 ## Configuring RBAC rules
 
-RBAC rules are configured by appling `RbacRule` annotations to classes within the Operator project. They can be applied to any class including
-`Controllers`, `Finalizers` and `Webhooks`.
+RBAC rules are configured by appling `RbacRule` annotations to classes within
+the Operator project. They can be applied to any class including `Controllers`,
+`Finalizers` and `Webhooks`.
 
 ### Example
 
@@ -38,10 +40,22 @@ namespace ExampleOperator
     /// <summary>
     /// Example controller
     /// </summary>
-    [RbacRule<V1ExampleEntity>(Verbs = RbacVerb.All, Scope = EntityScope.Cluster)]
-    [RbacRule<V1ServiceAccount>(Verbs = RbacVerb.List | RbacVerb.Create, Scope = EntityScope.Cluster)]
-    [RbacRule<V1Pod>(Verbs = RbacVerb.Get | RbacVerb.Watch | RbacVerb.Patch, Scope = EntityScope.Namespaced)]
-    [RbacRule<V1ConfigMap>(Verbs = RbacVerb.Get | RbacVerb.Watch, Scope = EntityScope.Namespaced)]
+    [RbacRule<V1ExampleEntity>(
+      Verbs = RbacVerb.All,
+      Scope = EntityScope.Cluster)]
+    [RbacRule<V1ServiceAccount>(
+      Verbs = RbacVerb.List
+      | RbacVerb.Create,
+      Scope = EntityScope.Cluster)]
+    [RbacRule<V1Pod>(
+      Verbs = RbacVerb.Get
+      | RbacVerb.Watch
+      | RbacVerb.Patch,
+      Scope = EntityScope.Namespaced)]
+    [RbacRule<V1ConfigMap>(
+      Verbs = RbacVerb.Get
+      | RbacVerb.Watch,
+      Scope = EntityScope.Namespaced)]
     public class ExampleController : IResourceController<V1ExampleEntity>
     {
         // your controller implementation
@@ -51,7 +65,8 @@ namespace ExampleOperator
 
 ### Generating RBAC manifests
 
-Operators can generate RBAC manifests which can be applied using Helm, Kustomize, etc.
+Operators can generate RBAC manifests which can be applied using Helm,
+Kustomize, etc.
 
 ```bash
 operator.exe generate rbac

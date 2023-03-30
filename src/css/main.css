@@ -8,6 +8,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* colors
+forge pink #e530e9
+cloud blue #77ceff
+kube green #84ffbc */
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #2e8555;
@@ -42,7 +47,7 @@ html[data-theme="dark"] {
   --ifm-navbar-background-color: #060611;
   --ifm-color: #f9fafb;
   --ifm-preview-text: #f9fafb;
-  --ifm-link-color: #f9fafb;
+  --ifm-link-color: #a1a1a1;
   --ifm-link-hover-color: var(--ifm-color-primary);
   --ifm-card-background-color: #0606117c;
   --docusaurus-highlighted-code-line-bg: rgb(57, 104, 77);
@@ -62,10 +67,10 @@ html[data-theme="dark"] {
   --ifm-footer-title-color: var(--ifm-color-white);
 }
 
-article {
-  @apply ml-0 w-full xl:ml-32 xl:w-9/12;
+div.container {
+  @apply ml-0 w-full xl:ml-16 xl:w-10/12 2xl:ml-32 2xl:max-w-6xl;
 }
 
-article.margin-top--lg {
-  @apply ml-0 w-full;
+article {
+  @apply ml-0 max-w-full 2xl:max-w-4xl;
 }

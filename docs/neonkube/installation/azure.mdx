@@ -17,13 +17,15 @@ import Image from "@theme/IdealImage";
 
 ## Prerquisites
 
-Make sure you have neon-desktop installed. To install, follow the neon-desktop installation instructions [here](./neon-desktop)
+Make sure you have neon-desktop installed. To install, follow the neon-desktop
+installation instructions [here](./neon-desktop)
 
 ## Creating a cluster
 
 ### Azure CLI
 
-Install the [Azure CLI](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html).
+Install the
+[Azure CLI](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html).
 
 ### Azure RBAC
 
@@ -47,11 +49,14 @@ The output will be something like:
 
 ### Cluster Definition
 
-Create a [Cluster Definition](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html) that describes the cluster.
+Create a
+[Cluster Definition](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html)
+that describes the cluster.
 
 :::caution Warning
 
-Make sure that the Azure account has enough [Resource Quota](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
+Make sure that the Azure account has enough
+[Resource Quota](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 to deploy the cluster.
 
 :::
@@ -95,5 +100,6 @@ Save the Cluster Definition.
 
 1. Right click the neon-desktop icon in the taskbar > Deploy cluster
    <Image img={require("./assets/deploy-cluster.png")} style={{ width: 300 }} />
-2. When the dialog pops up, select the Cluster Definition file you saved earlier.
+2. When the dialog pops up, select the Cluster Definition file you saved
+   earlier.
 3. Grab a coffee and wait for neon-desktop to create the cluster.

@@ -4,7 +4,8 @@ displayed_sidebar: neonkube
 title: Hello World Example
 hide_title: false
 hide_table_of_contents: false
-description: Demonstrates how to deploy a simple application to a NeonKUBE cluster.
+description:
+  Demonstrates how to deploy a simple application to a NeonKUBE cluster.
 keywords:
   - helloworld
   - example
@@ -19,7 +20,8 @@ import TabItem from "@theme/TabItem";
 
 # Hello World Example
 
-This tutorial demonstrates how to deploy a simple application to a NeonKUBE cluster.
+This tutorial demonstrates how to deploy a simple application to a NeonKUBE
+cluster.
 
 ## Clone demo repository
 
@@ -29,13 +31,16 @@ git clone https://github.com/nforgeio/neonKUBE-demos.git
 
 ## Publish images
 
-NeonKUBE Clusters include a built-in container registry to store images for deployment. In this step we'll publish
-the necessary container images to the Cluster Registry.
+NeonKUBE Clusters include a built-in container registry to store images for
+deployment. In this step we'll publish the necessary container images to the
+Cluster Registry.
 
 :::note
 
-You can optionally build the containers yourself, rather than using the public images. To do this, add the `-build` flag to the following
-command. You'll need to have [Visual Studio](https://visualstudio.microsoft.com/) and the .NET SDK installed to do this.
+You can optionally build the containers yourself, rather than using the public
+images. To do this, add the `-build` flag to the following command. You'll need
+to have [Visual Studio](https://visualstudio.microsoft.com/) and the .NET SDK
+installed to do this.
 
 :::
 
@@ -77,8 +82,8 @@ neon apply -f hello-world.yaml
 
 :::info HTTPS!
 
-Every NeonKUBE Cluster comes with an SSL certificate to make it easy to deploy new services.
-The Hello World demo is deployed using this certificate.
+Every NeonKUBE Cluster comes with an SSL certificate to make it easy to deploy
+new services. The Hello World demo is deployed using this certificate.
 
 :::
 
@@ -103,8 +108,10 @@ The Hello World demo is deployed using this certificate.
 
 ## HelloWorldDemo Options
 
-The `HelloWorldDemo` Custom Resource `spec` allows for configuration of the demo. These options can be changed at any time by modifying
-the `hello-world.yaml` manifest and applying the changes with `neon apply -f hello-world.yaml`.
+The `HelloWorldDemo` Custom Resource `spec` allows for configuration of the
+demo. These options can be changed at any time by modifying the
+`hello-world.yaml` manifest and applying the changes with
+`neon apply -f hello-world.yaml`.
 
 ### `logLevel`
 
@@ -119,30 +126,37 @@ the `hello-world.yaml` manifest and applying the changes with `neon apply -f hel
 
 ### `helloWorldReplicas`
 
-This is the number of replicas that will be deployed for the `hello-world` web app.
+This is the number of replicas that will be deployed for the `hello-world` web
+app.
 
 ### `loadGeneratorReplicas`
 
-This is the number of replicas for the load generator app. Increase this to generate more load.
+This is the number of replicas for the load generator app. Increase this to
+generate more load.
 
 ### `storageType`
 
 storageType can be set to `ephemeral` or `nfs`.
 
-The `hello-world` app has a `/storage` page where users can update a text file. This can be used to verify the behaviours described below.
-Try updating the text file and killing some pods with the "Kill Pods" button to see what happens.
+The `hello-world` app has a `/storage` page where users can update a text file.
+This can be used to verify the behaviours described below. Try updating the text
+file and killing some pods with the "Kill Pods" button to see what happens.
 
-- `ephemeral`
-  does not create any Kubernetes [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). Each pod has its own ephemeral
-  volume, and any data stored on it will be lost when the pod is deleted.
-- `nfs`
-  Creates a persistent volume that is shared between all `hello-world` pods as described [here](http://localhost:3000/docs/neonkube/volumes-storage#network-file-system).
+- `ephemeral` does not create any Kubernetes
+  [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+  Each pod has its own ephemeral volume, and any data stored on it will be lost
+  when the pod is deleted.
+- `nfs` Creates a persistent volume that is shared between all `hello-world`
+  pods as described
+  [here](http://localhost:3000/docs/neonkube/volumes-storage#network-file-system).
   In this mode, any data stored on the Volume will be persisted.
 
 ### `ssoEnabled`
 
-If set to true, the Operator will configure the `hello-world` demo to use Neon Single Sign On. Users will need cluster credentials to access the demo.
+If set to true, the Operator will configure the `hello-world` demo to use Neon
+Single Sign On. Users will need cluster credentials to access the demo.
 
 ### `neonDashboardEnabled`
 
-If set to true, the Operator will add a link to the `hello-world` dashboard to the NeonKUBE dashboard.
+If set to true, the Operator will add a link to the `hello-world` dashboard to
+the NeonKUBE dashboard.

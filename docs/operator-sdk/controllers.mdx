@@ -20,8 +20,9 @@ last_update:
 
 ## Introduction
 
-Resource Controllers are called when Kubernetes resources are created, modified, or deleted.
-They are configured to watch specific resource types, have methods for responding to such updates.
+Resource Controllers are called when Kubernetes resources are created, modified,
+or deleted. They are configured to watch specific resource types, have methods
+for responding to such updates.
 
 ```mermaid
 flowchart TD
@@ -34,14 +35,17 @@ flowchart TD
 
 ## Reconciler
 
-Reconcilers are responsible for bringing the actual state of a resource to the desired state, which is expressed in the
-Custom Resource object specification.
+Reconcilers are responsible for bringing the actual state of a resource to the
+desired state, which is expressed in the Custom Resource object specification.
 
-When a reconcile event is triggered, it is always passed the current state of the resource to be reconciled.
+When a reconcile event is triggered, it is always passed the current state of
+the resource to be reconciled.
 
-:::danger A reconciler must be [idempotent](https://en.wikipedia.org/wiki/Idempotence)
+:::danger A reconciler must be
+[idempotent](https://en.wikipedia.org/wiki/Idempotence)
 
-A function is said to be idempotent if it can be applied multiple times without changing the result beyond the initial application.
+A function is said to be idempotent if it can be applied multiple times without
+changing the result beyond the initial application.
 
 :::
 
@@ -52,7 +56,8 @@ Reconcile is triggered by the following events:
 - A resource has been created.
 - A resource has been updated.
 - A resource failed reconciliation and was requeued.
-- An object with an [`ownerReference`](https://kubernetes.io/docs/concepts/overview/working-with-objects/owners-dependents/#owner-references-in-object-specifications)
+- An object with an
+  [`ownerReference`](https://kubernetes.io/docs/concepts/overview/working-with-objects/owners-dependents/#owner-references-in-object-specifications)
   to the resource.
 
 ### Example
@@ -85,7 +90,8 @@ When a reconcile event throws an exception, it will be requeued.
 
 ### Global defaults
 
-Global defaults can be configured by setting `ResourceManagerOptions` in `ConfigureOperator`.
+Global defaults can be configured by setting `ResourceManagerOptions` in
+`ConfigureOperator`.
 
 ```csharp
 var k8s = KubernetesOperatorHost
@@ -107,11 +113,13 @@ await = k8s.RunAsync();
 
 ### Controller specific
 
-Controllers are configurable by passing `ResourceManagerOptions` to your controller when calling `AddController` in `Startup.cs`.
+Controllers are configurable by passing `ResourceManagerOptions` to your
+controller when calling `AddController` in `Startup.cs`.
 
 :::note
 
-To do this, assembly scanning should be disabled or add the `[Controller(Ignore = true)]` attribute to the controller.
+To do this, assembly scanning should be disabled or add the
+`[Controller(Ignore = true)]` attribute to the controller.
 
 :::
 
@@ -166,11 +174,13 @@ public async Task OnNewLeaderAsyncc(string identity)
 
 ### Configuring
 
-Leader election can be configured by setting `LeaderElectionConfig` when adding a controller via `AddController` in `Startup.cs`.
+Leader election can be configured by setting `LeaderElectionConfig` when adding
+a controller via `AddController` in `Startup.cs`.
 
 :::note
 
-To do this, assembly scanning should be disabled or add the `[Controller(Ignore = true)]` attribute to the controller.
+To do this, assembly scanning should be disabled or add the
+`[Controller(Ignore = true)]` attribute to the controller.
 
 :::
 
@@ -192,12 +202,17 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Filtering
 
-Filtering resources can be achieved by applying [field selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/) and/or [label selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).
-Both label selectors and field selectors are comma-separated `key=value` strings.
+Filtering resources can be achieved by applying
+[field selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/)
+and/or
+[label selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).
+Both label selectors and field selectors are comma-separated `key=value`
+strings.
 
 ### Field Selectors
 
-Field selectors can be set either by the `Controller` attribute, or by the `ResourceManagerOptions.FieldSelector` property.
+Field selectors can be set either by the `Controller` attribute, or by the
+`ResourceManagerOptions.FieldSelector` property.
 
 ```csharp
 [Controller(FieldSelector = "metadata.name=my-resource")]
@@ -207,7 +222,8 @@ public class ExampleController : IResourceController<ExampleResource>
 
 ### Label Selectors
 
-Field selectors can be set either by the `Controller` attribute, or by the `ResourceManagerOptions.FieldSelector` property.
+Field selectors can be set either by the `Controller` attribute, or by the
+`ResourceManagerOptions.FieldSelector` property.
 
 ```csharp
 [Controller(LabelSelector = "neonkube.io/managed-by=my-operator,neonkube.io/controlled-by=example-controller")]
@@ -217,9 +233,12 @@ public class ExampleController : IResourceController<ExampleResource>
 
 ## Dependent Resources
 
-In many cases, an operator creates a bunch of Kubernetes resources in the cluster, as a result of reconciling a `Resource`. For instance, the etcd-operator creates
-two services and a number of pods for a single EtcdCluster CR. In this case, all the Kubernetes resources created by the operator for a CR is defined as
-dependent resources. The etcd-operator may want to watch the pods that it created in case it needs to reconcile again.
+In many cases, an operator creates a bunch of Kubernetes resources in the
+cluster, as a result of reconciling a `Resource`. For instance, the
+etcd-operator creates two services and a number of pods for a single EtcdCluster
+CR. In this case, all the Kubernetes resources created by the operator for a CR
+is defined as dependent resources. The etcd-operator may want to watch the pods
+that it created in case it needs to reconcile again.
 
 `DependentResources` can be defined by adding an annotation to the `Controller`.
 
@@ -236,11 +255,14 @@ public class EtcdController : IResourceController<V1EtcdCluster>
 }
 ```
 
-Controllers are configurable by setting `DependentResources` in `ResourceManagerOptions` when adding a controller via `AddController` in `Startup.cs`.
+Controllers are configurable by setting `DependentResources` in
+`ResourceManagerOptions` when adding a controller via `AddController` in
+`Startup.cs`.
 
 :::note
 
-To do this, assembly scanning should be disabled or add the `[Controller(Ignore = true)]` attribute to the controller.
+To do this, assembly scanning should be disabled or add the
+`[Controller(Ignore = true)]` attribute to the controller.
 
 :::
 
