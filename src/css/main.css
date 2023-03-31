@@ -13,6 +13,11 @@ forge pink #e530e9
 cloud blue #77ceff
 kube green #84ffbc */
 
+@font-face {
+  font-family: "Manrope";
+  src: url("../fonts/Manrope.woff2") format("woff2");
+}
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #2e8555;
@@ -51,6 +56,10 @@ html[data-theme="dark"] {
   --ifm-link-hover-color: var(--ifm-color-primary);
   --ifm-card-background-color: #0606117c;
   --docusaurus-highlighted-code-line-bg: rgb(57, 104, 77);
+}
+
+body {
+  font-family: "Manrope", var(--ifm-font-family-base);
 }
 
 /* .footer--dark {
