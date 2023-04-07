@@ -83,3 +83,7 @@ div.container {
 article {
   @apply ml-0 max-w-full 2xl:max-w-4xl;
 }
+
+.cardDescription_node_modules-\@docusaurus-theme-classic-lib-theme-DocCard-styles-module {
+  @apply line-clamp-3 whitespace-normal;
+}
