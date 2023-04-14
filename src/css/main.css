@@ -72,6 +72,14 @@ body {
 .navbar__logo {
   @apply w-8;
 }
+
+.navbar__search-input {
+  @apply w-96 cursor-pointer;
+}
+
+.github_icon_header {
+  @apply h-full w-full fill-gray-100;
+}
 .footer--dark {
   --ifm-footer-background-color: #060611;
   --ifm-footer-color: var(--ifm-footer-link-color);
