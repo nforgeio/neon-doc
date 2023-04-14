@@ -91,3 +91,7 @@ article {
 .theme-doc-toc-desktop {
   @apply ml-0 xl:ml-8 xl:w-48 2xl:ml-32 2xl:w-64;
 }
+
+.footer {
+  @apply flex w-screen justify-center;
+}
