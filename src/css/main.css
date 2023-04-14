@@ -69,6 +69,9 @@ body {
   --ifm-footer-title-color: var(--ifm-color-white);
 } */
 
+.navbar__logo {
+  @apply w-8;
+}
 .footer--dark {
   --ifm-footer-background-color: #060611;
   --ifm-footer-color: var(--ifm-footer-link-color);
