@@ -77,7 +77,7 @@ body {
 }
 
 div.container {
-  @apply ml-0 w-full xl:ml-16 xl:w-10/12 2xl:ml-32 2xl:max-w-6xl;
+  @apply mx-0 w-full xl:ml-8 xl:w-11/12 2xl:ml-32 2xl:max-w-6xl;
 }
 
 article {
@@ -86,4 +86,8 @@ article {
 
 .cardDescription_node_modules-\@docusaurus-theme-classic-lib-theme-DocCard-styles-module {
   @apply line-clamp-3 whitespace-normal;
+}
+
+.theme-doc-toc-desktop {
+  @apply ml-0 xl:ml-8 xl:w-48 2xl:ml-32 2xl:w-64;
 }
