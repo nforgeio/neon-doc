@@ -73,8 +73,8 @@ body {
   @apply w-8;
 }
 
-.navbar__search-input {
-  @apply w-96 cursor-pointer;
+.DocSearch-Button-Container {
+  @apply w-96;
 }
 
 .github_icon_header {
