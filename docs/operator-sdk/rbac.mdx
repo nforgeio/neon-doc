@@ -32,8 +32,7 @@ the Operator project. They can be applied to any class including `Controllers`,
 ### Example
 
 ```csharp
-using Neon.Kube.Operator.Rbac;
-using Neon.Kube.Resources;
+using Neon.Operator.Rbac;
 
 namespace ExampleOperator
 {
@@ -56,7 +55,7 @@ namespace ExampleOperator
       Verbs = RbacVerb.Get
       | RbacVerb.Watch,
       Scope = EntityScope.Namespaced)]
-    public class ExampleController : IResourceController<V1ExampleEntity>
+    public class ExampleController : ResourceControllerBase<V1ExampleEntity>
     {
         // your controller implementation
     }

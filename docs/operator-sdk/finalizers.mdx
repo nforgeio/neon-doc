@@ -36,9 +36,11 @@ Finalizers can also be used to prevent accidental deletion of resources.
 ## Example
 
 ```csharp
-public class ExampleFinalizer : IResourceFinalizer<V1ExampleEntity>
+using Neon.Operator.Finalizers;
+
+public class ExampleFinalizer : ResourceFinalizerBase<V1ExampleEntity>
 {
-    public async Task FinalizeAsync(V1ExampleEntity resource)
+    public override async Task FinalizeAsync(V1ExampleEntity resource)
     {
         // Run finalizer for given entity.
     }

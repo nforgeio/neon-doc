@@ -65,11 +65,17 @@ Reconcile is triggered by the following events:
 In its simplest form, this is what the `ReconcileAsync` method looks like:
 
 ```csharp
-public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
-{
-    // TODO: apply logic
+using Neon.Operator;
+using Neon.Operator.Controllers;
 
-    return ResourceControllerResult.Ok();
+public class ExampleController : ResourceControllerBase<V1ExampleEntity>
+{
+    public override async Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
+    {
+        // TODO: apply logic
+
+        return ResourceControllerResult.Ok();
+    }
 }
 ```
 
@@ -78,7 +84,7 @@ public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
 `StatusModifiedAsync` is called when the status of a resource has changed.
 
 ```csharp
-public async Task StatusModifiedAsync(V1ExampleEntity resource)
+public override async Task StatusModifiedAsync(V1ExampleEntity resource)
 {
     // react to status update
 }
@@ -124,8 +130,8 @@ To do this, assembly scanning should be disabled or add the
 :::
 
 ```csharp
-using Neon.Kube.Operator;
-using Neon.Kube.Operator.ResourceManager;
+using Neon.Operator;
+using Neon.Operator.ResourceManager;
 
 public void ConfigureServices(IServiceCollection services)
 {
@@ -143,7 +149,7 @@ public void ConfigureServices(IServiceCollection services)
 ### Manual requeue
 
 ```csharp
-public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
+public override async Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
 {
     return ResourceControllerResult.RequeueEvent(TimeSpan.FromSeconds(10));
 }
@@ -156,17 +162,17 @@ public Task<ResourceControllerResult> ReconcileAsync(V1ExampleEntity resource)
 The following methods are provided for reacting to leadership events.
 
 ```csharp
-public async Task OnPromotionAsync()
+public override async Task OnPromotionAsync()
 {
     // Controller was promoted to leader.
 }
 
-public async Task OnDemotionAsync()
+public override async Task OnDemotionAsync()
 {
     // Controller is no longer leader.
 }
 
-public async Task OnNewLeaderAsyncc(string identity)
+public override async Task OnNewLeaderAsyncc(string identity)
 {
     // There is a new leader. The identity of the new leader is given.
 }
@@ -185,8 +191,7 @@ To do this, assembly scanning should be disabled or add the
 :::
 
 ```csharp
-using Neon.Kube;
-using Neon.Kube.Operator;
+using Neon.Operator;
 
 public void ConfigureServices(IServiceCollection services)
 {
@@ -216,7 +221,7 @@ Field selectors can be set either by the `Controller` attribute, or by the
 
 ```csharp
 [Controller(FieldSelector = "metadata.name=my-resource")]
-public class ExampleController : IResourceController<ExampleResource>
+public class ExampleController : ResourceControllerBase<ExampleResource>
 
 ```
 
@@ -227,7 +232,7 @@ Field selectors can be set either by the `Controller` attribute, or by the
 
 ```csharp
 [Controller(LabelSelector = "neonkube.io/managed-by=my-operator,neonkube.io/controlled-by=example-controller")]
-public class ExampleController : IResourceController<ExampleResource>
+public class ExampleController : ResourceControllerBase<ExampleResource>
 
 ```
 
@@ -243,13 +248,12 @@ that it created in case it needs to reconcile again.
 `DependentResources` can be defined by adding an annotation to the `Controller`.
 
 ```csharp
-using Neon.Kube.Operator;
-using Neon.Kube.Operator.Controller;
-using Neon.Kube.Resources;
+using Neon.Operator;
+using Neon.Operator.Controllers;
 
 [DependentResource<V1Pod>]
 [DependentResource<V1Service>]
-public class EtcdController : IResourceController<V1EtcdCluster>
+public class EtcdController : ResourceControllerBase<V1EtcdCluster>
 {
    // Controller implementation.
 }
@@ -267,9 +271,8 @@ To do this, assembly scanning should be disabled or add the
 :::
 
 ```csharp
-using Neon.Kube.Operator;
-using Neon.Kube.Operator.ResourceManager;
-using Neon.Kube.Resources;
+using Neon.Operator;
+using Neon.Operator.ResourceManager;
 
 public void ConfigureServices(IServiceCollection services)
 {

@@ -45,9 +45,9 @@ flowchart TD
     operations: AdmissionOperations.Create | AdmissionOperations.Update,
     resources: V1Pod.KubePluralName,
     scope: "*")]
-public class PodWebhook : IValidatingWebhook<V1Pod>
+public class PodWebhook : ValidatingWebhookBase<V1Pod>
 {
-    public async Task<ValidationResult> CreateAsync(V1Pod entity, bool dryRun)
+    public override async Task<ValidationResult> CreateAsync(V1Pod entity, bool dryRun)
     {
         if (entity.Metadata.Name == "invalid-entity")
         {
@@ -57,7 +57,7 @@ public class PodWebhook : IValidatingWebhook<V1Pod>
         return ValidationResult.Success();
     }
 
-    public async Task<ValidationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun)
+    public override async Task<ValidationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun)
     {
         if (entity.Metadata.Name == "invalid-entity")
         {

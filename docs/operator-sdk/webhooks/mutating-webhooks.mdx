@@ -43,11 +43,11 @@ flowchart TD
     operations: AdmissionOperations.Create | AdmissionOperations.Update,
     resources: V1Pod.KubePluralName,
     scope: "*")]
-public class PodWebhook : IMutatingWebhook<V1Pod>
+public class PodWebhook : MutatingWebhookBase<V1Pod>
 {
     private bool modified = false;
 
-    public async Task<MutationResult> CreateAsync(V1Pod entity, bool dryRun)
+    public override async Task<MutationResult> CreateAsync(V1Pod entity, bool dryRun)
     {
         if (modified)
         {
@@ -57,7 +57,7 @@ public class PodWebhook : IMutatingWebhook<V1Pod>
         return await Task.FromResult(MutationResult.NoChanges());
     }
 
-    public async Task<MutationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun)
+    public override async Task<MutationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun)
     {
         if (modified)
         {
