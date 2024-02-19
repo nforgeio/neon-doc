@@ -124,8 +124,8 @@ controller when calling `AddController` in `Startup.cs`.
 
 :::note
 
-To do this, assembly scanning should be disabled or add the
-`[Controller(Ignore = true)]` attribute to the controller.
+To do this manual configuration, automatic configuration should be disabled by
+adding the `[Controller(Ignore = true)]` attribute to the controller.
 
 :::
 
@@ -140,7 +140,7 @@ public void ConfigureServices(IServiceCollection services)
             options: new ResourceManagerOptions()
             {
                 ErrorMaxRequeueInterval = TimeSpan.FromMinutes(1),
-                ErrorMaxRetryCount = 10,
+                ErrorMaxRetryCount      = 10,
                 ErrorMinRequeueInterval = TimeSpan.FromSeconds(1)
             });
 }
@@ -185,8 +185,8 @@ a controller via `AddController` in `Startup.cs`.
 
 :::note
 
-To do this, assembly scanning should be disabled or add the
-`[Controller(Ignore = true)]` attribute to the controller.
+To do this manual configuration, automatic configuration should be disabled by
+adding the `[Controller(Ignore = true)]` attribute to the controller.
 
 :::
 
@@ -265,8 +265,8 @@ Controllers are configurable by setting `DependentResources` in
 
 :::note
 
-To do this, assembly scanning should be disabled or add the
-`[Controller(Ignore = true)]` attribute to the controller.
+To do this manual configuration, automatic configuration should be disabled by
+adding the `[Controller(Ignore = true)]` attribute to the controller.
 
 :::
 

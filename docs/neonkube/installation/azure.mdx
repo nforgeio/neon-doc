@@ -46,6 +46,26 @@ The output will be something like:
   "tenant": "AZURE_TENANT_ID"
 }
 ```
+### Accept offer terms
+
+:::info Info
+
+Replace `neonforge:neonkube:0-10-0-beta-5:0.10.0` with the version you want to use.
+
+For example version 1.0.0 would be `neonforge:neonkube:1-0-0:1.0.0`
+
+:::
+
+View offer terms:
+```bash
+az vm image terms show --urn neonforge:neonkube:0-10-0-beta-5:0.10.0
+```
+
+Accept offer terms:
+```bash
+az vm image terms accept --urn neonforge:neonkube:0-10-0-beta-5:0.10.0
+```
+
 
 ### Cluster Definition
 

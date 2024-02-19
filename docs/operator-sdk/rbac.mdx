@@ -65,9 +65,14 @@ namespace ExampleOperator
 
 ### Generating RBAC manifests
 
-Operators can generate RBAC manifests which can be applied using Helm,
-Kustomize, etc.
+The `Neon.Operator` NuGet package includes analyzers to generate RBAC rules for
+your Operator. You can disable this analyzer with the `NeonOperatorGenerateRbac`
+MSBuild property.
 
-```bash
-operator.exe generate rbac
+For example:
+
+```
+<PropertyGroup>
+  <NeonOperatorGenerateRbac>False</NeonOperatorGenerateRbac>
+</PropertyGroup>
 ```
