@@ -1,0 +1,78 @@
+---
+sidebar_position: 1
+displayed_sidebar: operatorsdk
+title: OLM Bundling Quickstart
+hide_title: false
+hide_table_of_contents: false
+description: How to write unit tests.
+keywords:
+  - operator
+  - sdk
+  - olm
+  - operator lifecycle manager
+last_update:
+  author: Marcus Bowyer
+---
+
+# Operator Lifecycle Manager Integration Bundle
+
+The `Neon.Operator` package uses assembly attributes to configure the OLM
+bundle. The following is the minimum required list of assembly attributes to
+create an OLM bundle. The bundle will be created in the
+`bin/OperatorLifecycleManager` directory, but can be overridden using the
+`NeonOperatorOlmOutputDir` MSBuild property.
+
+- `NameAttribute` - Sets the name of the operator.
+- `DisplayNameAttribute` - Sets the display name of the operator.
+- `VersionAttribute` - Sets the version of the operator. This can also be set
+  using the `NeonOperatorVersion` MSBuild property.
+- `DescriptionAttribute` - Sets the description of the operator.
+- `KeywordAttribute` - Keywords for the operator.
+- `CategoryAttribute` - Sets the category of the operator. These are flags and
+  can be combined.
+- `CapabilitiesAttribute` - Sets the capabilities of the operator. These are
+  flags and can be combined.
+- `ContainerImageAttribute` - Sets the container image of the operator.
+- `InstallModeAttribute` - Sets the install modes of the operator. These are
+  flags and can be combined.
+- `ProviderAttribute` - Sets the provider of the operator.
+- `MaintainerAttribute` - Sets the maintainer of the operator. This can be
+  repeated to add multiple maintainers.
+- `IconAttribute` - Sets the icon of the operator. This can be repeated to add
+  multiple icons.
+- `DefaultChannelAttribute` - Sets the default channel of the operator.
+- `LinkAttribute` - Sets the link of the operator.
+
+Here is an example of how to use these attributes:
+
+```csharp
+using Neon.Operator.Attributes;
+using Neon.Operator.OperatorLifecycleManager;
+
+[assembly: Name("my-operator")]
+[assembly: DisplayName("My Operator")]
+[assembly: Version("1.2.3")]
+[assembly: Description(
+    ShortDescription = "short description",
+    FullDescription = "This is the full description.")]
+[assembly: Keyword("my", "example", "operator")]
+[assembly: Category(
+    Category = Category.DeveloperTools | Category.ApplicationRuntime)]
+[assembly: Capabilities(
+    Capability = CapabilityLevel.DeepInsights)]
+[assembly: ContainerImage(
+    Repository = "github.com/test-operator/cluster-operator",
+    Tag ="1.2.3")]
+[assembly: InstallMode(
+    Type = InstallModeType.OwnNamespace | InstallModeType.MultiNamespace,
+    Supported = true)]
+[assembly: Provider(Name = "Example")]
+[assembly: Maintainer(
+    Name = "Some Corp",
+    Email = "foo@bar.com")]
+[assembly: Icon(
+    Path = "icon.png",
+    MediaType = "image/png")]
+[assembly: DefaultChannel("stable")]
+[assembly: Link(Name = "GitHub", Url = "https://github.com/foo/bar")]
+```

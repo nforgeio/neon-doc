@@ -108,3 +108,7 @@ article {
 .footer {
   @apply flex w-screen justify-center;
 }
+
+.DocSearch-Button-Container {
+  @apply w-6 sm:w-64 md:w-96;
+}
