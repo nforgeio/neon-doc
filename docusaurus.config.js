@@ -216,6 +216,7 @@ const config = {
   ],
   markdown: {
     mermaid: true,
+    format: 'mdx',
   },
   themes: ["@docusaurus/theme-mermaid"],
 };
