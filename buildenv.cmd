@@ -40,11 +40,13 @@ popd
 REM Set other environment variables.
 
 set ND_NODEJS_VERSION=20.11.1
+set ND_SITE_ROOT=%NF_REPOS%\nforgeio-docs
 
 REM Persist the environment variables.
 
-setx ND_ROOT "%ND_ROOT%" /M                   > nul
-setx ND_NODE_VERSION "%ND_NODEJS_VERSION%" /M > nul
+setx ND_ROOT "%ND_ROOT%" /M                               > nul
+setx ND_NODE_VERSION "%ND_NODEJS_VERSION%" /M             > nul
+setx ND_SITE_ROOT "%NF_REPOS%\nforgeio-docs.github.io" /M > nul
 
 REM Check whether NVM (Node Version Manager) is installed and start its
 REM installed when it's not present.
@@ -83,10 +85,29 @@ if "%INSTALL_NVM%"=="1" (
 
 :nvmOK
 
+REM Configure the PATH.
+
+pathtool -dedup -system -add "%ND_ROOT%\toolbin"
+
 REM Install the required version of Node.js.
 
 nvm install %ND_NODEJS_VERSION%
 nvm use %ND_NODEJS_VERSION%
+
+REM Install the Docusaurus tools.
+
+cd %ND_ROOT%
+npm install
+
+REM Update latest browser information.
+
+echo y | npx update-browserslist-db@latest
+
+REM Build the documentation to: ~/build
+REM
+REM NOTE: Publication is performed using the NEONCLOUD neon-kube tool.
+
+npm run build
 
 :done
 echo.
