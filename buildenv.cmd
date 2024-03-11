@@ -39,14 +39,14 @@ popd
 
 REM Set other environment variables.
 
-set ND_NODEJS_VERSION=20.11.1
 set ND_SITE_ROOT=%NF_REPOS%\nforgeio-docs
+set ND_NODEJS_VERSION=20.11.1
 
 REM Persist the environment variables.
 
 setx ND_ROOT "%ND_ROOT%" /M                               > nul
-setx ND_NODE_VERSION "%ND_NODEJS_VERSION%" /M             > nul
 setx ND_SITE_ROOT "%NF_REPOS%\nforgeio-docs.github.io" /M > nul
+setx ND_NODEJS_VERSION "%ND_NODEJS_VERSION%" /M           > nul
 
 REM Check whether NVM (Node Version Manager) is installed and start its
 REM installed when it's not present.
@@ -114,3 +114,4 @@ echo.
 echo ============================================================================================
 echo * Be sure to close and reopen Visual Studio and any command windows to pick up the changes *
 echo ============================================================================================
+pause

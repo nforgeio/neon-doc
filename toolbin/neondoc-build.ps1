@@ -27,48 +27,80 @@
 #       -publish        - publish the documentation
 #       -skipBrowser    - skip browser file update
 
-param 
-(
-    [parameter(Mandatory=$true, Position=1)][string]$version,
-    [parameter(Mandatory=$true, Position=2)][string]$outputFolder
-    [switch]$publish,
-    [switch]$skipBrowser
-)
+# param 
+# (
+#     [parameter(Mandatory=$true, Position=1)][string]$version,
+#     [switch]$publish,
+#     [switch]$skipBrowser
+# )
 
-$ndRoot        = $env:ND_ROOT
-$ndSiteRoot    = $env:ND_SITE_ROOT
-$nodeJsVersion = $env:ND_NODEJS_VERSION
+$version     = "0.11.0-alpha.0"
+$publish     = $true
+$skipBrowser = $true
+
+#------------------------------------------------------------------------------
+# Returns a named string constant value from: $NK_ROOT\Lib\Neon.Kube\KubeVersion.cs
+
+function Get-KubeVersion
+{
+    [CmdletBinding()]
+    param (
+        [Parameter(Position=0, Mandatory=$true)]
+        [string]$name
+    )
+
+    $version = $(& neon-build read-version "$env:NK_ROOT\Lib\Neon.Kube\KubeVersions.cs" $name)
+
+    if ([System.String]::IsNullOrEmpty($version))
+    {
+        throw "Get-KubeVersion: [KubeVersion.$name] constant was not found."
+    }
+
+    return $version
+}
+
+#------------------------------------------------------------------------------
+# Main
+
+$ndRoot          = $env:ND_ROOT
+$docSiteRoot     = $env:ND_SITE_ROOT
+$nodeJsVersion   = $env:ND_NODEJS_VERSION
+$neonKubeVersion = (Get-KubeVersion NeonKube)
 
 # Check the required environment variables and also ensure that the GitHub
 # pages repo is cloned locally.
 
 if ([System.String]::IsNullOrEmpty($ndRoot))
 {
-    Write-Error "ERROR: ND_ROOT environment variable not found.  Re-run [~\neonCLOUD\buildenv.cmd]"
+    Write-Error "*** ERROR: ND_ROOT environment variable not found.  Re-run [~\neon-doc\buildenv.cmd]"
     exit 1
 }
 
-if ([System.String]::IsNullOrEmpty($ndSiteRoot))
+if ([System.String]::IsNullOrEmpty($docSiteRoot))
 {
-    Write-Error "ERROR: ND_SITE_ROOT environment variable not found.  Re-run [~\neonCLOUD\buildenv.cmd]"
+    Write-Error "*** ERROR: NC_DOCSITEROOT environment variable not found.  Re-run [~\neon-doc\buildenv.cmd]"
     exit 1
 }
 
 if ([System.String]::IsNullOrEmpty($nodeJsVersion))
 {
-    Write-Error "ERROR: ND_NODEJS_VERSION environment variable not found.  Re-run [~\neonCLOUD\buildenv.cmd]"
+    Write-Error "*** ERROR: ND_NODEJS_VERSION environment variable not found.  Re-run: ~\neon-doc\buildenv.cmd"
     exit 1
 }
 
-$ndSiteCnamePath = [System.IO.Path]::Combine($ndSiteRoot, "CNAME")
+# We're going to use the presence of the [.neon-doc-site] file at the root 
+# document site folder to verify that ND_SITE_ROOT actually hosts the documentation
+# GitHub Pages site.
 
-if (-not [System.IO.Directory]::Exists($ndSiteRoot) -or -not [System.IO.File]::Exists($ndSiteCnamePath))
+$docSiteIdentifier = [System.IO.Path]::Combine($docSiteRoot, ".neon-doc-site")
+
+if (-not [System.IO.Directory]::Exists($docSiteRoot) -or -not [System.IO.File]::Exists($docSiteIdentifier))
 {
-    Write-Error "ERROR: GitHub repo [nforgeio-docs/nforgeio-docs] is not cloned to: $$ndSiteRoot"
+    Write-Error "*** ERROR: GitHub repo [nforgeio-docs/nforgeio-docs] is not cloned to: $docSiteRoot"
     exit 1
 }
 
-# Commands below need to run within the [neon-doc] repo.
+# The git commands below need to run within the [neon-doc] repo directory.
 
 Push-Location $ndRoot
 
@@ -90,9 +122,9 @@ try
 
     npm run build
 
-    if (-not $>)
+    if (-not $?)
     {
-        Write-Error "ERROR: Documentation build failed."
+        Write-Error "*** ERROR: Documentation build failed."
         exit 1
     }
 
@@ -100,63 +132,112 @@ try
 
     if ($publish)
     {
-        # The repo at [$ndSiteRoot] is a GitHub Pages site.  To publish,
+        # The repo at [$docSiteRoot] is a GitHub Pages site.  To publish,
         # all we need to do is:
         #
         #   1. Pull any upstream changes so git won't complain when
-        #      we push any changes, then we'll remove all files and 
-        #      folders except for [.git]
+        #      we push any changes.
         #
-        #   2. Copy the contents of the [neon-doc/build] repo folders
-        #      into the [$ndSiteRoot] repo.
+        #   2. Remove all root files and folders except for the [.git]
+        #      and [.vs] folders and the [.gitignore] and [.neon-doc-site]
+        #      files.
         #
-        #   3. Stage, commit, and push all changes to GitHub.  It may
+        #   3. Copy the contents of the [neon-doc/build] repo folders
+        #      into the [$docSiteRoot] repo.
+        #
+        #   4. Stage, commit, and push all changes to GitHub.  It may
         #      take 10-30 minutes for GitHub to make the changes live.
 
-        Push-Location $ndSiteRoot
+        Push-Location $docSiteRoot
 
         try
         {
-            git pull
-            if (-not $>)
+            # Exit when the [$docSiteRoot] repo is dirty.
+
+            $response = (git status --porcelain)
+            if (-not $?)
             {
-                Write-Error "ERROR: [git pull] failed."
+                Write-Error "*** ERROR: [git status] failed."
                 exit 1
             }
 
-            foreach ($folder in [System.IO.Directory]::GetDirectories($$ndSiteRoot, [System.IO.SearchOption]::TopDirectoryOnly))
+            if ($null -ne $response)
             {
-                $folderName = [System.IO.Path]::GetFileName($folder));
+                Write-Output "*** ERROR: Cannot publish when [$docSiteRoot] repo is dirty."
+                exit 0
+            }
 
-                if ($folderName -neq ".git")
+            # Pull the upstream.
+
+            git pull
+            if (-not $?)
+            {
+                Write-Error "*** ERROR: [git pull] failed."
+                exit 1
+            }
+
+            # Remove all folders from the [$docSiteRoot] repo except for [.git] and [.vs].
+
+            foreach ($folderPath in [System.IO.Directory]::GetDirectories($docSiteRoot, "*", [System.IO.SearchOption]::TopDirectoryOnly))
+            {
+                $folderName = [System.IO.Path]::GetFileName($folderPath);
+
+                if ($folderName -eq ".git")
                 {
-                    [System.IO.Directory]::Delete($folderName, $true)
+                    continue;
                 }
+
+                if ($folderName -eq ".vs")
+                {
+                    continue;
+                }
+
+                [System.IO.Directory]::Delete($folderPath, $true)
             }
 
-            foreach ($file in [System.IO.Directory]::GetFiles($ndSiteRoot, [System.IO.SearchOption]::TopDirectoryOnly))
+            # Remove all top-level files except [.gitignore] and [.neon-doc-site] files
+
+            foreach ($filePath in [System.IO.Directory]::GetFiles($docSiteRoot, "*", [System.IO.SearchOption]::TopDirectoryOnly))
             {
-                [System.IO.File]::Delete($file)
+                $fileName = [System.IO.Path]::GetFileName($filePath);
+
+                if ($fileName -eq ".gitignore")
+                {
+                    continue
+                }
+
+                if ($fileName -eq ".neon-doc-site")
+                {
+                    continue
+                }
+
+                [System.IO.File]::Delete($filePath)
             }
+
+            # Copy the contents of the [/build] folder into the [$docSiteRoot] repo.
+
+            Copy-Item -Path "$ndRoot\build\*" -Destination $docSiteRoot -Recurse
+
+            # Commit and push changes to the [$docSiteRoot] repo.
 
             git add .
-            if (-not $>)
+            if (-not $?)
             {
-                Write-Error "ERROR: [git add] failed."
+                Write-Error "*** ERROR: [git add] failed."
                 exit 1
             }
 
-            git commnit -m "Publish documentation"
-            if (-not $>)
+            git commit -m "Publish documentation, NEONKUBE Version: $neonKubeVersion"
+            if (-not $?)
             {
-                Write-Error "ERROR: [git commit] failed."
+                Write-Error "*** ERROR: [git commit] failed."
                 exit 1
             }
 
             git push
-            if (-not $>)
+            if (-not $?)
             {
-                Write-Error "ERROR: [git push] failed."
+                Write-Error "*** ERROR: [git push] failed."
                 exit 1
             }
         }
@@ -164,6 +245,10 @@ try
         {
             Pop-Location
         }
+
+        Write-Output " "
+        Write-Output "GitHub Pages Published"
+        Write-Output " "
     }
 }
 finally
