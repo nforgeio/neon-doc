@@ -27,16 +27,15 @@
 #       -publish        - publish the documentation
 #       -skipBrowser    - skip browser file update
 
+#################################
+# $debug(jefflill): restore THIS!
 # param 
 # (
 #     [parameter(Mandatory=$true, Position=1)][string]$version,
 #     [switch]$publish,
 #     [switch]$skipBrowser
 # )
-
-$version     = "0.11.0-alpha.0"
-$publish     = $true
-$skipBrowser = $true
+#################################
 
 #------------------------------------------------------------------------------
 # Returns a named string constant value from: $NK_ROOT\Lib\Neon.Kube\KubeVersion.cs
@@ -61,6 +60,12 @@ function Get-KubeVersion
 
 #------------------------------------------------------------------------------
 # Main
+
+################################
+# $debug(jefflill): DELETE THIS!
+$publish     = $true
+$skipBrowser = $true
+################################
 
 $ndRoot          = $env:ND_ROOT
 $docSiteRoot     = $env:ND_SITE_ROOT
