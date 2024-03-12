@@ -218,6 +218,22 @@ try
 
             Copy-Item -Path "$ndRoot\build\*" -Destination $docSiteRoot -Recurse
 
+            # We don't need to commit/push when the repo isn't dirty.
+
+            $response = (git status --porcelain)
+            if (-not $?)
+            {
+                Write-Error "*** ERROR: [git status] failed."
+                exit 1
+            }
+
+            if ($null -eq $response)
+            {
+                Write-Output " "
+                Write-Output "** GitHub Pages not published: nothing changed **"
+                Write-Output " "
+            }
+
             # Commit and push changes to the [$docSiteRoot] repo.
 
             git add .
@@ -247,7 +263,7 @@ try
         }
 
         Write-Output " "
-        Write-Output "GitHub Pages Published"
+        Write-Output "*** GitHub Pages Published ***"
         Write-Output " "
     }
 }
