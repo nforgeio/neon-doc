@@ -58,6 +58,7 @@ if NOT "%ERRORLEVEL%" == "0" (
 	echo.
 	echo *** Answer YES to manage any installed Node.js versions.
 	"%ND_ROOT%\toolbin\nvm-setup.exe" /silent
+	echo.
 
 	REM The NVM environment variables aren't set locally after
 	REM setup, so we'll do this explicitly here.
