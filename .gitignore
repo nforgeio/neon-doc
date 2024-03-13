@@ -25,5 +25,3 @@ src/css/custom.css
 *.svg.bkp
 *.svg.dtmp
 *.drawio.bkp
-/package-lock.json
-/yarn.lock

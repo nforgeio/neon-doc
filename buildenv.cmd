@@ -20,8 +20,8 @@ set ND_ROOT=%ND_ROOT:~0,-2%
 
 if not [%1]==[] set ND_ROOT=%1
 
-if exist %ND_ROOT%\.neon-docs goto goodPath
-echo The [%ND_ROOT%\.neon-docs] file does not exist.  Please pass the path
+if exist %ND_ROOT%\.neon-doc goto goodPath
+echo The [%ND_ROOT%\.neon-doc] file does not exist.  Please pass the path
 echo to the [neon-docs] repo folder.
 goto done
 
@@ -93,6 +93,12 @@ REM Install the required version of Node.js.
 
 nvm install %ND_NODEJS_VERSION%
 nvm use %ND_NODEJS_VERSION%
+
+REM Install Yarn.
+
+cd %ND_ROOT%
+rm package-lock.json
+npm install --global yarn
 
 REM Install the Docusaurus tools.
 
