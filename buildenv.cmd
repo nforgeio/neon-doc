@@ -54,10 +54,17 @@ REM when it's not present.
 where NVM > nul 2> nul
 
 if NOT "%ERRORLEVEL%" == "0" (
-	echo "Installing NVM (Node Version Manager)"
+	echo Installing NVM (Node Version Manager)
 	echo.
-	echo "* Answer YES to manage any installed Node.js versions."
+	echo *** Answer YES to manage any installed Node.js versions.
 	"%ND_ROOT%\toolbin\nvm-setup.exe" /silent
+
+	REM The NVM environment variables aren't set locally after
+	REM setup, so we'll do this explicitly here.
+
+	set NVM_HOME=%APPDATA%\nvm
+	set NVM_SYMLINK=%ProgramFiles%\nodejs
+	set PATH=%PATH%;%NVM_HOME%;%NVM_SYMLINK%
 )
 
 REM Configure the PATH.
