@@ -2,7 +2,7 @@
 #------------------------------------------------------------------------------
 # FILE:         neondoc-build.ps1
 # CONTRIBUTOR:  Jeff Lill
-# COPYRIGHT:    Copyright (c) 2005-2021 by neonFORGE LLC.  All rights reserved.
+# COPYRIGHT:    Copyright (c) 2005-2021 by NEONFORGE LLC.  All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,15 +27,12 @@
 #       -publish        - publish the documentation
 #       -skipBrowser    - skip browser file update
 
-#################################
-# $debug(jefflill): restore THIS!
-# param 
-# (
-#     [parameter(Mandatory=$true, Position=1)][string]$version,
-#     [switch]$publish,
-#     [switch]$skipBrowser
-# )
-#################################
+param 
+(
+    [parameter(Mandatory=$true, Position=1)][string]$version,
+    [switch]$publish,
+    [switch]$skipBrowser
+)
 
 #------------------------------------------------------------------------------
 # Returns a named string constant value from: $NK_ROOT\Lib\Neon.Kube\KubeVersion.cs
@@ -60,12 +57,6 @@ function Get-KubeVersion
 
 #------------------------------------------------------------------------------
 # Main
-
-################################
-# $debug(jefflill): DELETE THIS!
-$publish     = $true
-$skipBrowser = $true
-################################
 
 $ndRoot          = $env:ND_ROOT
 $docSiteRoot     = $env:ND_SITE_ROOT

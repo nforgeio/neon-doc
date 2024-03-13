@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "neonFORGE Documentation",
-  tagline: "Explanation and usage information for neonFORGE projects.",
+  title: "NEONFORGE Documentation",
+  tagline: "Kubernetes for the rest of us!",
   url: "https://docs.neonforge.com",
   baseUrl: "/",
   onBrokenLinks: "throw",
@@ -91,7 +91,7 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: "neonFORGE",
+        title: "NEONFORGE",
         logo: {
           alt: "NEONKUBE Logo",
           src: "img/favicon.png",
@@ -109,7 +109,7 @@ const config = {
           },
           {
             to: "/docs/operator-sdk",
-            label: "Operator SDK",
+            label: "NEONOPERATORSDK",
             position: "left",
           },
           {
