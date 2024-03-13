@@ -1,0 +1,69 @@
+---
+sidebar_position: 4
+displayed_sidebar: neonkube
+title: AWS Cluster
+hide_title: false
+hide_table_of_contents: false
+description: Getting started with NEONKUBE on AWS.
+keywords:
+  - aws
+  - amazon web services
+last_update:
+  author: NEONFORGE Team
+---
+
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Deploy A NEONKUBE Cluster on AWS
+
+## Prerequisites
+
+- An AWS account
+- Accept the [NEONKUBE EULA](https://aws.amazon.com/marketplace/server/procurement?productId=e42b4534-a895-49d0-8c2e-1cafd10df38e)
+- An AWS Access Key and Secret Key
+
+## Creating a cluster
+
+### Cluster Definition
+
+Create a
+[Cluster Definition](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html)
+that describes the cluster.
+
+Be sure to substitute the following with your own values:
+
+- `ACCESS_KEY_ID`
+- `SECRET_ACCESS_KEY`
+
+```yaml
+name: aws-tiny
+purpose: development
+timeSources:
+- pool.ntp.org
+kubernetes:
+  allowPodsOnControlPlane: true
+hosting:
+  environment: aws
+  aws:
+    accessKeyId: ACCESS_KEY_ID
+    secretAccessKey: SECRET_ACCESS_KEY
+    availabilityZone: us-west-2a
+    defaultEbsOptimized: true
+nodes:
+  control-0:
+    role: control-plane
+```
+
+Save the Cluster Definition.
+
+### Creating the Cluster
+
+1. Right click the NEONDESKTOP icon in the taskbar > Deploy cluster
+   <Image img={require("./assets/deploy-cluster.png")} style={{ width: 300 }} />
+2. When the dialog pops up, select the Cluster Definition file you saved
+   earlier.
+3. Grab a coffee and wait for NEONDESKTOP to create the cluster.

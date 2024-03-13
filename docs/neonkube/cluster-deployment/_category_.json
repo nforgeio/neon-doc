@@ -1,0 +1,8 @@
+{
+    "label": "Cluster Deployment",
+    "position": 3,
+    "link": {
+        "type": "doc",
+        "id": "index"
+    }
+}
