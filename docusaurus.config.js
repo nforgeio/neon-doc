@@ -53,7 +53,7 @@ const config = {
         {
           name: "keywords",
           content:
-            "neon, neonforge, neonkube, neondesktop, neon-desktop, neon-cli, kubernetes, documentation",
+            "neon, neonforge, neonkube, neondesktop, neon-cli, kubernetes, documentation",
         },
       ],
       algolia: {
@@ -93,18 +93,18 @@ const config = {
       navbar: {
         title: "neonFORGE",
         logo: {
-          alt: "NeonKUBE Logo",
+          alt: "NEONKUBE Logo",
           src: "img/favicon.png",
         },
         items: [
           {
             to: "/docs/neonkube",
-            label: "neonKUBE",
+            label: "NEONKUBE",
             position: "left",
           },
           {
             to: "/docs/neonsdk",
-            label: "neonSDK",
+            label: "NEONSDK",
             position: "left",
           },
           {
@@ -152,7 +152,7 @@ const config = {
             title: "More",
             items: [
               {
-                label: "neonKUBE",
+                label: "NEONKUBE",
                 href: "https://neonkube.io/",
               },
             ],

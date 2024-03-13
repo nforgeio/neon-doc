@@ -10,7 +10,7 @@ keywords:
   - sdk
   - getting started
 last_update:
-  author: Marcus Bowyer
+  author: NEONFORGE Team
 ---
 
 # Getting Started
@@ -32,7 +32,7 @@ public static partial class Program
     {
         var operator = KubernetesOperatorHost
             .CreateDefaultBuilder(args)
-            .ConfigureNeonKube() // for operators running in NeonKUBE clusters.
+            .ConfigureNeonKube() // for operators running in NEONKUBE clusters.
             .UseStartup<Startup>()
             .Build();
 
