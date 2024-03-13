@@ -53,9 +53,11 @@ REM when it's not present.
 
 where NVM > nul 2> nul
 
-if "%ERRORLEVEL%" != "0" (
-	echo Installing NVM (Node Version Manager)
-	"%ND_ROOT%\toolbin\nvm-setup.exe"
+if NOT "%ERRORLEVEL%" == "0" (
+	echo "Installing NVM (Node Version Manager)"
+	echo.
+	echo "* Answer YES to manage any installed Node.js versions."
+	"%ND_ROOT%\toolbin\nvm-setup.exe" /silent
 )
 
 REM Configure the PATH.
