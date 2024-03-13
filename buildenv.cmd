@@ -48,42 +48,15 @@ setx ND_ROOT "%ND_ROOT%" /M                               > nul
 setx ND_SITE_ROOT "%NF_REPOS%\nforgeio-docs.github.io" /M > nul
 setx ND_NODEJS_VERSION "%ND_NODEJS_VERSION%" /M           > nul
 
-REM Check whether NVM (Node Version Manager) is installed and start its
-REM installed when it's not present.
+REM Check whether NVM (Node Version Manager) is installed and install
+REM when it's not present.
 
 where NVM > nul 2> nul
 
-if "%ERRORLEVEL%" == "0" goto nvmOK
-
-echo.
-echo NVM (Node Version Manager) is required and needs to be installed.
-echo.
-set /P "INSTALL_NVM=Do you want to install NVM now? (y/n): "
-
-if "%INSTALL_NVM%"=="y" (
-    set INSTALL_NVM=1
-) else if "%INSTALL_NVM%"=="Y" (
-    set INSTALL_NVM=1
-) else if "%INSTALL_NVM%"=="n" (
-    set INSTALL_NVM=0
-) else if "%INSTALL_NVM%"=="N" (
-    set INSTALL_NVM=0
-) else (
-    echo.
-    echo "*** ERROR: You must answer with: Y or N."
-    echo.
-    goto justMockPrompt
+if "%ERRORLEVEL%" != "0" (
+	echo Installing NVM (Node Version Manager)
+	"%ND_ROOT%\toolbin\nvm-setup.exe"
 )
-
-if "%INSTALL_NVM%"=="1" (
-    "%ND_ROOT%\toolbin\nvm-setup.exe"
-) else (
-    echo.
-    echo "Build environment is NOT FULLY CONFIGURED."
-    exit 1
-)
-
-:nvmOK
 
 REM Configure the PATH.
 
