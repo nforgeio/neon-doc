@@ -97,7 +97,6 @@ nvm use %ND_NODEJS_VERSION%
 REM Install Yarn.
 
 cd %ND_ROOT%
-rm package-lock.json
 npm install --global yarn
 
 REM Install the Docusaurus tools.
