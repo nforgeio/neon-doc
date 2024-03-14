@@ -25,7 +25,7 @@ https://github.com/nforgeio/neonKUBE/releases
 Click on a release (generally the most recent) and then scroll down
 to the bottom of the release page to locate the **Assets**:
 
-<Image img={require("../assets/getting-started/github-release.png")} style={{ width: 700 }} />
+<Image img={require("./assets/installation/github-release.png")} style={{ width: 700 }} />
 
 You'll find the two installer downloads there, one that installs the **NEONCLI**
 tool (a gently extended version of the Kubernetes **kubectl** client).  Note that
@@ -51,4 +51,12 @@ Helm Version: 3.12.0
 ```
 
 Download and run **neon-desktop.#-win.amd64.exe** to install **NEONDESKTOP** as
-well as **NEONCLI**, which is included.  NEONDESKTOP lives in the Windows taskbar
+well as **NEONCLI**, which is included.  Note that NEONDESKTOP lives in the Windows
+taskbar:
+
+<Image img={require("./assets/installation/desktop-taskbar.png")} style={{ width: 500 }} />
+
+This is the NEONDESKTOP icon.  It will be **green** when connected to a cluster, **blinking 
+yellow** when an operation is in progress, **red** when there's a problem with the current
+cluster, and **clear** when not connected to a cluster.  Right-click on this icon to display 
+the application menu.
