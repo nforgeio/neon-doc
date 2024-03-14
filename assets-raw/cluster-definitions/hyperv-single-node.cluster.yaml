@@ -1,0 +1,14 @@
+name: my-cluster
+hosting:
+  environment: hyperv
+network:
+  premiseSubnet: 10.0.0.0/16
+  gateway: 10.0.0.1
+nodes:
+  control-0:
+    role: control-plane
+    address: 10.0.1.1
+    hypervisor:
+      vcpus: 4
+      memory: 16 GiB
+      osDisk: 64 GiB

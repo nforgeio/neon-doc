@@ -1,0 +1,21 @@
+name: my-azure-cluster
+hosting:
+  environment: azure
+  azure:
+    subscriptionId: $<env:AZURE_NEONFORGE_SUBSCRIPTION_ID>
+    tenantId: $<env:AZURE_NEONFORGE_TENANT_ID>
+    clientId: $<env:AZURE_NEONFORGE_CLIENT_ID>
+    clientSecret: $<env:AZURE_NEONFORGE_CLIENT_SECRET>
+    region: westus2
+    defaultVmSize: Standard_D4d_v5
+nodes:
+   control-0:
+     role: control-plane
+     azure:
+       vmSize: Standard_D4pls_v5
+   worker-0:
+     role: worker
+   worker-1:
+     role: worker
+   worker-2:
+     role: worker
