@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 displayed_sidebar: neonkube
-title: AWS Cluster
+title: AWS
 hide_title: false
 hide_table_of_contents: false
 description: Getting started with NEONKUBE on AWS.
@@ -18,7 +18,7 @@ import Image from "@theme/IdealImage";
 import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
 
-# Deploy A NEONKUBE Cluster on AWS
+# Deploy a NEONKUBE Cluster on AWS
 
 ## Prerequisites
 
@@ -56,6 +56,7 @@ your own AWS credentials for:
 :::note
 We plan on eventually integrating with AWS IAM Roles so AWS authntication
 will be more secure.
+::: 
 
 ## Cluster Deployment via NEONDESKTOP
 
@@ -72,7 +73,7 @@ Cluster deployment happens in two phases:
 
 - Configuring the hosting infrastructure, which involves configuring the 
   **Resource Group**, **VPC**, starting the **Instances**, configuring 
-  the **LoadBalancer**, **IP Addresses**, **Disks** etc.
+  the **LoadBalancer**, **IP Addresses**, **Disks**, etc.
 
 - Setting up the cluster.  This involves configuring Linux and Kubernetes
   and then installing the necessary cluster components via Helm charts.
@@ -86,7 +87,7 @@ REM Prepare the cluster infrastructure (change PATH to your cluster definition p
 neon cluster prepare PATH
 
 REM Setup the cluster
-neon cluster setup root@CLUSTERNAME
+neon cluster setup root@my-aws-cluster
 ```
 
 Then wait for cluster setup to complete.
