@@ -55,7 +55,7 @@ ClusterDefinition:
 		<tr>
 			<td><b>annotations</b></td>
 			<td>
-				`object`: Optionally specifies cluster annotations.  Label names and values must follow the
+				`map`: Optionally specifies cluster annotations.  Label names and values must follow the
 				[Kubernetes conventions](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
 				and the <b>neonkube.io/</b> prefix is reserved by NEONKUBE.
 			</td>
@@ -69,7 +69,7 @@ ClusterDefinition:
 		<tr>
 			<td><b>datacenter</b></td>
 			<td>
-				Identifies the datacenter.  This defaults to empty string for on-premise clusters
+				`string`: Identifies the datacenter.  This defaults to empty string for on-premise clusters
 				or the region for clusters deployed to the cloud.
 
 				<b>NOTE:</b> The name may include only letters, numbers, periods, dashes, and underscores.
@@ -235,6 +235,6 @@ ClusterDefinition:
 			</td>
 		</tr>
 	</tbody>
-
-	The following pages will describe the more complex properties.
 </table>
+
+The following pages will describe the more complex properties.

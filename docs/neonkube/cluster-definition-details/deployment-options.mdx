@@ -1,0 +1,52 @@
+---
+sidebar_position: 2
+slug: /deployment
+displayed_sidebar: neonkube
+title: Deployment Options
+hide_title: false
+hide_table_of_contents: true
+description: Describes cluster definition Container Options
+last_update:
+  author: NEONFORGE Team
+---
+ara
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Container Options
+
+Used to customizes the cluster's container registry configuration.
+
+```yaml
+deployment:
+  prefix: null
+```
+
+<table>
+	<thead>
+		<th>Property</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><b>registries</b></td>
+			<td>
+				`string`: Optional prefix combined with the cluster name to generate the resource group name
+				when deploying the cluster to a cloud environment or combined with the node name
+				for other environments.  This is typically used by unit tests deployed by <b>ClusterFixture</b>
+				but can also be used by custom tools to avoid conflicts when multiple tests may be 
+				running in parallel (probably on different machines) as well as providing a way to 
+				identify and remove clusters or VMs orphaned by previous interrupted tests or tool runs.
+
+				This will typically be set to something identifying the machine, user, and/or tool
+				running the test like <b>runner-0</b>, <b>jeff</b>, or <b>runner-0-jeff</b>.
+
+				<b>NOTE:</b> A dash will be appended automatically to non-`null` prefixes before prepending this
+				to the cluster name.
+			</td>
+		</tr>
+	</tbody>
+</table>
