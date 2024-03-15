@@ -1,0 +1,44 @@
+---
+sidebar_position: 4
+displayed_sidebar: neonkube
+title: XenServer/XCP-ng
+hide_title: false
+hide_table_of_contents: true
+description: Describes cluster definition Hosting Options
+last_update:
+  author: NEONFORGE Team
+---
+ara
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# XenServer/XCP-ng Hosting Options
+
+Here are the XenServer/XCP-ng related hosting options:
+
+```yaml
+hosting:
+  environment: xenserver
+  xenserver: 
+```
+
+<table>
+	<thead>
+		<th>Property</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><b>accessKeyId</b></td>
+			<td>
+				`string:` Specifies the AWS access key ID that identifies the IAM key created 
+				for the IAM user assigned to NEONKUBE for management activities, including creating
+				the cluster.  This combined with <b>SecretAccessKey</b> will be used to confirm the 
+				identity.  This is required.
+			</td>
+		</tr>
+	</tbody>
+</table>

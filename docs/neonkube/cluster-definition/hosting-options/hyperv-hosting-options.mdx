@@ -1,0 +1,61 @@
+---
+sidebar_position: 3
+displayed_sidebar: neonkube
+title: Hyper-V
+hide_title: false
+hide_table_of_contents: true
+description: Describes cluster definition Hosting Options
+last_update:
+  author: NEONFORGE Team
+---
+ara
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Hyper-V Hosting Options
+
+Here are the Hyper-V related hosting options:
+
+```yaml
+hosting:
+  environment: hyperv
+```
+
+<table>
+	<thead>
+		<th>Property</th>
+		<th>Description</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td><b>environment</b></td>
+			<td>
+				`string:` Deploys the cluster to Azure.
+			</td>
+		</tr>
+		<tr>
+			<td><b>azure</b></td>
+			<td>
+				`string:` Specifies the Amazon Web Services (AWS) hosting settings.
+
+				<table>
+					<thead>
+						<th>Property</th>
+						<th>Description</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td><b>enabled</b></td>
+							<td>
+								`bool:` Optionally installs Harbor. This defaults to `false`.
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>
