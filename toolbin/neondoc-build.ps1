@@ -183,6 +183,11 @@ try
                     continue;
                 }
 
+                if ($folderName -eq ".neon-doc-site")
+                {
+                    continue;
+                }
+
                 if ($folderName -eq ".vs")
                 {
                     continue;
