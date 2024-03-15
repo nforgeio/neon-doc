@@ -1,5 +1,4 @@
 ---
-slug: /cluster-definition-details
 sidebar_position: 8
 displayed_sidebar: neonkube
 title: Cluster Definition
@@ -22,7 +21,7 @@ top-level structure of a cluster definition:
 ClusterDefinition:
   annotations: {}
   container: {}
-  datacenter: false
+  datacenter: null
   deployment: {}
   description:
   features: {}
@@ -54,7 +53,7 @@ ClusterDefinition:
 		<tr>
 			<td><b>annotations</b></td>
 			<td>
-				`map`: Optionally specifies cluster annotations.  Label names and values must follow the
+				`map:` Optionally specifies cluster annotations.  Label names and values must follow the
 				[Kubernetes conventions](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
 				and the <b>neonkube.io/</b> prefix is reserved by NEONKUBE.
 			</td>
@@ -62,13 +61,13 @@ ClusterDefinition:
 		<tr>
 			<td><b>container</b></td>
 			<td>
-				`object`: Customizes the cluster's container registry configuration.
+				`object:` Customizes the cluster's container registry configuration.
 			</td>
 		</tr>
 		<tr>
 			<td><b>datacenter</b></td>
 			<td>
-				`string`: Identifies the datacenter.  This defaults to empty string for on-premise clusters
+				`string:` Identifies the datacenter.  This defaults to empty string for on-premise clusters
 				or the region for clusters deployed to the cloud.
 
 				<b>NOTE:</b> The name may include only letters, numbers, periods, dashes, and underscores.
@@ -77,52 +76,52 @@ ClusterDefinition:
 		<tr>
 			<td><b>deployment</b></td>
 			<td>
-				`object`: Optionally used by <b>ClusterFixture</b> and possibly custom tools for customizing
+				`object:` Optionally used by <b>ClusterFixture</b> and possibly custom tools for customizing
 				cluster and node names to avoid conflicts.
 			</td>
 		</tr>
 		<tr>
 			<td><b>description</b></td>
 			<td>
-				`string`: Optionally describes the cluster for humans.  This may be a string up to 256 characters long.
+				`string:` Optionally describes the cluster for humans.  This may be a string up to 256 characters long.
 			</td>
 		</tr>
 		<tr>
 			<td><b>features</b></td>
 			<td>
-				`object`: Specifies optional features to be installed in the cluster.
+				`object:` Specifies optional features to be installed in the cluster.
 			</td>
 		</tr>
 		<tr>
 			<td><b>hosting</b></td>
 			<td>
-				`object`: Specifies hosting related settings (e.g. the cloud provider).  This defaults to
+				`object:` Specifies hosting related settings (e.g. the cloud provider).  This defaults to
 				`null` indicating that the cluster will be hosted on private servers.
 			</td>
 		</tr>
 		<tr>
 			<td><b>isDesktop</b></td>
 			<td>
-				`bool`: Indicates that the definition describes a NEONDESKTOP cluster.  This is set to `true`
+				`bool:` Indicates that the definition describes a NEONDESKTOP cluster.  This is set to `true`
                  by NEONDESKTOP when it deploys a desktop cluster and isn't typically set by cluster operators.
 			</td>
 		</tr>
 		<tr>
 			<td><b>jobs</b></td>
 			<td>
-				`object`: Specifies the schedules for cluster jobs.
+				`object:` Specifies the schedules for cluster jobs.
 			</td>
 		</tr>
 		<tr>
 			<td><b>kubernetes</b></td>
 			<td>
-				`object`: Specifies Kubernetes cluster options.
+				`object:` Specifies Kubernetes cluster options.
 			</td>
 		</tr>
 		<tr>
 			<td><b>latitude</b></td>
 			<td>
-				`decimal`: Optionally specifies the latitude of the cluster location.  This is a value
+				`decimal:` Optionally specifies the latitude of the cluster location.  This is a value
 				between -90 and +90 degrees.
 
 				<b>NOTE:</b> <b>Latitude</b> and <b>Longitude</b> must both be specified together or
@@ -132,7 +131,7 @@ ClusterDefinition:
 		<tr>
 			<td><b>longitude</b></td>
 			<td>
-				`decimal`: Optionally specifies the longitude of the cluster location.  This is a value
+				`decimal:` Optionally specifies the longitude of the cluster location.  This is a value
 				between -180 and +180 degrees.
 
 				<b>NOTE:</b> <b>Latitude</b> and <b>Longitude</b> must both be specified together or
@@ -142,13 +141,13 @@ ClusterDefinition:
 		<tr>
 			<td><b>monitor</b></td>
 			<td>
-			    `object`: Specifies options for the cluster integrated monitoring stack.
+			    `object:` Specifies options for the cluster integrated monitoring stack.
 			</td>
 		</tr>
 		<tr>
 			<td><b>name</b></td>
 			<td>
-			`string`: Specifies the cluster name.
+			`string:` Specifies the cluster name.
 
 			<b>NOTE:</b> 
 			Names may include only letters, numbers, periods, dashes, and underscores and
@@ -160,25 +159,25 @@ ClusterDefinition:
 		<tr>
 			<td><b>network</b></td>
 			<td>
-				`object`: Describes the cluster's network configuration.
+				`object:` Describes the cluster's network configuration.
 			</td>
 		</tr>
 		<tr>
 			<td><b>nodeOptions</b></td>
 			<td>
-				`object`: Specifies host node options, including Linux package manager settings.
+				`object:` Specifies host node options, including Linux package manager settings.
 			</td>
 		</tr>
 		<tr>
 			<td><b>nodes</b></td>
 			<td>
-				`map`: Describes the cluster nodes.
+				`map:` Describes the cluster nodes.
 			</td>
 		</tr>
 		<tr>
 			<td><b>packageProxy</b></td>
 			<td>
-				`string`: Optionally specifies one or more APT proxy/cache servers the cluster will use to install
+				`string:` Optionally specifies one or more APT proxy/cache servers the cluster will use to install
 				and update Linux packages.  These are endpoints like <b>HOSTNAME:PORT</b> or <b>ADDRESS.PORT</b>
 				of a <b>apt-cacher-ng</b> or other package proxy server.  The port is generally set to <b>3142</b>
 				Multiple proxies may be specified by separating them with spaces.  This defaults to
@@ -196,14 +195,14 @@ ClusterDefinition:
 		<tr>
 			<td><b>purpose</b></td>
 			<td>
-				`string`: Describes how the cluster is being used.  Supported values are: <b>unspecified</b>,
+				`string:` Describes how the cluster is being used.  Supported values are: <b>unspecified</b>,
 				<b>development</b>, <b>production</b>, <b>stage</b>, and <b>test</b>
 			</td>
 		</tr>
 		<tr>
 			<td><b>resourceTags</b></td>
 			<td>
-				 `array`: Optionally specifies custom tags that will be attached to cluster resources in cloud
+				 `array:` Optionally specifies custom tags that will be attached to cluster resources in cloud
 				 hosting environments.  These tags are intended to help you manage your cloud resources
 				 as well as help organize your cost reporting.
 				 
@@ -213,19 +212,19 @@ ClusterDefinition:
 		<tr>
 			<td><b>security</b></td>
 			<td>
-				`object`: Specifies cluster security options.
+				`object:` Specifies cluster security options.
 			</td>
 		</tr>
 		<tr>
 			<td><b>storage</b></td>
 			<td>
-				`object`: Specifies cluster storage related options.
+				`object:` Specifies cluster storage related options.
 			</td>
 		</tr>
 		<tr>
 			<td><b>timeSources</b></td>
 			<td>
-				`array`: Specifies the NTP time sources to be configured for the cluster.  These are the
+				`array:` Specifies the NTP time sources to be configured for the cluster.  These are the
 				FQDNs or IP addresses of the sources.  This defaults to <b>pool.ntp.org</b>.
 				
 				The cluster control-plane nodes will be configured to synchronize their time with these

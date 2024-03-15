@@ -10,8 +10,3 @@ echo.
 
 cd %ND_ROOT%
 yarn start
-
-echo.
-echo Looks like the Docusaurus build quit or failed!
-echo.
-pause

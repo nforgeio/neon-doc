@@ -1,8 +1,8 @@
 ---
-sidebar_position: 4
-slug: /hosting-options
+sidebar_position: 0
+slug: /cluster-definition/hosting-options/aws
 displayed_sidebar: neonkube
-title: Hosting Options
+title: AWS Hosting Options
 hide_title: false
 hide_table_of_contents: true
 description: Describes cluster definition Hosting Options
@@ -58,7 +58,7 @@ hosting:
 		<tr>
 			<td><b>accessKeyId</b></td>
 			<td>
-				`string`: Specifies the AWS access key ID that identifies the IAM key created 
+				`string:` Specifies the AWS access key ID that identifies the IAM key created 
 				for the IAM user assigned to NEONKUBE for management activities, including creating
 				the cluster.  This combined with <b>SecretAccessKey</b> will be used to confirm the 
 				identity.  This is required.
@@ -67,13 +67,13 @@ hosting:
 		<tr>
 			<td><b>availabilityZone</b></td>
 			<td>
-			`string`: Specifies the AWS zone where the cluster will be provisioned.  This is required.
+			`string:` Specifies the AWS zone where the cluster will be provisioned.  This is required.
 			</td>
 		</tr>
 		<tr>
 			<td><b>controlPlanePlacementPartitions</b></td>
 			<td>
-				`integer`: Specifies the number of control-plane placement group partitions the cluster
+				`integer:` Specifies the number of control-plane placement group partitions the cluster
 				control-plane node instances will be deployed to.  This defaults to <b>-1</b> which means
 				that the number  of partitions will equal the number of control-plane nodes.  AWS supports
 				a maximum of 7 placement partitions.
@@ -104,7 +104,7 @@ hosting:
 		<tr>
 			<td><b>defaultInstanceType</b></td>
 			<td>
-			`string`: Identifies the default AWS instance type to be provisioned for cluster nodes that don't
+			`string:` Identifies the default AWS instance type to be provisioned for cluster nodes that don't
             specify an instance type.  This defaults to <b>c5.2xlarge</b> which includes 8 virtual cores and 
 			16 GiB RAM but can be overridden for specific cluster nodes.
 
@@ -118,7 +118,7 @@ hosting:
 		<tr>
 			<td><b>defaultEbsOptimized</b></td>
 			<td>
-				`bool`: Specifies whether the cluster instances should be EBS-optimized by default.  
+				`bool:` Specifies whether the cluster instances should be EBS-optimized by default.  
 				This defaults to <b>false</b> and can be overidden for specific cluster nodes.
 				See this for more information: <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html">Amazon EBS–optimized instances</a>
 
@@ -145,7 +145,7 @@ hosting:
 		<tr>
 			<td><b>defaultVolumeSize</b></td>
 			<td>
-				`string`: Specifies the default AWS volume size for the cluster node primary disks.
+				`string:` Specifies the default AWS volume size for the cluster node primary disks.
 				This defaults to <b>128 GiB</b> but can be overridden for specific cluster nodes.
 
 				<b>NOTE:</b> Node disks smaller than 32 GiB are not supported by NEONKUBE.  We'll 
@@ -155,7 +155,7 @@ hosting:
 		<tr>
 			<td><b>defaultVolumeType</b></td>
 			<td>
-				`string`: Specifies the default AWS volume type for cluster node primary disks.  This defaults
+				`string:` Specifies the default AWS volume type for cluster node primary disks.  This defaults
 			    to <b>gp2</b> which is SSD based and offers a reasonable compromise between performance and cost.
 				This can be overriden for specific cluster nodes.
 			</td>
@@ -163,7 +163,7 @@ hosting:
 		<tr>
 			<td><b>defaultOpenEbsVolumeSize</b></td>
 			<td>
-				`string`: Specifies the default AWS volume size to be used when creating 
+				`string:` Specifies the default AWS volume size to be used when creating 
 				OpenEBS cStor disks.  This defaults to <b>128 GiB</b> but can be overridden 
 				for specific cluster nodes.
 
@@ -174,7 +174,7 @@ hosting:
 		<tr>
 			<td><b>defaultOpenEbsVolumeType</b></td>
 			<td>
-				`string`: Specifies the default AWS volume type to use for OpenEBS cStor disks.  This defaults
+				`string:` Specifies the default AWS volume type to use for OpenEBS cStor disks.  This defaults
 				to <b>gp2</b> which is SSD based and offers a reasonable compromise between performance and cost.
 				This can be overridden for specific cluster nodes.
 			</td>
@@ -182,7 +182,7 @@ hosting:
 		<tr>
 			<td><b>network</b></td>
 			<td>
-				`object`: Specifies the AWS related cluster network options.
+				`object:` Specifies the AWS related cluster network options.
 
 				<table>
 				    <thead>
@@ -193,7 +193,7 @@ hosting:
 						<tr>
 							<td><b>elasticIpEgressId</b></td>
 							<td>
-								`string`: Optionally specifies an existing Elastic IP address to be used by the cluster
+								`string:` Optionally specifies an existing Elastic IP address to be used by the cluster
 								load balancer for receiving network traffic.  Set this to your Elastic IP allocation ID
 								(something like <b>eipalloc-080a1efa9c04ad72</b>).  This is useful for ensuring that your 
 								cluster is always provisioned with a known static IP.
@@ -208,7 +208,7 @@ hosting:
 						<tr>
 							<td><b>elasticIpIngressId</b></td>
 							<td>
-								`string`: Optionally specifies an existing Elastic IP address to be used by the cluster 
+								`string:` Optionally specifies an existing Elastic IP address to be used by the cluster 
 								load balancer for sending network traffic.  Set this to your Elastic IP allocation ID 
 								(something like <b>eipalloc-080a1efa9c04ad88</b>).  This is useful for ensuring that your
 								cluster is always provisioned with a known static IP.
@@ -223,7 +223,7 @@ hosting:
 						<tr>
 							<td><b>vpcSubnet</b></td>
 							<td>
-								`string`: Specifies the subnet CIDR to used for AWS VPC (virtual private cloud) provisioned
+								`string:` Specifies the subnet CIDR to used for AWS VPC (virtual private cloud) provisioned
 								for the cluster.  This must surround the <b>nodeSubnet</b> and <b>publicSubnet</b> subnets.
 								This defaults to <b>10.100.0.0/16</b>.
 							</td>
@@ -231,14 +231,14 @@ hosting:
 						<tr>
 							<td><b>privateSubnet</b></td>
 							<td>
-								`string`: Specifies the private subnet CIDR within <b>vpcSubnet</b> <see cref=""/> for the private subnet
+								`string:` Specifies the private subnet CIDR within <b>vpcSubnet</b> <see cref=""/> for the private subnet
 								where the cluster node instances will be provisioned.  This defaults to <b>10.100.0.0/24</b>.
 							</td>
 						</tr>
 						<tr>
 							<td><b>publicSubnet</b></td>
 							<td>
-								`string`: Specifies the public subnet CIDR within <b>vpcSubnet</b> for the public subnet where
+								`string:` Specifies the public subnet CIDR within <b>vpcSubnet</b> for the public subnet where
 								the AWS network load balancer will be provisioned to manage inbound cluster traffic.  This defaults
 								to <b>10.100.255.0/16</b>.
 							</td>
@@ -250,21 +250,21 @@ hosting:
 		<tr>
 			<td><b>resourceGroup</b></td>
 			<td>
-				`string`: Specifies the AWS resource group where all cluster components are to be provisioned.
+				`string:` Specifies the AWS resource group where all cluster components are to be provisioned.
 				This defaults to "neon-" plus the cluster name but can be customized as required.
 			</td>
 		</tr>
 		<tr>
 			<td><b>secretAccessKey</b></td>
 			<td>
-				`string`: Specifies the AWS secret used to authenticate the <b>AccessKeyId</b>.
+				`string:` Specifies the AWS secret used to authenticate the <b>AccessKeyId</b>.
 				This is required.
 			</td>
 		</tr>
 		<tr>
 			<td><b>workerPlacementPartitions</b></td>
 			<td>
-				`integer`: Specifies the number of worker placement group partitions the cluster 
+				`integer:` Specifies the number of worker placement group partitions the cluster 
 				worker node instances will be deployed to.  This defaults to <b>1</b> trading off
 				resilience to hardware failures against increasing the chance that AWS will actually
 				be able to provision the cluster nodes.  AWS supports a maximum of 7 placement partitions.
@@ -313,13 +313,13 @@ hosting:
 		<tr>
 			<td><b>environment</b></td>
 			<td>
-				`string`: Deploys the cluster to Azure.
+				`string:` Deploys the cluster to Azure.
 			</td>
 		</tr>
 		<tr>
 			<td><b>azure</b></td>
 			<td>
-				`string`: Specifies the Amazon Web Services (AWS) hosting settings.
+				`string:` Specifies the Amazon Web Services (AWS) hosting settings.
 
 				<table>
 					<thead>
@@ -330,7 +330,7 @@ hosting:
 						<tr>
 							<td><b>enabled</b></td>
 							<td>
-								`bool`: Optionally installs Harbor. This defaults to `false`.
+								`bool:` Optionally installs Harbor. This defaults to `false`.
 							</td>
 						</tr>
 					</tbody>
@@ -358,13 +358,13 @@ hosting:
 		<tr>
 			<td><b>environment</b></td>
 			<td>
-				`string`: Deploys the cluster to Azure.
+				`string:` Deploys the cluster to Azure.
 			</td>
 		</tr>
 		<tr>
 			<td><b>azure</b></td>
 			<td>
-				`string`: Specifies the Amazon Web Services (AWS) hosting settings.
+				`string:` Specifies the Amazon Web Services (AWS) hosting settings.
 
 				<table>
 					<thead>
@@ -375,7 +375,7 @@ hosting:
 						<tr>
 							<td><b>enabled</b></td>
 							<td>
-								`bool`: Optionally installs Harbor. This defaults to `false`.
+								`bool:` Optionally installs Harbor. This defaults to `false`.
 							</td>
 						</tr>
 					</tbody>
@@ -403,13 +403,13 @@ hosting:
 		<tr>
 			<td><b>environment</b></td>
 			<td>
-				`string`: Deploys the cluster to Azure.
+				`string:` Deploys the cluster to Azure.
 			</td>
 		</tr>
 		<tr>
 			<td><b>azure</b></td>
 			<td>
-				`string`: Specifies the Amazon Web Services (AWS) hosting settings.
+				`string:` Specifies the Amazon Web Services (AWS) hosting settings.
 
 				<table>
 					<thead>
@@ -420,7 +420,7 @@ hosting:
 						<tr>
 							<td><b>enabled</b></td>
 							<td>
-								`bool`: Optionally installs Harbor. This defaults to `false`.
+								`bool:` Optionally installs Harbor. This defaults to `false`.
 							</td>
 						</tr>
 					</tbody>
@@ -448,13 +448,13 @@ hosting:
 		<tr>
 			<td><b>environment</b></td>
 			<td>
-				`string`: Deploys the cluster to AWS.
+				`string:` Deploys the cluster to AWS.
 			</td>
 		</tr>
 		<tr>
 			<td><b>hypervisor</b></td>
 			<td>
-				`string`: Specifies the Amazon Web Services (AWS) hosting settings.
+				`string:` Specifies the Amazon Web Services (AWS) hosting settings.
 
 				<table>
 					<thead>
@@ -465,7 +465,7 @@ hosting:
 						<tr>
 							<td><b>enabled</b></td>
 							<td>
-								`bool`: Optionally installs Harbor. This defaults to `false`.
+								`bool:` Optionally installs Harbor. This defaults to `false`.
 							</td>
 						</tr>
 					</tbody>
