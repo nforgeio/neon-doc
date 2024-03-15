@@ -104,7 +104,7 @@ try
 {
     # Select the required version of Node.js.
 
-    nvm use %ND_NODEJS_VERSION%
+    nvm use $env:ND_NODEJS_VERSION
 
     # Update the info about known browsers; this is used when
     # generating documentation files.
