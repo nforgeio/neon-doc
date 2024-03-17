@@ -37,7 +37,7 @@ hosting:
         <tr>
             <td><b>snapshot</b></td>
             <td>
-                `bool:` Optionally directs XenCenter to create the virtual machines using a snapshot of
+                `bool:` Optionally directs XenServer to create the virtual machines using a snapshot of
                 the virtual machine template rather than creating a full copy.  This defaults to **false**.
 
                 Virtual machines created via a snapshot will be ready within seconds where as
@@ -54,7 +54,7 @@ hosting:
                 machine template must reside in the same repository where the virtual machines
                 are being created.  The current **neon-cli** implementation persists the
                 cluster VM templates to the local storage repository, so support for non-local
-                storage repositories is not support out-of-the-box at this time.
+                storage repositories is not supported out-of-the-box at this time.
             </td>
         </tr>
         <tr>
