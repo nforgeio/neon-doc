@@ -41,7 +41,7 @@ schedule.  The sub expressions (in order) are:
 - **Day-of-Week** (1..7) or SUN-SAT
 - **Year** (optional) (1970..2099)
 
-An example of a complete cron expression is **0 0 15 ? * MON** which triggers
+An example of a complete cron expression is **"0 0 15 ? * MON"** which triggers
 **every Monday at 3pm**.
 
 For the full documentation which describes special characters, see: 
@@ -52,7 +52,7 @@ In addition to the standard Quartz defined special characters, we also
 support the <b>R</b> character which picks a random value within the
 allow range for a field.  For example:
 
-<b>0 0 R R * *</b>
+<b>"0 0 R R * *"</b>
 
 schedules the job for a random hour and minute during the day.  This is useful
 for situations like uploading telemetry to a global service where you don't
