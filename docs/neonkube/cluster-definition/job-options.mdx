@@ -31,15 +31,15 @@ This defaults to **"R R 0 ? * *"** which fires every day at a random minute and
 second between 12:00am and 1:00am.
 
 Cron expressions consist of seven sub-expressions that describe the details of the 
-schedule.  The sub expressions are:
+schedule.  The sub expressions (in order) are:
 
-- Seconds (0..59)
-- Minutes (0..59)
-- Hours (0..23)
-- Day-of-Month (1..31)
-- Month (1..12) or MON-DEC
-- Day-of-Week (1..7) or SUN-SAT
-- Year (optional) (1970..2099)
+- **Seconds** (0..59)
+- **Minutes** (0..59)
+- **Hours** (0..23)
+- **Day-of-Month** (1..31)
+- **Month** (1..12) or MON-DEC
+- **Day-of-Week** (1..7) or SUN-SAT
+- **Year** (optional) (1970..2099)
 
 An example of a complete cron expression is **0 0 15 ? * MON** which triggers
 **every Monday at 3pm**.
