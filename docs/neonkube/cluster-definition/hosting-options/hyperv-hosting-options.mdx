@@ -22,6 +22,10 @@ Here are the Hyper-V related hosting options:
 ```yaml
 hosting:
   environment: hyperv
+  hyperv:
+    neonDesktopBuiltIn: false
+    useInternalSwitch:  false
+
 ```
 
 <table>
@@ -48,9 +52,47 @@ hosting:
                     </thead>
                     <tbody>
                         <tr>
-                            <td><b>enabled</b></td>
+                            <td><b>neonDesktopBuiltIn</b></td>
                             <td>
-                                `bool:` Optionally installs Harbor. This defaults to `false`.
+                                `bool:` Controls whether the cluster will be deployed on the internal **neonkube** Hyper-V switch
+                                within the **NeonKubeInternalSubnet**.  Note that any **NetworkOptions.PremiseSubnet**
+                                must be already set to **NeonKubeInternalSubnet** and **NetworkOptions.Gateway** must be 
+                                set to **NeonKubeInternalGateway** when this is **true**.
+
+                                This defaults to **false**.
+
+                                Note that NEONKUBE creates only a single internal Hyper-V switch for the **HyperV**
+                                hosting environment for the **NeonKubeInternalSubnet** (**100.64.0.0/24**).  some
+                                addresses in this subnet are reserved:
+
+                                <table>
+                                    <tr>
+                                        <td>**100.64.0.0**</td>
+                                        <td>Reserved</td>
+                                    </tr>
+                                    <tr>
+                                        <td>**100.64.0.1**</td>
+                                        <td>Gateway for external network access</td>
+                                    </tr>
+                                    <tr>
+                                        <td>**00.64.0.2 ... 253**</td>
+                                        <td>Available for user cluster nodes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>**100.64.0.254**</td>
+                                        <td>Reserved for the NEONDESKTOP single node cluster</td>
+                                    </tr>
+                                    <tr>
+                                        <td>**100.64.0.255**</td>
+                                        <td>Reserved for the subnet UDP broadcast address</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>useInternalSwitch</b></td>
+                            <td>
+                                `bool:` Optionally installs Harbor. This defaults to **false**.
                             </td>
                         </tr>
                     </tbody>
