@@ -17,121 +17,122 @@ import Tabs from "@theme/Tabs";
 
 # Feature Options
 
-Specifies optional cluster features that should be included in the cluster.
+Here's what the feature options look like, with the default values
+or **[required]** for properties that must be specified:
 
 ```yaml
 features:
-  grafana: true
+  grafana:             true
   harbor:
-    enabled: false
-    chartMuseum: false
-    notary: false
-    trivy: false
-  kiali: false
-  loki: true
-  mimir: true
-  minio: true
+    enabled:           false
+    chartMuseum:       false
+    notary:            false
+    trivy:             false
+  kiali:               false
+  loki:                true
+  mimir:               true
+  minio:               true
   nodeProblemDetector: false
-  serviceMesh: false
-  tempo: true
+  serviceMesh:         false
+  tempo:               true
 ```
 
 <table>
-	<thead>
-		<th>Property</th>
-		<th>Description</th>
-	</thead>
-	<tbody>
-		<tr>
-			<td><b>grafana</b></td>
-			<td>
-				`bool:` Specifies whether <b>Grafana</b> is installed.  This defaults to `true`.
-			</td>
-		</tr>
-		<tr>
-			<td><b>harbor</b></td>
-			<td>
-				`object:` Specifies whether Harbor and related related components to be installed in the cluster.
+    <thead>
+        <th>Property</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>grafana</b></td>
+            <td>
+                `bool:` Specifies whether <b>Grafana</b> is installed.  This defaults to `true`.
+            </td>
+        </tr>
+        <tr>
+            <td><b>harbor</b></td>
+            <td>
+                `object:` Specifies whether Harbor and related related components to be installed in the cluster.
 
-				<table>
-					<thead>
-						<th>Property</th>
-						<th>Description</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td><b>enabled</b></td>
-							<td>
-								`bool:` Optionally installs Harbor. This defaults to `false`.
-							</td>
-						</tr>
-						<tr>
-							<td><b>chartMuseum</b></td>
-							<td>
-								`bool:` Optionally installs the Harbor Chart Museum. This defaults to `false`.
-							</td>
-						</tr>
-						<tr>
-							<td><b>notary</b></td>
-							<td>
-								`bool:` Optionally installs the Harbor Notary. This defaults to `false`.
-							</td>
-						</tr>
-						<tr>
-							<td><b>trivy</b></td>
-							<td>
-								`bool:` Optionally installs the Harbor Trivy. This defaults to `false`.
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-		<tr>
-			<td><b>kiali</b></td>
-			<td>
-				`bool:` Optionally enables the Kiali service mesh dashboard.  This defaults to <c>false</c>.
+                <table>
+                    <thead>
+                        <th>Property</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>enabled</b></td>
+                            <td>
+                                `bool:` Optionally installs Harbor. This defaults to `false`.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>chartMuseum</b></td>
+                            <td>
+                                `bool:` Optionally installs the Harbor Chart Museum. This defaults to `false`.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>notary</b></td>
+                            <td>
+                                `bool:` Optionally installs the Harbor Notary. This defaults to `false`.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>trivy</b></td>
+                            <td>
+                                `bool:` Optionally installs the Harbor Trivy. This defaults to `false`.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td><b>kiali</b></td>
+            <td>
+                `bool:` Optionally enables the Kiali service mesh dashboard.  This defaults to <c>false</c>.
 
-				<b>NOTE:</b> <b>serviceMesh</b> will also be enabled when <b>kiali</b> is enabled.
-			</td>
-		</tr>
-		<tr>
-			<td><b>loki</b></td>
-			<td>
-				`bool:` Specifies whether <b>Loki</b> is installed.  This defaults to `true`.
-			</td>
-		</tr>
-		<tr>
-			<td><b>mimir</b></td>
-			<td>
-				`bool:` Indicates whether <b>Mimir</b> is installed.  This defaults to `true`.
-			</td>
-		</tr>
-		<tr>
-			<td><b>minio</b></td>
-			<td>
-				`bool:` Indicates whether <b>Minio</b> is installed.  This defaults to `true`.
-			</td>
-		</tr>
-		<tr>
-			<td><b>nodeProblemDetector</b></td>
-			<td>
-				`bool:` Optionally installs the Node Problem Detector.  This defaults to `false`.
-			</td>
-		</tr>
-		<tr>
-			<td><b>serviceMesh</b></td>
-			<td>
-				`bool:` Optionally enables the Istio service mesh.  This defaults to `false`.
+                <b>NOTE:</b> <b>serviceMesh</b> will also be enabled when <b>kiali</b> is enabled.
+            </td>
+        </tr>
+        <tr>
+            <td><b>loki</b></td>
+            <td>
+                `bool:` Specifies whether <b>Loki</b> is installed.  This defaults to `true`.
+            </td>
+        </tr>
+        <tr>
+            <td><b>mimir</b></td>
+            <td>
+                `bool:` Indicates whether <b>Mimir</b> is installed.  This defaults to `true`.
+            </td>
+        </tr>
+        <tr>
+            <td><b>minio</b></td>
+            <td>
+                `bool:` Indicates whether <b>Minio</b> is installed.  This defaults to `true`.
+            </td>
+        </tr>
+        <tr>
+            <td><b>nodeProblemDetector</b></td>
+            <td>
+                `bool:` Optionally installs the Node Problem Detector.  This defaults to `false`.
+            </td>
+        </tr>
+        <tr>
+            <td><b>serviceMesh</b></td>
+            <td>
+                `bool:` Optionally enables the Istio service mesh.  This defaults to `false`.
 
-				<b>NOTE:</b> This will also be enabled when <b>kiali</b> is enabled.
-			</td>
-		</tr>
-		<tr>
-			<td><b>tempo</b></td>
-			<td>
-				`bool:` Optionally installs Tempo.  This defaults to `true`.
-			</td>
-		</tr>
-	</tbody>
+                <b>NOTE:</b> This will also be enabled when <b>kiali</b> is enabled.
+            </td>
+        </tr>
+        <tr>
+            <td><b>tempo</b></td>
+            <td>
+                `bool:` Optionally installs Tempo.  This defaults to `true`.
+            </td>
+        </tr>
+    </tbody>
 </table>
