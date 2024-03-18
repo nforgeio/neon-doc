@@ -57,14 +57,14 @@ network:
         <tr>
             <td><b>acme.certificateDuration</b></td>
             <td>
-                `string:`  Specifies the maximum lifespan for internal cluster TLS certificates as a GOLANG formatted string.  
+                `string:` Optionally specifies the maximum lifespan for internal cluster TLS certificates as a GOLANG formatted string.  
                 This defaults to **2160h0m0s** (90 days).
             </td>
         </tr>
         <tr>
             <td><b>acme.certificateRenewBefore</b></td>
             <td>
-                `string:` specifies the time to wait before attempting to renew internal cluster TLS certificates.
+                `string:` Optionally specifies the time to wait before attempting to renew internal cluster TLS certificates.
                 This must be less than **acme.certificateDuration** and defaults to **720h0m0s** (24 days).
             </td>
         </tr>
@@ -96,7 +96,7 @@ network:
         <tr>
             <td><b>gatewy</b></td>
             <td>
-                `string:`  Specifies the default network gateway address to be configured for cluster nodes.
+                `string:` Specifies the default network gateway address to be configured for cluster nodes.
                 This defaults to the  second usable address in the **premiseSubnet**.  For example,
                 for the **10.0.0.0/24** subnet, this will be default to **10.0.0.1**.
                 
@@ -106,7 +106,7 @@ network:
         <tr>
             <td><b>ingressRules</b></td>
             <td>
-                `array:` Optionally sets the ingress routing rules for external traffic received by nodes
+                `array:` Optionally specifies the ingress routing rules for external traffic received by nodes
                 with **node.Ingress=true** enabled, targeting one or more Istio ingress gateway services 
                 which are then responsible for routing to the target Kubernetes services.
 
@@ -160,7 +160,7 @@ network:
                     <tr>
                         <td><b>ingressHealthCheck</b></td>
                         <td>
-                            **intervalSeconds:** `integer`:  Specifies the interval in seconds between load balancer health 
+                            **intervalSeconds:** `integer`: Specifies the interval in seconds between load balancer health 
                             checks.  This defaults to <b>10 seconds</b> and must be in the range of **10...300** seconds.
 
                             **thresholdCount:** `integer:` Specifies the number of consecutive failed health checks before
@@ -219,7 +219,7 @@ network:
                     <tr>
                         <td><b>tcpIdleTimeoutMinutes</b></td>
                         <td>
-                            `integer:` `Optionally specifies the TCP idle time out for TCP related ingress protocols like
+                            `integer:` Optionally specifies the TCP idle time out for TCP related ingress protocols like
                             **http**, **https**, and **tcp**.  Inbound TCP connections that have no network
                             traffic going either way will be closed by supported load balancers or routers.
                             This defaults to **4 minutes**.
@@ -237,7 +237,7 @@ network:
         <tr>
             <td><b>managementAddressRules</b></td>
             <td>
-                `array:`  Optionally specifies whitelisted and/or blacklisted external addresses for
+                `array:` Optionally specifies whitelisted and/or blacklisted external addresses for
                 node management via SSH NAT rules as well as cluster management via the 
                 Kubernetes API via port 6443.  This defaults to allowing inbound traffic 
                 from anywhere when the property is <c>null</c> or empty.  See [Address Rules](#address-rules)
@@ -271,7 +271,7 @@ network:
         <tr>
             <td><b>nodeMtu</b></td>
             <td>
-                `integer:`  Optionally overrides the default MTU (maximum transmission unit) 
+                `integer:` Optionally overrides the default MTU (maximum transmission unit) 
                 configured for luster node network interfaces.  The default MTU for the hosting environment
                 will be used when set to **0**, otherwise this can be configured as a value between **512-9000**.
                 This defaults to: **0**

@@ -17,35 +17,16 @@ import Tabs from "@theme/Tabs";
 
 # Node Options
 
-Describes the network options for a cluster.
+Describes the options used to configure the host (Linux) configuration
+for cluster nodes.  These apply to all nodes in the cluster.
 
-Here's what the monitoring options look like, with the default values
+Here's what the node options look like, with the default values
 or **[required]** for properties that must be specified:
 
 ```yaml
-network:
-  acme:
-    certificateDuration:    "2160h0m0s"
-    certificateRenewBefore: "720h0m0s"
-    issuer:                 null
-  egressAddressRules:       []
-  gateway:                  [second address in premiseSubnet]
-  ingressHealthCheck:
-    intervalSeconds:        10
-    thresholdCount:         2
-  ingressRules:             []
-  managementAddressRules:   []
-  mutalPodTls:              false
-  nameServers:
-  - "8.8.8.8"               [Google DNS for on-premise]
-  - "8.8.4.4"               [otherwise use cloud DNS  ]
-  nodeMtu:                  0
-  premiseSubnet:            [required for on-premise]
-  podSubnet:                "10.254.0.0/16"
-  publicAddresses:          []
-  reservedIngressEndPort:   64999
-  reservedIngressStartPort: 64000
-  serviceSubnet:            "10.253.0.0/16"
+node:
+  allowPackageManagerIPv6: false
+  packageManagerRetries:   5
 ```                                       
 
 <table>
@@ -55,10 +36,18 @@ network:
     </thead>
     <tbody>
         <tr>
-            <td><b>acme.certificateDuration</b></td>
+            <td><b>allowPackageManagerIPv6</b></td>
             <td>
-                `string:`  Specifies the maximum lifespan for internal cluster TLS certificates as a GOLANG formatted string.  
-                This defaults to **2160h0m0s** (90 days).
+                `bool:` Allow the Linux package manager to use IPv6 when communicating with
+                package mirrors.  This defaults to **false** to restrict updates
+                to using IPv4.
+            </td>
+        </tr>
+        <tr>
+            <td><b>packageManagerRetries</b></td>
+            <td>
+                `integer:` Specifies the number of times the host package manager should retry
+                 failed index or package downloads.  This defaults to <b>5</b>
             </td>
         </tr>
     </tbody>
