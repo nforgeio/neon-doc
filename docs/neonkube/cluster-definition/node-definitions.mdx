@@ -172,7 +172,7 @@ properties for individual cluster nodes.
                         <td>**openEbsVolumeSize**</td>
                         <td>
                             `string:` Optionally specifies the AWS volume type to be used for the node's OpenEBS cStor/Maystor
-                            disk (if any).  This defaults to **null** which indicates that **hosting.aws.defaultOpenEbsVolumeSize**
+                            disk (if any).  This defaults to **null** indicating that **hosting.aws.defaultOpenEbsVolumeSize**
                             will specify the volume type for the node.
                         </td>
                     </tr>
@@ -180,7 +180,8 @@ properties for individual cluster nodes.
                         <td>**openEbsVolumeType**</td>
                         <td>
                             `string:` Optionally specifies the size of the AWS volume to be used for the node's OpenEBS
-                            cStor/Maystor disk (if any).  This defaults to **default" which indicates that **hosting.aws.defaultOpenEbsVolumeType**
+                            cStor/Maystor disk (if any).  Supported values are **default**, **st**, **sc1**, **gp2**, **io1**, or **io2**.
+                            This defaults to **default" indicating that **hosting.aws.defaultOpenEbsVolumeType**
                             will be used for the node.
 
                             **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll automatically
@@ -191,7 +192,7 @@ properties for individual cluster nodes.
                         <td>**volumeSize**</td>
                         <td>
                             `string:` Optionally specifies the size of the AWS volume to be used as the node's primary operating
-                            system disk.  This defaults to **null** which indicates that **hosting.aws.defaultvolumeSize**
+                            system disk.  This defaults to **null** indicated that **hosting.aws.defaultvolumeSize**
                             will be used.
 
                             **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll automatically
@@ -202,7 +203,8 @@ properties for individual cluster nodes.
                      <td>**volumeType**</td>
                         <td>
                             `string:` Optionally specifies the AWS volume type to be used for the node's OpenEBS cStor/Mayastor
-                            disk (if any).  This defaults to **default** which indicates that **hosting.aws.defaultvolumeType**
+                            disk (if any).  Supported values are **default**, **st**, **sc1**, **gp2**, **io1**, or **io2**.
+                            This defaults to **default** indicating that **hosting.aws.defaultvolumeType**
                             will specify the volume type for the node.
                         </td>
                     </tr>
@@ -215,6 +217,76 @@ properties for individual cluster nodes.
                 `object:` **Azure** specific options for the cluster node.  These options can be used to override
                 defaults specified by **hosting.azure** in the cluster definition.  This is ignored
                 for non-Azure deployments.
+
+                ```yaml
+                azure:
+                  diskSize:           null
+                  openEbsStorageType: "default"
+                  openEbsDiskSize:    null
+                  storageType:        "default"
+                  vmSize:             "default"
+                ```
+
+                <table>
+                    <thead>
+                        <th>Property</th>
+                        <th>Description</th>
+                    </thead>
+                    <tr>
+                        <td>**diskSize**</td>
+                        <td>
+                            `string:` Optionally specifies the size of the Azure disk to be used as the node's
+                            primary operating system disk.  This defaults to **null** indicating that
+                            **hosting.azure.defaultDiskSize** from the cluster definition will be used.
+
+                            **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll
+                            automatically round up the disk size when necessary.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>**openEbsStorageType**</td>
+                        <td>
+                            `string:`  Optionally specifies the Azure storage type to be used for the node's OpenEBS
+                            cStor/Mayastor disk (if any).  Supported values are **default**, **standard0hhd**, **standard-ssd**,
+                            **premium-ssd**, **premium-ssd-v2**, and **ultra-ssd**.  This defaults to **default** indicating
+                            that **hosting.azure.openEbsStorageType** from the cluster definition will be used.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>**openEbsDiskSize**</td>
+                        <td>
+                            `string:` Optionally specifies the size of the Azure disk to be used for the node's OpenEBS
+                            cStor/Mayastor disk (if any).  This defaults to **null** indicating that ****hosting.azure.openEbsDiskSize**
+
+                            **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll automatically
+                            round up the disk size when necessary.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>**storageType**</td>
+                        <td>
+                            `string:` Optionally specifies the storage type to use the node's primary disk.
+                            Supported values are **default**, **standard0hhd**, **standard-ssd**, **premium-ssd**,
+                            **premium-ssd-v2**, and **ultra-ssd**.  This defaults to **default** indicating
+                            that **hosting.azure.storageType** from the cluster definition will be used.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>**vmSize**</td>
+                        <td>
+                            `string:` Optionally specifies the Azure virtual machine size.  Here's a list of the
+                            available [Azure VM Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general).
+                            This dwefaults to **default** indicating that **hosting.azure.vmSize** from the
+                            cluster definition will be used.
+
+                            **NOTE:** NeonKUBE clusters cannot be deployed to ARM-based Azure V, sizes at this time.  You must
+                            specify an VM size using a Intel or AMD 64-bit processor.
+
+                            **NOTE:** NeonKUBE requires control-plane and worker instances to have at least 4 CPUs and 8GiB RAM.
+                            Choose an Azure VM size instance type that satisfies these requirements.
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr>
