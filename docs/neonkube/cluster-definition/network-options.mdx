@@ -106,19 +106,132 @@ network:
         <tr>
             <td><b>ingressRules</b></td>
             <td>
-                `array:` Optionally sets the ingress routing rules for external traffic received by
-                nodes with <see cref="NodeDefinition.Ingress"/> enabled into one or more Istio ingress
-                gateway services which are then responsible for routing to the target Kubernetes 
-                services.  See [Address Rules](#address-rules) below for more information.
-        
-                **NOTE:** Address rules are processed in order from first to last, so you may 
-                consider putting your blacklist rules before your whitelist rules.
+                `array:` Optionally sets the ingress routing rules for external traffic received by nodes
+                with **node.Ingress=true** enabled, targeting one or more Istio ingress gateway services 
+                which are then responsible for routing to the target Kubernetes services.
 
-                This defaults to allowing all inbound traffic.
+                This defaults to allowing inbound **HTTP/HTTPS** traffic and cluster setup
+                also adds a TCP rule for the Kubernetes API server on port **6442**.
 
-                **NOTE:** This is currently supported only for clusters hosted on Azure.  AWS doesn't support
-                this scenario and we currently don't support automatic router configuration for
-                on-premise environments.
+                Here's how an address rule is structured:
+
+                ```yaml
+                addressRules:          []
+                externalPort:          [required]
+                ingressHealthCheck:
+                  intervalSeconds:     10
+                  thresholdCount:      2
+                name:                  [required]
+                nodePort:              [required]
+                protocol:              tcp
+                targetPort:            0
+                tcpIdleReset:          true
+                tcpIdleTimeoutMinutes: 4
+                ```
+
+                <table>
+                    <thead>
+                        <th>Property</th>
+                        <th>Description</th>
+                    </thead>
+                    <tr>
+                        <td><b>addressRules</b></td>
+                        <td>
+                            `array:` Optionally specifies whitelisted and/or blacklisted external addresses 
+                            for inbound traffic.  This defaults to allowing inbound traffic from anywhere 
+                            when the property is **null** or empty.    See [Address Rules](#address-rules)
+                            below for more information.
+
+                            **NOTE:** Address rules are processed in order, from first to last so you may consider
+                            putting your blacklist rules before your whitelist rules.
+
+                            **NOTE:** This is currently supported only for clusters hosted on Azure.  AWS doesn't support
+                            this scenario and we currently don't support automatic router configuration for
+                            on-premise environments.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>externalPort</b></td>
+                        <td>
+                            `integer:` Specifies the external ingress port used to handle external (generally Internet) traffic 
+                            received by the cluster load balancer.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>ingressHealthCheck</b></td>
+                        <td>
+                            **intervalSeconds:** `integer`:  Specifies the interval in seconds between load balancer health 
+                            checks.  This defaults to <b>10 seconds</b> and must be in the range of **10...300** seconds.
+
+                            **thresholdCount:** `integer:` Specifies the number of consecutive failed health checks before
+                            the load balancer will consider the node endpoint to be unhealthy.  This defaults to **2** and
+                            must be in the range of **2...10**
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>name</b></td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>nodePort</b></td>
+                        <td>
+                            `integer:` Specifies the port on cluster nodes where external traffic received by the load balancer 
+                            on **externalPort** will be forwarded.  The cluster's ingress gateway (Istio) will be 
+                            configured to listen for traffic on this port and route it into the cluster.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>protocol</b></td>
+                        <td>
+                        `string:` Optionally specifies the network protocol.  Supported values are: **http**, **https**,
+                        **tcp**, or **udp**.
+                        
+                        This defaults to **tcp**.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>targetPort</b></td>
+                        <td>
+                            `integer:` Specifies the target ingress port internal to the cluster.  The cluster's ingress gateway
+                            (Istio) applies routing rules (virtual service) to the network traffic as it was received on 
+                            **targetPort**.  This decouples routing rules from **nNodePort** which may change for different 
+                            hosting environments.
+
+                            This property is optional and defaults to zero, indicating that the traffic should
+                            be routed to just the node port but **should not be routed through ingress gateway**.
+                            This is useful for handling **UDP traffic** which Istio doesn't currently support and
+                            perhaps some other scenarios.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>tcpIdleReset</b></td>
+                        <td>
+                            `bool:` Optionally specifies whether the cluster router or load balancer sends a TCP RESET
+                            packet to both ends of a TCP connection that has been idle for longer than **tcpIdleTimeoutMinutes**. 
+                            This defaults to **true**.
+
+                            **NOTE:** At this point, this property is supported only in cloud environments where we
+                            can easily control the cluster's external loag balancer.  This also has no
+                            impact for the **udp** protocol.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>tcpIdleTimeoutMinutes</b></td>
+                        <td>
+                            `integer:` `Optionally specifies the TCP idle time out for TCP related ingress protocols like
+                            **http**, **https**, and **tcp**.  Inbound TCP connections that have no network
+                            traffic going either way will be closed by supported load balancers or routers.
+                            This defaults to **4 minutes**.
+
+                            **NOTE:** At this point, this property is supported only in cloud environments where we
+                            can easily control the cluster's external loag balancer.  This also has no impact for non-TCP rules.
+
+                            **NOTE:** Cluster setup may modify this value to ensure that it honors the range of
+                            values supported by the target cloud cloud.
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr>
