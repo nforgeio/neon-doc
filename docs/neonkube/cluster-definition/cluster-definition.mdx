@@ -4,17 +4,17 @@ displayed_sidebar: neonkube
 title: Cluster Definition
 hide_title: false
 hide_table_of_contents: false
-description: NEONKUBE cluster definition file format
+description: NeonKUBE cluster definition file format
 keywords:
   - introduction
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 # Cluster Definition
 
-This documentation section describes the cluster definition format in detail.  Here's the
-top-level structure of a cluster definition:
+This documentation section describes the cluster definition format in detail.
+Here's the top-level structure of a cluster definition:
 
 ```yaml
 ClusterDefinition:
@@ -54,7 +54,7 @@ ClusterDefinition:
             <td>
                 `map:` Optionally specifies cluster annotations.  Label names and values must follow the
                 [Kubernetes conventions](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
-                and the <b>neonkube.io/</b> prefix is reserved by NEONKUBE.
+                and the <b>neonkube.io/</b> prefix is reserved by NeonKUBE.
             </td>
         </tr>
         <tr>
@@ -101,8 +101,8 @@ ClusterDefinition:
         <tr>
             <td><b>isDesktop</b></td>
             <td>
-                `bool:` Indicates that the definition describes a NEONDESKTOP cluster.  This is set to `true`
-                 by NEONDESKTOP when it deploys a desktop cluster and isn't typically set by cluster operators.
+                `bool:` Indicates that the definition describes a NeonDESKTOP cluster.  This is set to `true`
+                 by NeonDESKTOP when it deploys a desktop cluster and isn't typically set by cluster operators.
             </td>
         </tr>
         <tr>
@@ -148,7 +148,7 @@ ClusterDefinition:
             <td>
             `string:` Specifies the cluster name.
 
-            <b>NOTE:</b> 
+            <b>NOTE:</b>
             Names may include only letters, numbers, periods, dashes, and underscores and
             may be up to 24 characters long.  Some hosting environments enforce length limits
             on resource names that we derive from the cluster name, so please limit your
@@ -183,7 +183,7 @@ ClusterDefinition:
                 referencing the <b>apt-cacher-ng</b> instances running on the control-plane nodes.
 
                 <b>NOTE:</b>
-                The cluster nodes are configured to failover to different proxies or to hit the 
+                The cluster nodes are configured to failover to different proxies or to hit the
                 default Linux distribution package mirror directly if any or all of the caches
                 specified are unavailable.
 
@@ -204,7 +204,7 @@ ClusterDefinition:
                  `array:` Optionally specifies custom tags that will be attached to cluster resources in cloud
                  hosting environments.  These tags are intended to help you manage your cloud resources
                  as well as help organize your cost reporting.
-                 
+
                  <b>NOTE:</b> Currently, this is only supported for clusters deployed to AWS and Azure.
             </td>
         </tr>
@@ -225,13 +225,14 @@ ClusterDefinition:
             <td>
                 `array:` Specifies the NTP time sources to be configured for the cluster.  These are the
                 FQDNs or IP addresses of the sources.  This defaults to <b>pool.ntp.org</b>.
-                
+
                 The cluster control-plane nodes will be configured to synchronize their time with these
                 time sources and the worker nodes will be configured to synchronize their time
                 with the control-plane nodes.
             </td>
         </tr>
     </tbody>
+
 </table>
 
 The following pages will describe the more complex properties.

@@ -6,7 +6,7 @@ hide_title: false
 hide_table_of_contents: true
 description: Common on-premise hypervisior hosting options
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,14 +17,16 @@ import Tabs from "@theme/Tabs";
 
 # Common Hypervisor Hosting Options
 
-The NEONKUBE on-premise **xenserver** hosting environment relies on the **hypervisorOptions**
-to locate the host hypervisor servers where the cluster node VMs will be provisioned, including
-their **hostname** (or ip addresses), **username** and **password** as well default VM settings such as
-the number of **vCPUs**, **memory**, and **disk** respources to be assigned.  This can be overriden for
-specific nodes.
+The NeonKUBE on-premise **xenserver** hosting environment relies on the
+**hypervisorOptions** to locate the host hypervisor servers where the cluster
+node VMs will be provisioned, including their **hostname** (or ip addresses),
+**username** and **password** as well default VM settings such as the number of
+**vCPUs**, **memory**, and **disk** respources to be assigned. This can be
+overriden for specific nodes.
 
-Here's what the common on-premise Hypervisor related hosting options looks like, with the 
-default values or **[required]** for property values that must be specified:
+Here's what the common on-premise Hypervisor related hosting options looks like,
+with the default values or **[required]** for property values that must be
+specified:
 
 ```yaml
 hosting:
@@ -98,16 +100,16 @@ hosting:
                         <tr>
                             <td><b>hostUsername</b></td>
                             <td>
-                                `string:` Specifies the default username to use for connecting to hypervisor host machines 
+                                `string:` Specifies the default username to use for connecting to hypervisor host machines
                                 specified by **hosts**.   This may be overridden for specific hypervisor machines.
-                                
+
                                 **NOTE:** This defaults to **root** for XenServer based environments, **null** otherwise.
                             </td>
                         </tr>
                         <tr>
                             <td><b>hostPassword</b></td>
                             <td>
-                                `string:`  Specifies the default password to use for connecting to hypervisor host machines 
+                                `string:`  Specifies the default password to use for connecting to hypervisor host machines
                                 specified by **hosts**.  This may be overridden for specific hypervisor machines within **hosts**
                                 items.  This defaults to **null**.
                             </td>
@@ -115,7 +117,7 @@ hosting:
                         <tr>
                             <td><b>memory</b></td>
                             <td>
-                                `string:` Specifies the default amount of memory to allocate to each cluster virtual machine.  
+                                `string:` Specifies the default amount of memory to allocate to each cluster virtual machine.
                                 This is specified as a string that can be a byte count or a number with units like <b>512MiB</b>,
                                 <b>0.5GiB</b>, <b>2iGB</b>, or <b>1TiB</b>.  This defaults to <b>4GiB</b>.
                             </td>
@@ -126,7 +128,7 @@ hosting:
                                 `string:` The prefix to be prepended to virtual machine provisioned to hypervisors for the
                                 **xenserver** enmvironment.  This is used to avoid VM naming conflicts between different clusters.
 
-                                When this is **null** (the default), the cluster name followed by a dash will 
+                                When this is **null** (the default), the cluster name followed by a dash will
                                 prefix the provisioned virtual machine names.  When this is a non-empty string, the
                                 value followed by a dash will be used.  If this is an empty string or whitespace then
                                 the machine names will not be prefixed.
@@ -140,8 +142,8 @@ hosting:
                         <tr>
                             <td><b>openEbsDisk</b></td>
                             <td>
-                                `string:` Specifies the default size of the second block device to be created for nodes 
-                                enabled for OpenEBS.  This is specified as a string that can be a byte count or a number with 
+                                `string:` Specifies the default size of the second block device to be created for nodes
+                                enabled for OpenEBS.  This is specified as a string that can be a byte count or a number with
                                 units like <b>512MiB</b>, <b>0.5GiB</b>, <b>2iGB</b>, or <b>1TiB</b>.  This defaults
                                 to <b>128GiB</b>.
                             </td>
@@ -166,4 +168,5 @@ hosting:
             </td>
         </tr>
     </tbody>
+
 </table>

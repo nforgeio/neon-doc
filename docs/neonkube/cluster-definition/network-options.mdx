@@ -4,9 +4,9 @@ displayed_sidebar: neonkube
 title: Network Options
 hide_title: false
 hide_table_of_contents: true
-description: NEONKUBE network options
+description: NeonKUBE network options
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -19,8 +19,8 @@ import Tabs from "@theme/Tabs";
 
 Describes the network options for a cluster.
 
-Here's what the network options look like, with the default values
-or **[required]** for properties that must be specified:
+Here's what the network options look like, with the default values or
+**[required]** for properties that must be specified:
 
 ```yaml
 network:
@@ -46,7 +46,7 @@ network:
   reservedIngressEndPort:   64999
   reservedIngressStartPort: 64000
   serviceSubnet:            "10.253.0.0/16"
-```                                       
+```
 
 <table>
     <thead>
@@ -72,7 +72,7 @@ network:
             <td><b>acme.issuer</b></td>
             <td>
                 `string:` Optionally specifies the certificate issuer, including any configuration required by the issuer.
-                This defaults to **null** which enables the standard NEONKUBE certificate issuer.
+                This defaults to **null** which enables the standard NeonKUBE certificate issuer.
             </td>
         </tr>
         <tr>
@@ -137,8 +137,8 @@ network:
                     <tr>
                         <td><b>addressRules</b></td>
                         <td>
-                            `array:` Optionally specifies whitelisted and/or blacklisted external addresses 
-                            for inbound traffic.  This defaults to allowing inbound traffic from anywhere 
+                            `array:` Optionally specifies whitelisted and/or blacklisted external addresses
+                            for inbound traffic.  This defaults to allowing inbound traffic from anywhere
                             when the property is **null** or empty.    See [Address Rules](#address-rules)
                             below for more information.
 
@@ -153,14 +153,14 @@ network:
                     <tr>
                         <td><b>externalPort</b></td>
                         <td>
-                            `integer:` Specifies the external ingress port used to handle external (generally Internet) traffic 
+                            `integer:` Specifies the external ingress port used to handle external (generally Internet) traffic
                             received by the cluster load balancer.
                         </td>
                     </tr>
                     <tr>
                         <td><b>ingressHealthCheck</b></td>
                         <td>
-                            **intervalSeconds:** `integer`: Specifies the interval in seconds between load balancer health 
+                            **intervalSeconds:** `integer`: Specifies the interval in seconds between load balancer health
                             checks.  This defaults to <b>10 seconds</b> and must be in the range of **10...300** seconds.
 
                             **thresholdCount:** `integer:` Specifies the number of consecutive failed health checks before
@@ -176,8 +176,8 @@ network:
                     <tr>
                         <td><b>nodePort</b></td>
                         <td>
-                            `integer:` Specifies the port on cluster nodes where external traffic received by the load balancer 
-                            on **externalPort** will be forwarded.  The cluster's ingress gateway (Istio) will be 
+                            `integer:` Specifies the port on cluster nodes where external traffic received by the load balancer
+                            on **externalPort** will be forwarded.  The cluster's ingress gateway (Istio) will be
                             configured to listen for traffic on this port and route it into the cluster.
                         </td>
                     </tr>
@@ -186,7 +186,7 @@ network:
                         <td>
                         `string:` Optionally specifies the network protocol.  Supported values are: **http**, **https**,
                         **tcp**, or **udp**.
-                        
+
                         This defaults to **tcp**.
                         </td>
                     </tr>
@@ -194,8 +194,8 @@ network:
                         <td><b>targetPort</b></td>
                         <td>
                             `integer:` Specifies the target ingress port internal to the cluster.  The cluster's ingress gateway
-                            (Istio) applies routing rules (virtual service) to the network traffic as it was received on 
-                            **targetPort**.  This decouples routing rules from **nNodePort** which may change for different 
+                            (Istio) applies routing rules (virtual service) to the network traffic as it was received on
+                            **targetPort**.  This decouples routing rules from **nNodePort** which may change for different
                             hosting environments.
 
                             This property is optional and defaults to zero, indicating that the traffic should
@@ -208,7 +208,7 @@ network:
                         <td><b>tcpIdleReset</b></td>
                         <td>
                             `bool:` Optionally specifies whether the cluster router or load balancer sends a TCP RESET
-                            packet to both ends of a TCP connection that has been idle for longer than **tcpIdleTimeoutMinutes**. 
+                            packet to both ends of a TCP connection that has been idle for longer than **tcpIdleTimeoutMinutes**.
                             This defaults to **true**.
 
                             **NOTE:** At this point, this property is supported only in cloud environments where we
@@ -238,12 +238,12 @@ network:
             <td><b>managementAddressRules</b></td>
             <td>
                 `array:` Optionally specifies whitelisted and/or blacklisted external addresses for
-                node management via SSH NAT rules as well as cluster management via the 
-                Kubernetes API via port 6443.  This defaults to allowing inbound traffic 
+                node management via SSH NAT rules as well as cluster management via the
+                Kubernetes API via port 6443.  This defaults to allowing inbound traffic
                 from anywhere when the property is <c>null</c> or empty.  See [Address Rules](#address-rules)
                 below for more information.
 
-                **NOTE:** Address rules are processed in order from first to last, so you may 
+                **NOTE:** Address rules are processed in order from first to last, so you may
                 consider putting your blacklist rules before your whitelist rules.
 
                 **NOTE:** This is currently supported only for clusters hosted on Azure.  AWS doesn't support
@@ -271,7 +271,7 @@ network:
         <tr>
             <td><b>nodeMtu</b></td>
             <td>
-                `integer:` Optionally overrides the default MTU (maximum transmission unit) 
+                `integer:` Optionally overrides the default MTU (maximum transmission unit)
                 configured for luster node network interfaces.  The default MTU for the hosting environment
                 will be used when set to **0**, otherwise this can be configured as a value between **512-9000**.
                 This defaults to: **0**
@@ -291,7 +291,7 @@ network:
             <td><b>podSubnet</b></td>
             <td>
                 `string:` Optionally specifies the subnet used for cluster pods.  This subnet will be
-                split so that each node will be allocated its own subnet for the pods running there. 
+                split so that each node will be allocated its own subnet for the pods running there.
                 This defaults to (**)10.254.0.0/16**.
             </td>
         </tr>
@@ -308,9 +308,9 @@ network:
         <tr>
             <td><b>reservedIngressEndPort</b></td>
             <td>
-                `integer:` Optionally specifies the end of a range of ingress load balancer ports 
-                reserved by NEONKUBE.  These are reserved for temporarily exposing SSH from individual 
-                cluster nodes to the Internet during cluster setup as well as afterwards so that a 
+                `integer:` Optionally specifies the end of a range of ingress load balancer ports
+                reserved by NeonKUBE.  These are reserved for temporarily exposing SSH from individual
+                cluster nodes to the Internet during cluster setup as well as afterwards so that a
                 cluster node can be accessed remotely by a cluster operator as well as for other
                 purposes and for potential future features such as an integrated
 
@@ -319,16 +319,16 @@ network:
                 for the temporary SSH NAT rules plus another 100 ports reserved for other purposes.
                 This range defaults to **64000-64999** which will support a cluster with up to
                 900 nodes.  This default range is unlikely to conflict with ports a cluster is likely
-                to need expose to the Internet like HTTP/HTTPS (80/443).  You can change this range 
+                to need expose to the Internet like HTTP/HTTPS (80/443).  You can change this range
                 for your cluster to resolve any conflicts when necessary.
             </td>
         </tr>
         <tr>
             <td><b>reservedIngressStartPort</b></td>
             <td>
-                `integer:` Optionally specifies the end of a range of ingress load balancer ports 
-                reserved by NEONKUBE.  These are reserved for temporarily exposing SSH from individual 
-                cluster nodes to the Internet during cluster setup as well as afterwards so 
+                `integer:` Optionally specifies the end of a range of ingress load balancer ports
+                reserved by NeonKUBE.  These are reserved for temporarily exposing SSH from individual
+                cluster nodes to the Internet during cluster setup as well as afterwards so
                 that a cluster node can be accessed remotely by a cluster operator as well
                 as for other purposes and for potential future features such as an integrated
 
@@ -337,35 +337,38 @@ network:
                 for the temporary SSH NAT rules plus another 100 ports reserved for other purposes.
                 This range defaults to **64000-64999** which will support a cluster with up to
                 900 nodes.  This default range is unlikely to conflict with ports a cluster is likely
-                to need expose to the Internet like HTTP/HTTPS (80/443).  You can change this range 
+                to need expose to the Internet like HTTP/HTTPS (80/443).  You can change this range
                 for your cluster to resolve any conflicts when necessary.
             </td>
         </tr>
     </tbody>
+
 </table>
 
 ## Address Rules
-<a name="address-rules"/>
+
+<a name="address-rules" />
 
 Address rules can be used white or blacklist external traffic to or from the
-cluster.  The network **egressAddressRules**, **ingressRules**, and **managementAddressRules**
-properties above may be set to an array of address rules to allow or deny traffic
-for a specific IP address or subnet.
+cluster. The network **egressAddressRules**, **ingressRules**, and
+**managementAddressRules** properties above may be set to an array of address
+rules to allow or deny traffic for a specific IP address or subnet.
 
-Here's what an address rule looks like, with the default values
-or **[required]** for properties that must be specified:
+Here's what an address rule looks like, with the default values or
+**[required]** for properties that must be specified:
 
 ```yaml
 action:          [required]
 addressOrSubnet: [required]
 ```
 
-**addressOrSubnet** specifies can specify a single IP address or a CIDR/subnet specifying 
-a range of IP addresses.  This can also be set to **"any"** which matches all possible IP
-addresses.
+**addressOrSubnet** specifies can specify a single IP address or a CIDR/subnet
+specifying a range of IP addresses. This can also be set to **"any"** which
+matches all possible IP addresses.
 
-**action** can be set to **allow** or **deny**, where **allow** lets network flow for the
-IP address(es) and **deny** blocks the traffic.
+**action** can be set to **allow** or **deny**, where **allow** lets network
+flow for the IP address(es) and **deny** blocks the traffic.
 
-Rules are applied in the order they appear in the list where the first rule that applies
-to the traffic's IP address will be applied.  Traffic will be allowed when no rule matches.
+Rules are applied in the order they appear in the list where the first rule that
+applies to the traffic's IP address will be applied. Traffic will be allowed
+when no rule matches.

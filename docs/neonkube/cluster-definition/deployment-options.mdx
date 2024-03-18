@@ -4,7 +4,7 @@ displayed_sidebar: neonkube
 title: Deployment Options
 hide_title: false
 hide_table_of_contents: true
-description: NEONKUBE deployment options
+description: NeonKUBE deployment options
 last_update:
   author: NeonFORGE Team
 ---
@@ -17,8 +17,8 @@ import Tabs from "@theme/Tabs";
 
 # Container Options
 
-Here's what the deployment options look like, with the default values or **[required]** 
-for property values that must be specified:
+Here's what the deployment options look like, with the default values or
+**[required]** for property values that must be specified:
 
 ```yaml
 deployment:
@@ -41,12 +41,13 @@ deployment:
 				running in parallel (probably on different machines) as well as providing a way to 
 				identify and remove clusters or VMs orphaned by previous interrupted tests or tool runs.
 
-				This will typically be set to something identifying the machine, user, and/or tool
-				running the test like <b>runner-0</b>, <b>jeff</b>, or <b>runner-0-jeff</b>.
+    			This will typically be set to something identifying the machine, user, and/or tool
+    			running the test like <b>runner-0</b>, <b>jeff</b>, or <b>runner-0-jeff</b>.
 
-				<b>NOTE:</b> A dash will be appended automatically to non-`null` prefixes before prepending this
-				to the cluster name.
-			</td>
-		</tr>
-	</tbody>
+    			<b>NOTE:</b> A dash will be appended automatically to non-`null` prefixes before prepending this
+    			to the cluster name.
+    		</td>
+    	</tr>
+    </tbody>
+
 </table>

@@ -4,9 +4,9 @@ displayed_sidebar: neonkube
 title: Container Options
 hide_title: false
 hide_table_of_contents: true
-description: NEONKUBE container runtime options
+description: NeonKUBE container runtime options
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,8 +17,8 @@ import Tabs from "@theme/Tabs";
 
 # Container Options
 
-Here's what the container registry configuration looks like, with the 
-default values or **[required]** for property values that must be specified:
+Here's what the container registry configuration looks like, with the default
+values or **[required]** for property values that must be specified:
 
 ```yaml
 container:
@@ -69,7 +69,7 @@ container:
                         <tr>
                             <td><b>blocked</b></td>
                             <td>
-                                `bool:` Optionally blocks pulls of images from registries that match <b>prefix</b>  
+                                `bool:` Optionally blocks pulls of images from registries that match <b>prefix</b>
                                 This defaults to `false`.
                             </td>
                         </tr>
@@ -84,7 +84,7 @@ container:
                             <td><b>location</b></td>
                             <td>
                                 `string:` Optionally enables registry redirection.  When specified, this indicates
-                                that images  specified to be pulled from <b>prefix</b> will actually be pulled from 
+                                that images  specified to be pulled from <b>prefix</b> will actually be pulled from
                                 <b>locartion</b> instead.  This is a nice way to be able to reuse manifests
                                 and Helm charts such that they pull images from an alternate registry without
                                 modification.  This defaults to `null`.
@@ -93,7 +93,7 @@ container:
                         <tr>
                             <td><b>prefix</b></td>
                             <td>
-                                `string:` Specifies registry prefix, optionally with a subdomain <b>"*"</b> wildcard 
+                                `string:` Specifies registry prefix, optionally with a subdomain <b>"*"</b> wildcard
                                 character for subdomain matching.
                             </td>
                         </tr>
@@ -121,11 +121,12 @@ container:
                 `array:` Optionally specifies the prefixes for the default container registeries to be searched when pulling
                  container images that don't identify a source registry.  This defaults to Docker Hub (<b>docker.io</b>)
                  but zero or more custom DNS hostnames or IP addresses may be specified.
-         
+
                 <b>NOTE:</b>
                 Container registries will be searched for containers in the order that registries appear in
                 this list.
             </td>
         </tr>
     </tbody>
+
 </table>

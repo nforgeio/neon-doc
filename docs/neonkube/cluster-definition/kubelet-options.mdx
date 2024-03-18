@@ -4,9 +4,9 @@ displayed_sidebar: neonkube
 title: Kubelet Options
 hide_title: false
 hide_table_of_contents: true
-description: NEONKUBE Kubelet options
+description: NeonKUBE Kubelet options
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,12 +17,12 @@ import Tabs from "@theme/Tabs";
 
 # Kubelet Service Options
 
-Every node in a Kubernetes cluster has a running **Kubelet Service** which is responsible
-for managing the containers scheduled to run on each node.  These options let you customize
-some of the cluster-wide Kubelet settings.
+Every node in a Kubernetes cluster has a running **Kubelet Service** which is
+responsible for managing the containers scheduled to run on each node. These
+options let you customize some of the cluster-wide Kubelet settings.
 
-Here's what the Kubelet options look like, with the default values
-or **[required]** for properties that must be specified:
+Here's what the Kubelet options look like, with the default values or
+**[required]** for properties that must be specified:
 
 ```yaml
 kubelet:
@@ -37,11 +37,14 @@ kubelet:
   shutdownGracePeriodCriticalPodsSeconds: 120
   shutdownGracePeriodSeconds:             360
   systemReserved:                         [empty map]
-```                                       
+```
 
-:::note
-**allowPodsOnControlPlane** defaults to **false** for cluster that have worker nodes
-or **true** for clusters with only control-plane nodes (such as the desktop cluster).
+:::note 
+
+**allowPodsOnControlPlane** defaults to **false** for cluster that have
+worker nodes or **true** for clusters with only control-plane nodes (such as the
+desktop cluster). 
+
 :::
 
 <table>
@@ -110,10 +113,10 @@ or **true** for clusters with only control-plane nodes (such as the desktop clus
                 enables the feature and **false** disables it.  Here's a description
                 of the available [Kubernetes Feature Gates](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/#feature-gates).
 
-                NEONKUBE clusters enable specific features by default when you you haven't
-                explicitly disabled them via this property.  Note that some features may 
+                NeonKUBE clusters enable specific features by default when you you haven't
+                explicitly disabled them via this property.  Note that some features may
                 be required and cannot be disabled.  Here are the feature gates enabled
-                for NEONKUBE clusters by default:
+                for NeonKUBE clusters by default:
 
                 <table>
                     <thead>
@@ -173,4 +176,5 @@ or **true** for clusters with only control-plane nodes (such as the desktop clus
             </td>
         </tr>
     </tbody>
+
 </table>
