@@ -52,129 +52,126 @@ desktop cluster).
         <th>Property</th>
         <th>Description</th>
     </thead>
-    <tbody>
         <tr>
-            <td><b>allowPodsOnControlPlane</b></td>
-            <td>
-                `bool:` Specifies whether Kubernetes will allow pods to be scheduled on control-plane 
-                nodes.  This defaults to **true** for clusters without worker nodes, **false** when
-                worker nodes are present.
-            </td>
-        </tr>
-        <tr>
-            <td><b>apiServer</b></td>
-            <td>
-                `object:` Specifies Kubernetes API Server options.
+        <td><b>allowPodsOnControlPlane</b></td>
+        <td>
+            `bool:` Specifies whether Kubernetes will allow pods to be scheduled on control-plane 
+            nodes.  This defaults to **true** for clusters without worker nodes, **false** when
+            worker nodes are present.
+        </td>
+    </tr>
+    <tr>
+        <td><b>apiServer</b></td>
+        <td>
+            `object:` Specifies Kubernetes API Server options.
 
-                <table>
-                    <thead>
-                        <th>Property</th>
-                        <th>Description</th>
-                    </thead>
-                    <tr>
-                        <td><b>verbosity</b></td>
-                        <td>
-                            Specifies the Kubernetes API Server log verbosity.  This defaults to: <b>2</b>
+            <table>
+                <thead>
+                    <th>Property</th>
+                    <th>Description</th>
+                </thead>
+                <tr>
+                    <td><b>verbosity</b></td>
+                    <td>
+                        Specifies the Kubernetes API Server log verbosity.  This defaults to: <b>2</b>
 
-                            Here are the supported verbosity values and what they do:
+                        Here are the supported verbosity values and what they do:
 
-                            - **1** - Log minimal details
-                            - **2** - **(default)** Log useful steady state service status and significant changes to the system
-                            - **3** - Log extended information about changes
-                            - **4** - Log debug information
-                            - **5** - *Undefined*
-                            - **6** - Log requested resources
-                            - **7** - Log HTTP request headers
-                            - **8** - Log HTTP request contents
-                            - **9** - Log HTTP request responses
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td><b>evictionHard</b></td>
-            <td>
-                `map:` Used to specify hard eviction thresholds that Kubelet will use to evict pods with our
-                a grace period.  See [Hard eviction thresholds](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#hard-eviction-thresholds)
-                for more information.
+                        - **1** - Log minimal details
+                        - **2** - **(default)** Log useful steady state service status and significant changes to the system
+                        - **3** - Log extended information about changes
+                        - **4** - Log debug information
+                        - **5** - *Undefined*
+                        - **6** - Log requested resources
+                        - **7** - Log HTTP request headers
+                        - **8** - Log HTTP request contents
+                        - **9** - Log HTTP request responses
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td><b>evictionHard</b></td>
+        <td>
+            `map:` Used to specify hard eviction thresholds that Kubelet will use to evict pods with our
+            a grace period.  See [Hard eviction thresholds](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#hard-eviction-thresholds)
+            for more information.
 
-                This defaults to an <b>empty map</b> to use the Kubernetes defaults.
-            </td>
-        </tr>
-        <tr>
-            <td><b>featureGates</b></td>
-            <td>
-                `map:` Enables or disables specific Kubernetes features.  This can be used to enable
-                alpha quality or other features that are disabled by default for the Kubernetes
-                version being deployed or to disable features.
+            This defaults to an <b>empty map</b> to use the Kubernetes defaults.
+        </td>
+    </tr>
+    <tr>
+        <td><b>featureGates</b></td>
+        <td>
+            `map:` Enables or disables specific Kubernetes features.  This can be used to enable
+            alpha quality or other features that are disabled by default for the Kubernetes
+            version being deployed or to disable features.
 
-                This is a dictionary that maps feature names a boolean where **true**
-                enables the feature and **false** disables it.  Here's a description
-                of the available [Kubernetes Feature Gates](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/#feature-gates).
+            This is a dictionary that maps feature names a boolean where **true**
+            enables the feature and **false** disables it.  Here's a description
+            of the available [Kubernetes Feature Gates](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/#feature-gates).
 
-                NeonKUBE clusters enable specific features by default when you you haven't
-                explicitly disabled them via this property.  Note that some features may
-                be required and cannot be disabled.  Here are the feature gates enabled
-                for NeonKUBE clusters by default:
+            NeonKUBE clusters enable specific features by default when you you haven't
+            explicitly disabled them via this property.  Note that some features may
+            be required and cannot be disabled.  Here are the feature gates enabled
+            for NeonKUBE clusters by default:
 
-                <table>
-                    <thead>
-                        <th>Feature</th>
-                        <th>Description</th>
-                    </thead>
-                    <tr>
-                        <td><b>EphemeralContainers</b></td>
-                        <td>
-                            Enables the ability to add ephemeral containers to running pods.
-                            This comes in handy for debugging running pods.
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td><b>kubeReserved</b></td>
-            <td>
-                `map:` Used to reserve system resources for Kubernetes related services.
-                See [Reserve Compute Resources](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/)
-                for more information.
+            <table>
+                <thead>
+                    <th>Feature</th>
+                    <th>Description</th>
+                </thead>
+                <tr>
+                    <td><b>EphemeralContainers</b></td>
+                    <td>
+                        Enables the ability to add ephemeral containers to running pods.
+                        This comes in handy for debugging running pods.
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td><b>kubeReserved</b></td>
+        <td>
+            `map:` Used to reserve system resources for Kubernetes related services.
+            See [Reserve Compute Resources](https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/)
+            for more information.
 
-                This defaults to an **empty map** to use the Kubernetes defaults.
-            </td>
-        </tr>
-        <tr>
-            <td><b>maxPodsPerNode</b></td>
-            <td>
-                `integer:` Specifies the maximum number of Pods that can be scheduled on a node. This defaults to: **250**
-            </td>
-        </tr>
-        <tr>
-            <td><b>shutdownGracePeriodCriticalPodsSeconds</b></td>
-            <td>
-                `integer:` Specifies the seconds that Kubelet will delay node shutdown for critical pods.
-                This defaults to **120 seconds** and must be less than **shutdownGracePeriodSeconds**
-                and not less than **30 seconds**.
-            </td>
-        </tr>
-        <tr>
-            <td><b>shutdownGracePeriodSeconds</b></td>
-            <td>
-                `integer:` Specifies seconds Kubelet will delay node shutdown while gracefully terminating pods
-                on the node.  This is expressed in seconds and must be at least **30 seconds**.
-                This defaults to **360 seconds**.
-            </td>
-        </tr>
-        <tr>
-            <td><b>systemReserved</b></td>
-            <td>
-                `map:` Used to reserve system resources for Linux System related services.
-                See <a href="https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/">Reserve Compute Resources</a>
-                for more information.
+            This defaults to an **empty map** to use the Kubernetes defaults.
+        </td>
+    </tr>
+    <tr>
+        <td><b>maxPodsPerNode</b></td>
+        <td>
+            `integer:` Specifies the maximum number of Pods that can be scheduled on a node. This defaults to: **250**
+        </td>
+    </tr>
+    <tr>
+        <td><b>shutdownGracePeriodCriticalPodsSeconds</b></td>
+        <td>
+            `integer:` Specifies the seconds that Kubelet will delay node shutdown for critical pods.
+            This defaults to **120 seconds** and must be less than **shutdownGracePeriodSeconds**
+            and not less than **30 seconds**.
+        </td>
+    </tr>
+    <tr>
+        <td><b>shutdownGracePeriodSeconds</b></td>
+        <td>
+            `integer:` Specifies seconds Kubelet will delay node shutdown while gracefully terminating pods
+            on the node.  This is expressed in seconds and must be at least **30 seconds**.
+            This defaults to **360 seconds**.
+        </td>
+    </tr>
+    <tr>
+        <td><b>systemReserved</b></td>
+        <td>
+            `map:` Used to reserve system resources for Linux System related services.
+            See <a href="https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/">Reserve Compute Resources</a>
+            for more information.
 
-                This defaults to an **empty map** to use the Kubernetes defaults.
-            </td>
-        </tr>
-    </tbody>
-
+            This defaults to an **empty map** to use the Kubernetes defaults.
+        </td>
+    </tr>
 </table>

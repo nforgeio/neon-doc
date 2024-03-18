@@ -4,7 +4,7 @@ displayed_sidebar: neonkube
 title: Node Definitions
 hide_title: false
 hide_table_of_contents: true
-description: NeonKUBE cluster node definitions
+description: Describing NeonKUBE cluster nodes
 last_update:
   author: NEONFORGE Team
 ---
@@ -72,271 +72,269 @@ properties for individual cluster nodes.
         <th>Property</th>
         <th>Description</th>
     </thead>
-    <tbody>
-        <tr>
-            <td><b>address</b></td>
-            <td>
-                `string:` Specifies the IP address to be assinged to the node or **null** if addresses are
-                to be automatically assigned durining cluster setup.
+    <tr>
+        <td>**address**</td>
+        <td>
+            `string:` Specifies the IP address to be assinged to the node or **null** if addresses are
+            to be automatically assigned durining cluster setup.
 
-                This is required for on-premise clusters deployed to Hype-V or XenServer/XCP-ng
-                but is optional for cloud deployments.
-            </td>
-        </tr>
-        <tr>
-            <td><b>aws</b></td>
-            <td>
-                `object:` **AWS** specific options for the cluster node.  These options can be used to override
-                defaults specified by **hosting.aws** in the cluster definition.  This is ignored
-                for non-AWS deployments.
+            This is required for on-premise clusters deployed to Hype-V or XenServer/XCP-ng
+            but is optional for cloud deployments.
+        </td>
+    </tr>
+    <tr>
+        <td>**aws**</td>
+        <td>
+            `object:` **AWS** specific options for the cluster node.  These options can be used to override
+            defaults specified by **hosting.aws** in the cluster definition.  This is ignored
+            for non-AWS deployments.
 
-                ```yaml
-                aws:
-                  ebsOptiomized:     "default"
-                  instanceType:      null
-                  placementPartition:    0
-                  openEbsVolumeSize: null
-                  openEbsVolumeType: "default"
-                  volumeSize:        null
-                  volumeType:        "default"
-                ```
+            ```yaml
+            aws:
+                ebsOptiomized:     "default"
+                instanceType:      null
+                placementPartition:    0
+                openEbsVolumeSize: null
+                openEbsVolumeType: "default"
+                volumeSize:        null
+                volumeType:        "default"
+            ```
 
-                <table>
-                    <thead>
-                        <th>Property</th>
-                        <th>Description</th>
-                    </thead>
-                    <tr>
-                        <td>**ebsOptiomized**</td>
-                        <td>
-                        `string:` Non EBS optimized instances perform disk operation I/O to EBS volumes using the same
-                        network used for other network operations.  This means that you may see some disk
-                        performance declines when your instance is busy serving web traffic or running
-                        database queries, etc.
+            <table>
+                <thead>
+                    <th>Property</th>
+                    <th>Description</th>
+                </thead>
+                <tr>
+                    <td>**ebsOptiomized**</td>
+                    <td>
+                    `string:` Non EBS optimized instances perform disk operation I/O to EBS volumes using the same
+                    network used for other network operations.  This means that you may see some disk
+                    performance declines when your instance is busy serving web traffic or running
+                    database queries, etc.
 
-                        EBS optimization can be enabled for some instance types.  This provisions extra dedicated
-                        network bandwidth exclusively for EBS I/O.  Exactly how this works, depends on the specific
-                        VM type.
+                    EBS optimization can be enabled for some instance types.  This provisions extra dedicated
+                    network bandwidth exclusively for EBS I/O.  Exactly how this works, depends on the specific
+                    VM type.
 
-                        More modern AWS VM types enable EBS optimization by default and you won't incur any
-                        additional charges for these instances and disabling EBS optimization here or via
-                        <see cref="AwsHostingOptions.DefaultEbsOptimized"/> won't have any effect.
+                    More modern AWS VM types enable EBS optimization by default and you won't incur any
+                    additional charges for these instances and disabling EBS optimization here or via
+                    <see cref="AwsHostingOptions.DefaultEbsOptimized"/> won't have any effect.
 
-                        Some AWS instance types can be optimized but this is disabled by default.  When you
-                        enable this by setting the cluster definition's **hosting.aws.defaultEbsOptimized** or 
-                        this (**ebsOptiomized**) property to "true", you'll probably an additional AWS hourly fee for
-                        these instances.
+                    Some AWS instance types can be optimized but this is disabled by default.  When you
+                    enable this by setting the cluster definition's **hosting.aws.defaultEbsOptimized** or 
+                    this (**ebsOptiomized**) property to "true", you'll probably an additional AWS hourly fee for
+                    these instances.
 
-                        Some AWS instance types don't support EBS optimization.  You'll need take care to disable
-                        **ebsOptiomized** for those nodes.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>**instanceType**</td>
-                        <td>
-                            `string:` Optionally specifies the type of ECB instance to provision for this node.
-                            See [AWS Instance Types](https://aws.amazon.com/ec2/instance-types/) for the instance
-                            types currently supported by AWS.
+                    Some AWS instance types don't support EBS optimization.  You'll need take care to disable
+                    **ebsOptiomized** for those nodes.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**instanceType**</td>
+                    <td>
+                        `string:` Optionally specifies the type of ECB instance to provision for this node.
+                        See [AWS Instance Types](https://aws.amazon.com/ec2/instance-types/) for the instance
+                        types currently supported by AWS.
 
-                            **NOTE:** NeonKUBE clusters cannot be deployed to ARM-based AWS instance types.  You must
-                            specify an instance type using a Intel or AMD 64-bit processor.
+                        **NOTE:** NeonKUBE clusters cannot be deployed to ARM-based AWS instance types.  You must
+                        specify an instance type using a Intel or AMD 64-bit processor.
 
-                            **NOTE:** NeonKUBE requires control-plane and worker instances to have at least 4 CPUs
-                            and 8GiB RAM.  Choose an AWS instance type that satisfies these requirements.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>**placementPartition**</td>
-                        <td>
-                        `integer:` Optionally specifies the AWS placement group partition the node will be provisioned
-                        within.  This is a **1-based** partition index which **defaults to 0**, indicating
-                        that node placement will be handled automatically by AWS.
+                        **NOTE:** NeonKUBE requires control-plane and worker instances to have at least 4 CPUs
+                        and 8GiB RAM.  Choose an AWS instance type that satisfies these requirements.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**placementPartition**</td>
+                    <td>
+                    `integer:` Optionally specifies the AWS placement group partition the node will be provisioned
+                    within.  This is a **1-based** partition index which **defaults to 0**, indicating
+                    that node placement will be handled automatically by AWS.
 
-                        You generally don't need to customize this for control-plane nodes since there will generally
-                        be a separate partition available for each control-plane and AWS will spread the instances
-                        across these automatically.  When you specify this for control-plane nodes, the partition index
-                        must be in the range of **1...hosting.aws.controlPlanePlacementPartitions**.
+                    You generally don't need to customize this for control-plane nodes since there will generally
+                    be a separate partition available for each control-plane and AWS will spread the instances
+                    across these automatically.  When you specify this for control-plane nodes, the partition index
+                    must be in the range of **1...hosting.aws.controlPlanePlacementPartitions**.
 
-                        For some cluster scenarios like a noSQL database cluster, you may wish to explicitly
-                        control the partition where specific worker nodes are provisioned.  For example, if
-                        your database replcates data across multiple worker nodes, you'd like to have the
-                        workers hosting the same data be provisioned to different partitions such that if
-                        the workers in one partition are lost then the workers in the remaining partitions
-                        will still be able to serve the data.  
+                    For some cluster scenarios like a noSQL database cluster, you may wish to explicitly
+                    control the partition where specific worker nodes are provisioned.  For example, if
+                    your database replcates data across multiple worker nodes, you'd like to have the
+                    workers hosting the same data be provisioned to different partitions such that if
+                    the workers in one partition are lost then the workers in the remaining partitions
+                    will still be able to serve the data.  
 
-                        When you specify this for worker nodes, the partition index must be in the range 
-                        of **1...hosting.aws.workerPlanePlacementPartitions**.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>**openEbsVolumeSize**</td>
-                        <td>
-                            `string:` Optionally specifies the AWS volume type to be used for the node's OpenEBS cStor/Maystor
-                            disk (if any).  This defaults to **null** indicating that **hosting.aws.defaultOpenEbsVolumeSize**
-                            will specify the volume type for the node.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>**openEbsVolumeType**</td>
-                        <td>
-                            `string:` Optionally specifies the size of the AWS volume to be used for the node's OpenEBS
-                            cStor/Maystor disk (if any).  Supported values are **default**, **st**, **sc1**, **gp2**, **io1**, or **io2**.
-                            This defaults to **default" indicating that **hosting.aws.defaultOpenEbsVolumeType**
-                            will be used for the node.
+                    When you specify this for worker nodes, the partition index must be in the range 
+                    of **1...hosting.aws.workerPlanePlacementPartitions**.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**openEbsVolumeSize**</td>
+                    <td>
+                        `string:` Optionally specifies the AWS volume type to be used for the node's OpenEBS cStor/Maystor
+                        disk (if any).  This defaults to **null** indicating that **hosting.aws.defaultOpenEbsVolumeSize**
+                        will specify the volume type for the node.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**openEbsVolumeType**</td>
+                    <td>
+                        `string:` Optionally specifies the size of the AWS volume to be used for the node's OpenEBS
+                        cStor/Maystor disk (if any).  Supported values are **default**, **st**, **sc1**, **gp2**, **io1**, or **io2**.
+                        This defaults to **default" indicating that **hosting.aws.defaultOpenEbsVolumeType**
+                        will be used for the node.
 
-                            **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll automatically
-                            upgrade the disk size when necessary.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>**volumeSize**</td>
-                        <td>
-                            `string:` Optionally specifies the size of the AWS volume to be used as the node's primary operating
-                            system disk.  This defaults to **null** indicated that **hosting.aws.defaultvolumeSize**
-                            will be used.
+                        **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll automatically
+                        upgrade the disk size when necessary.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**volumeSize**</td>
+                    <td>
+                        `string:` Optionally specifies the size of the AWS volume to be used as the node's primary operating
+                        system disk.  This defaults to **null** indicated that **hosting.aws.defaultvolumeSize**
+                        will be used.
 
-                            **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll automatically
-                            round up the disk size when necessary.
-                        </td>
-                    </tr>
-                    <tr>
-                     <td>**volumeType**</td>
-                        <td>
-                            `string:` Optionally specifies the AWS volume type to be used for the node's OpenEBS cStor/Mayastor
-                            disk (if any).  Supported values are **default**, **st**, **sc1**, **gp2**, **io1**, or **io2**.
-                            This defaults to **default** indicating that **hosting.aws.defaultvolumeType**
-                            will specify the volume type for the node.
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td><b>azure</b></td>
-            <td>
-                `object:` **Azure** specific options for the cluster node.  These options can be used to override
-                defaults specified by **hosting.azure** in the cluster definition.  This is ignored
-                for non-Azure deployments.
+                        **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll automatically
+                        round up the disk size when necessary.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**volumeType**</td>
+                    <td>
+                        `string:` Optionally specifies the AWS volume type to be used for the node's OpenEBS cStor/Mayastor
+                        disk (if any).  Supported values are **default**, **st**, **sc1**, **gp2**, **io1**, or **io2**.
+                        This defaults to **default** indicating that **hosting.aws.defaultvolumeType**
+                        will specify the volume type for the node.
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>**azure**</td>
+        <td>
+            `object:` **Azure** specific options for the cluster node.  These options can be used to override
+            defaults specified by **hosting.azure** in the cluster definition.  This is ignored
+            for non-Azure deployments.
 
-                ```yaml
-                azure:
-                  diskSize:           null
-                  openEbsStorageType: "default"
-                  openEbsDiskSize:    null
-                  storageType:        "default"
-                  vmSize:             "default"
-                ```
+            ```yaml
+            azure:
+                diskSize:           null
+                openEbsStorageType: "default"
+                openEbsDiskSize:    null
+                storageType:        "default"
+                vmSize:             "default"
+            ```
 
-                <table>
-                    <thead>
-                        <th>Property</th>
-                        <th>Description</th>
-                    </thead>
-                    <tr>
-                        <td>**diskSize**</td>
-                        <td>
-                            `string:` Optionally specifies the size of the Azure disk to be used as the node's
-                            primary operating system disk.  This defaults to **null** indicating that
-                            **hosting.azure.defaultDiskSize** from the cluster definition will be used.
+            <table>
+                <thead>
+                    <th>Property</th>
+                    <th>Description</th>
+                </thead>
+                <tr>
+                    <td>**diskSize**</td>
+                    <td>
+                        `string:` Optionally specifies the size of the Azure disk to be used as the node's
+                        primary operating system disk.  This defaults to **null** indicating that
+                        **hosting.azure.defaultDiskSize** from the cluster definition will be used.
 
-                            **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll
-                            automatically round up the disk size when necessary.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>**openEbsStorageType**</td>
-                        <td>
-                            `string:`  Optionally specifies the Azure storage type to be used for the node's OpenEBS
-                            cStor/Mayastor disk (if any).  Supported values are **default**, **standard0hhd**, **standard-ssd**,
-                            **premium-ssd**, **premium-ssd-v2**, and **ultra-ssd**.  This defaults to **default** indicating
-                            that **hosting.azure.openEbsStorageType** from the cluster definition will be used.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>**openEbsDiskSize**</td>
-                        <td>
-                            `string:` Optionally specifies the size of the Azure disk to be used for the node's OpenEBS
-                            cStor/Mayastor disk (if any).  This defaults to **null** indicating that ****hosting.azure.openEbsDiskSize**
+                        **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll
+                        automatically round up the disk size when necessary.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**openEbsStorageType**</td>
+                    <td>
+                        `string:`  Optionally specifies the Azure storage type to be used for the node's OpenEBS
+                        cStor/Mayastor disk (if any).  Supported values are **default**, **standard0hhd**, **standard-ssd**,
+                        **premium-ssd**, **premium-ssd-v2**, and **ultra-ssd**.  This defaults to **default** indicating
+                        that **hosting.azure.openEbsStorageType** from the cluster definition will be used.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**openEbsDiskSize**</td>
+                    <td>
+                        `string:` Optionally specifies the size of the Azure disk to be used for the node's OpenEBS
+                        cStor/Mayastor disk (if any).  This defaults to **null** indicating that ****hosting.azure.openEbsDiskSize**
 
-                            **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll automatically
-                            round up the disk size when necessary.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>**storageType**</td>
-                        <td>
-                            `string:` Optionally specifies the storage type to use the node's primary disk.
-                            Supported values are **default**, **standard0hhd**, **standard-ssd**, **premium-ssd**,
-                            **premium-ssd-v2**, and **ultra-ssd**.  This defaults to **default** indicating
-                            that **hosting.azure.storageType** from the cluster definition will be used.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>**vmSize**</td>
-                        <td>
-                            `string:` Optionally specifies the Azure virtual machine size.  Here's a list of the
-                            available [Azure VM Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general).
-                            This dwefaults to **default** indicating that **hosting.azure.vmSize** from the
-                            cluster definition will be used.
+                        **NOTE:** Node disks smaller than 64 GiB are not supported by NeonKUBE.  We'll automatically
+                        round up the disk size when necessary.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**storageType**</td>
+                    <td>
+                        `string:` Optionally specifies the storage type to use the node's primary disk.
+                        Supported values are **default**, **standard0hhd**, **standard-ssd**, **premium-ssd**,
+                        **premium-ssd-v2**, and **ultra-ssd**.  This defaults to **default** indicating
+                        that **hosting.azure.storageType** from the cluster definition will be used.
+                    </td>
+                </tr>
+                <tr>
+                    <td>**vmSize**</td>
+                    <td>
+                        `string:` Optionally specifies the Azure virtual machine size.  Here's a list of the
+                        available [Azure VM Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general).
+                        This dwefaults to **default** indicating that **hosting.azure.vmSize** from the
+                        cluster definition will be used.
 
-                            **NOTE:** NeonKUBE clusters cannot be deployed to ARM-based Azure V, sizes at this time.  You must
-                            specify an VM size using a Intel or AMD 64-bit processor.
+                        **NOTE:** NeonKUBE clusters cannot be deployed to ARM-based Azure V, sizes at this time.  You must
+                        specify an VM size using a Intel or AMD 64-bit processor.
 
-                            **NOTE:** NeonKUBE requires control-plane and worker instances to have at least 4 CPUs and 8GiB RAM.
-                            Choose an Azure VM size instance type that satisfies these requirements.
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td><b>hypervisor</b></td>
-            <td>
-                `object:` on-premsise hypervisor specific options for the cluster node.  These options 
-                can be used to override defaults specified by **hosting.azure** in the cluster definition.
-                This is ignored clpoud deployments.
-            </td>
-        </tr>
-        <tr>
-            <td><b>ingress</b></td>
-            <td>
-                `bool:` Optionally specifies that this node should be configured to receive external network
-                traffic on node ports and route that into the cluster.  This defaults to **false**.
+                        **NOTE:** NeonKUBE requires control-plane and worker instances to have at least 4 CPUs and 8GiB RAM.
+                        Choose an Azure VM size instance type that satisfies these requirements.
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>**hypervisor**</td>
+        <td>
+            `object:` on-premsise hypervisor specific options for the cluster node.  These options 
+            can be used to override defaults specified by **hosting.azure** in the cluster definition.
+            This is ignored clpoud deployments.
+        </td>
+    </tr>
+    <tr>
+        <td>**ingress**</td>
+        <td>
+            `bool:` Optionally specifies that this node should be configured to receive external network
+            traffic on node ports and route that into the cluster.  This defaults to **false**.
 
-                **NOTE:** If all nodes have **ingress: false** and the cluster defines one or more 
-                **network.ingressRules** then NeonKUBE will choose a reasonable set of nodes to handle
-                inbound traffic.
-            </td>
-        </tr>
-        <tr>
-            <td><b>role</b></td>
-            <td>
-                `string:` Optionally spoecifies the node's role in the cluster, supported values are **control-plane**
-                or **worker*  This defaults to **worker**.
-            </td>
-        </tr>
-        <tr>
-            <td><b>openEbsStorage</b></td>
-            <td>
-                `bool:` Optionally specifies that this node will provisioned with a cStor or Mayastor
-                 block device on this node for persistant container storage.  This defaults to **false**.
+            **NOTE:** If all nodes have **ingress: false** and the cluster defines one or more 
+            **network.ingressRules** then NeonKUBE will choose a reasonable set of nodes to handle
+            inbound traffic.
+        </td>
+    </tr>
+    <tr>
+        <td>**role**</td>
+        <td>
+            `string:` Optionally spoecifies the node's role in the cluster, supported values are **control-plane**
+            or **worker*  This defaults to **worker**.
+        </td>
+    </tr>
+    <tr>
+        <td>**openEbsStorage**</td>
+        <td>
+            `bool:` Optionally specifies that this node will provisioned with a cStor or Mayastor
+                block device on this node for persistant container storage.  This defaults to **false**.
                 
-                **NOTE:**  When all nodes have **openEbsStorage** set to **false**, NeonKUBE 
-                will automatically choose the nodes that will host the cStor/Mayastor block devices 
-                by configuring up to three nodes with **openEbsStorage: true**, favoring worker nodes o
-                ver control-plane nodes when possible.
+            **NOTE:**  When all nodes have **openEbsStorage** set to **false**, NeonKUBE 
+            will automatically choose the nodes that will host the cStor/Mayastor block devices 
+            by configuring up to three nodes with **openEbsStorage: true**, favoring worker nodes o
+            ver control-plane nodes when possible.
 
-                **NOTE:** When all nodes have **openEbsStorage set to **false** and **storage.openEbs.engine**
-                in the cluster definitions is set to **cstor** or **mayastor**, NeonKUBE will automatically
-                choose the nodes that will host the cStor/Maystor block devices by configuring up to three nodes to 
-                do this, favoring **worker** nodes over **control-plane** nodes when possible.
-            </td>
-        </tr>
-        <tr>
-            <td><b>taints</b></td>
-            <td>
-                `array:` Optionally specifies any taints to be assigned to the cluster node.
-            </td>
-        </tr>
-    </tbody>
+            **NOTE:** When all nodes have **openEbsStorage set to **false** and **storage.openEbs.engine**
+            in the cluster definitions is set to **cstor** or **mayastor**, NeonKUBE will automatically
+            choose the nodes that will host the cStor/Maystor block devices by configuring up to three nodes to 
+            do this, favoring **worker** nodes over **control-plane** nodes when possible.
+        </td>
+    </tr>
+    <tr>
+        <td>**taints**</td>
+        <td>
+            `array:` Optionally specifies any taints to be assigned to the cluster node.
+        </td>
+    </tr>
 </table>

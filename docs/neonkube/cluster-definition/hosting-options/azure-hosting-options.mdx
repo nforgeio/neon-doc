@@ -55,383 +55,378 @@ hosting:
         <th>Property</th>
         <th>Description</th>
     </thead>
-    <tbody>
-        <tr>
-            <td><b>environment</b></td>
-            <td>
-                `string:` Deploys the cluster to Azure.
-            </td>
-        </tr>
-        <tr>
-            <td><b>azure</b></td>
-            <td>
-                `string:` Specifies the Amazon Web Services (AWS) hosting settings.
+    <tr>
+        <td><b>environment</b></td>
+        <td>
+            `string:` Deploys the cluster to Azure.
+        </td>
+    </tr>
+    <tr>
+        <td><b>azure</b></td>
+        <td>
+            `string:` Specifies the Amazon Web Services (AWS) hosting settings.
 
-                <table>
-                    <thead>
-                        <th>Property</th>
-                        <th>Description</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><b>clientId</b></td>
-                            <td>
-                                `string:` Client/Application ID for the application created to manage Azure access
-                                to NeonKUBE provisioning and management tools.  This is required.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>clientSecret</b></td>
-                            <td>
-                                `string:` ClientSecret/AppPassword generated when creating the neon tool's Azure
-                                service principal.  This is required.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>cloud</b></td>
-                            <td>
-                                `string:`  Optionally specifies the target Azure cloud environment.  Supported
-                                values are: **global-cloud**, **custom**, **china**, **german**, or **us-government**.
-                                This defaults to **global-cloud**.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>defaultDiskSize</b></td>
-                            <td>
-                                `string:` Specifies the default Azure disk size to be used when cluster node primary disks.
-                                 This defaults to <b>128 GiB</b> but this can be overridden for specific cluster nodes.
+            <table>
+                <thead>
+                    <th>Property</th>
+                    <th>Description</th>
+                </thead>
+                <tr>
+                    <td><b>clientId</b></td>
+                    <td>
+                        `string:` Client/Application ID for the application created to manage Azure access
+                        to NeonKUBE provisioning and management tools.  This is required.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>clientSecret</b></td>
+                    <td>
+                        `string:` ClientSecret/AppPassword generated when creating the neon tool's Azure
+                        service principal.  This is required.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>cloud</b></td>
+                    <td>
+                        `string:`  Optionally specifies the target Azure cloud environment.  Supported
+                        values are: **global-cloud**, **custom**, **china**, **german**, or **us-government**.
+                        This defaults to **global-cloud**.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>defaultDiskSize</b></td>
+                    <td>
+                        `string:` Specifies the default Azure disk size to be used when cluster node primary disks.
+                            This defaults to <b>128 GiB</b> but this can be overridden for specific cluster nodes.
 
-                                 This table indicates the disk sizes that can be used for Azure storage types:
+                            This table indicates the disk sizes that can be used for Azure storage types:
 
-                                 <table>
-                                    <thead>
-                                        <th>Storage Type</th>
-                                        <th>Valid Disk Sizes</th>
-                                    </thead>
-                                    <tr>
-                                        <td><b>standard&#8209;hdd</b></td>
-                                        <td>
-                                            4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
-                                            1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>standard&#8209;ssd</b></td>
-                                        <td>
-                                            4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
-                                            1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>premium&#8209;ssd</b></td>
-                                        <td>
-                                            4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
-                                            1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>premium&#8209;ssd&#8209;v2</b></td>
-                                        <td>
-                                            4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
-                                            1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>ultra&#8209;ssd</b></td>
-                                        <td>
-                                            4 GiB, 8 GiB, 16 GiB, 32 GiB, 64 GiB, 128 GiB, 256 GiB, 512 GiB,
-                                            or from 1 TiB to 64TiB in increments of 1 TiB.
-                                        </td>
-                                    </tr>
-                                 </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>defaultOpenEbsDiskSize</b></td>
-                            <td>
-                                `string:` Optionally specifies pecifies the default size for cluster node secondary data disks used for OpenEBS storage.
-                                This defaults to <b>128 GiB</b> but can be overridden for specific cluster nodes
+                            <table>
+                            <thead>
+                                <th>Storage Type</th>
+                                <th>Valid Disk Sizes</th>
+                            </thead>
+                            <tr>
+                                <td><b>standard&#8209;hdd</b></td>
+                                <td>
+                                    4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
+                                    1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>standard&#8209;ssd</b></td>
+                                <td>
+                                    4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
+                                    1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>premium&#8209;ssd</b></td>
+                                <td>
+                                    4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
+                                    1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>premium&#8209;ssd&#8209;v2</b></td>
+                                <td>
+                                    4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
+                                    1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>ultra&#8209;ssd</b></td>
+                                <td>
+                                    4 GiB, 8 GiB, 16 GiB, 32 GiB, 64 GiB, 128 GiB, 256 GiB, 512 GiB,
+                                    or from 1 TiB to 64TiB in increments of 1 TiB.
+                                </td>
+                            </tr>
+                            </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>defaultOpenEbsDiskSize</b></td>
+                    <td>
+                        `string:` Optionally specifies pecifies the default size for cluster node secondary data disks used for OpenEBS storage.
+                        This defaults to <b>128 GiB</b> but can be overridden for specific cluster nodes
 
-                                 This table indicates the disk sizes that can be used for Azure storage types:
+                            This table indicates the disk sizes that can be used for Azure storage types:
 
-                                 <table>
-                                    <thead>
-                                        <th>Storage Type</th>
-                                        <th>Valid Disk Sizes</th>
-                                    </thead>
-                                    <tr>
-                                        <td><b>standard&#8209;hdd</b></td>
-                                        <td>
-                                            4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
-                                            1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>standard&#8209;ssd</b></td>
-                                        <td>
-                                            4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
-                                            1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>premium&#8209;ssd</b></td>
-                                        <td>
-                                            4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
-                                            1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>premium&#8209;ssd&#8209;v2</b></td>
-                                        <td>
-                                            4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
-                                            1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><b>ultra&#8209;ssd</b></td>
-                                        <td>
-                                            4 GiB, 8 GiB, 16 GiB, 32 GiB, 64 GiB, 128 GiB, 256 GiB, 512 GiB,
-                                            or from 1 TiB to 64TiB in increments of 1 TiB.
-                                        </td>
-                                    </tr>
-                                 </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>defaultOpenEbstorageType</b></td>
-                            <td>
-                                `string:` Optionally specifies the default Azure storage type of be used for the cluster node secondary data disks
-                                used for OpenEBS storage.  Supported values are: **standard&#8209;hhd**, **standard&#8209;ssd**, **premium&#8209;ssd**, **premium&#8209;ssd&#8209;v2**,
-                                or **ultravssd**.
+                            <table>
+                            <thead>
+                                <th>Storage Type</th>
+                                <th>Valid Disk Sizes</th>
+                            </thead>
+                            <tr>
+                                <td><b>standard&#8209;hdd</b></td>
+                                <td>
+                                    4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
+                                    1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>standard&#8209;ssd</b></td>
+                                <td>
+                                    4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
+                                    1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>premium&#8209;ssd</b></td>
+                                <td>
+                                    4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
+                                    1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>premium&#8209;ssd&#8209;v2</b></td>
+                                <td>
+                                    4GiB, 8GiB, 16GiB, 32GiB, 64GiB, 128GiB, 256GiB, 512GiB,
+                                    1TiB, 2TiB, 4TiB, 8TiB, 16TiB, or 32TiB
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>ultra&#8209;ssd</b></td>
+                                <td>
+                                    4 GiB, 8 GiB, 16 GiB, 32 GiB, 64 GiB, 128 GiB, 256 GiB, 512 GiB,
+                                    or from 1 TiB to 64TiB in increments of 1 TiB.
+                                </td>
+                            </tr>
+                            </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>defaultOpenEbstorageType</b></td>
+                    <td>
+                        `string:` Optionally specifies the default Azure storage type of be used for the cluster node secondary data disks
+                        used for OpenEBS storage.  Supported values are: **standard&#8209;hhd**, **standard&#8209;ssd**, **premium&#8209;ssd**, **premium&#8209;ssd&#8209;v2**,
+                        or **ultravssd**.
 
-                                This defaults **standard&#8209;ssd** but this can be overridden for specific cluster nodes.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>defaultStorageType</b></td>
-                            <td>
-                                `string:` Optionally specifies the default Azure storage type of be used for the cluster node primary OS disk.
-                                Supported values are: **standardvhhd**, **standardvssd**, **premium&#8209;ssd**, **premiumvssdvv2**, or **ultra&#8209;ssd**.
+                        This defaults **standard&#8209;ssd** but this can be overridden for specific cluster nodes.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>defaultStorageType</b></td>
+                    <td>
+                        `string:` Optionally specifies the default Azure storage type of be used for the cluster node primary OS disk.
+                        Supported values are: **standardvhhd**, **standardvssd**, **premium&#8209;ssd**, **premiumvssdvv2**, or **ultra&#8209;ssd**.
 
-                                This defaults **standard&#8209;ssd** but this can be overridden for specific cluster nodes.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>defaultVmSize</b></td>
-                            <td>
-                                `string:` Optionally specifies the default Azure virtual machine size  to use for cluster nodes.
-                                The available VM sizes are listed here: [Azure VM Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general)
+                        This defaults **standard&#8209;ssd** but this can be overridden for specific cluster nodes.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>defaultVmSize</b></td>
+                    <td>
+                        `string:` Optionally specifies the default Azure virtual machine size  to use for cluster nodes.
+                        The available VM sizes are listed here: [Azure VM Sizes](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general)
 
-                                This defaults to **Standard_D4as_v4**.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>disableProximityPlacement</b></td>
-                            <td>
-                                `bool:` Optionally disables VM proximity placement.  This defaults to <c>false</c>.
+                        This defaults to **Standard_D4as_v4**.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>disableProximityPlacement</b></td>
+                    <td>
+                        `bool:` Optionally disables VM proximity placement.  This defaults to <c>false</c>.
 
-                                NeonKUBE cluster VMs are all deployed within the same Azure [placement group](https://azure.microsoft.com/en-us/blog/introducing-proximity-placement-groups/)
-                                by default.  This ensures the shortest possible network latency between the cluster VMs.
+                        NeonKUBE cluster VMs are all deployed within the same Azure [placement group](https://azure.microsoft.com/en-us/blog/introducing-proximity-placement-groups/)
+                        by default.  This ensures the shortest possible network latency between the cluster VMs.
 
-                                **NOTE:** Proximity placement groups have one downside: they make it more likely that Azure
-                                may not be able to find enough unused VMs to satisfy the proximity constraints.  This
-                                can happen when you first provision a cluster or later on when you try to scale one.
+                        **NOTE:** Proximity placement groups have one downside: they make it more likely that Azure
+                        may not be able to find enough unused VMs to satisfy the proximity constraints.  This
+                        can happen when you first provision a cluster or later on when you try to scale one.
 
-                                For NeonKUBE clusters the additional risk of an Azure provisioning failure is going
-                                to be very low due to how we use availability sets, which is as similar deployment
-                                constraint: control-plane nodes are deployed to one availability set and workers to another.
-                                Without a proximity placement group, Azure could deploy the control-plane nodes to one datacenter
-                                and the workers to another.  This wasn't that likely in the past but as Azure has
-                                added more datacenters, the chance of this happening has increased.
+                        For NeonKUBE clusters the additional risk of an Azure provisioning failure is going
+                        to be very low due to how we use availability sets, which is as similar deployment
+                        constraint: control-plane nodes are deployed to one availability set and workers to another.
+                        Without a proximity placement group, Azure could deploy the control-plane nodes to one datacenter
+                        and the workers to another.  This wasn't that likely in the past but as Azure has
+                        added more datacenters, the chance of this happening has increased.
 
-                                Adding the proximity placement constrain, requires that Azure deploy both the control-plane nodes
-                                and workers in the same datacenter.  So say your cluster has 3 control-plane nodes and 50 workers.
-                                With proximity placement enabled, the Azure region will need to have a datacenter with
-                                53 VMs available with the specified sizes.  With proximity placement disabled, Azure
-                                could deploy the 3 control-plane nodes in one datacenter and the 50 workers in another.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>domainLabel</b></td>
-                            <td>
-                                `string:` Optionally specifies the DNS domain prefix for the public IP address
-                                to be assigned to the cluster.  This defaults to **neon-UUID** where UUID is
-                                generated.
+                        Adding the proximity placement constrain, requires that Azure deploy both the control-plane nodes
+                        and workers in the same datacenter.  So say your cluster has 3 control-plane nodes and 50 workers.
+                        With proximity placement enabled, the Azure region will need to have a datacenter with
+                        53 VMs available with the specified sizes.  With proximity placement disabled, Azure
+                        could deploy the 3 control-plane nodes in one datacenter and the 50 workers in another.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>domainLabel</b></td>
+                    <td>
+                        `string:` Optionally specifies the DNS domain prefix for the public IP address
+                        to be assigned to the cluster.  This defaults to **neon-UUID** where UUID is
+                        generated.
 
-                                This must be unique across all services deployed to an Azure region (your
-                                services as well as any other Azure cluster).  The IP address will be exposed
-                                by the Azure DNS like:
+                        This must be unique across all services deployed to an Azure region (your
+                        services as well as any other Azure cluster).  The IP address will be exposed
+                        by the Azure DNS like:
 
-                                **DOMAINLABEL.AZURE-REGION.cloudapp.azure.com**
+                        **DOMAINLABEL.AZURE-REGION.cloudapp.azure.com**
 
-                                For example, a public IP address with the <b>mycluster</b> deployed to the
-                                Azure **westus** region would have this DNS name:
+                        For example, a public IP address with the <b>mycluster</b> deployed to the
+                        Azure **westus** region would have this DNS name:
 
-                                **mycluster.westus.cloudapp.azure.com**
+                        **mycluster.westus.cloudapp.azure.com**
 
-                                Labels can be up to 80 characters in length and may include letters, digits,
-                                dashes, underscores, and periods.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>faultDomains</b></td>
-                            <td>
-                                `integer:` Specifies the number of Azure fault domains the worker nodes should be
-                                distributed across.  This defaults to **3** which should not be increased
-                                without making sure that your subscription supports the increase (most won't).
+                        Labels can be up to 80 characters in length and may include letters, digits,
+                        dashes, underscores, and periods.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>faultDomains</b></td>
+                    <td>
+                        `integer:` Specifies the number of Azure fault domains the worker nodes should be
+                        distributed across.  This defaults to **3** which should not be increased
+                        without making sure that your subscription supports the increase (most won't).
 
-                                **NOTE:** Manager nodes will always be provisioned in three fault domains to
-                                ensure that there will always be a quorum after any single fault domain failure.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>network</b></td>
-                            <td>
-                                `object:` Specifies the Azure related cluster network options.
+                        **NOTE:** Manager nodes will always be provisioned in three fault domains to
+                        ensure that there will always be a quorum after any single fault domain failure.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>network</b></td>
+                    <td>
+                        `object:` Specifies the Azure related cluster network options.
 
-                                **<u>network.egressPublicIpAddressId</u>**
+                        **<u>network.egressPublicIpAddressId</u>**
 
-                                Optionally specifies the ID of an existing public IPv4 address to be assigned
-                                to the NAT Gateway for sending outboung network traffic.
+                        Optionally specifies the ID of an existing public IPv4 address to be assigned
+                        to the NAT Gateway for sending outboung network traffic.
 
-                                **IMPORTANT:** This resource must be located in the same region as the cluster.
+                        **IMPORTANT:** This resource must be located in the same region as the cluster.
 
-                                **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster
-                                will  end up using the same egress address as before, meaning you won't have to update
-                                whitelist rules for other services, etc.
+                        **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster
+                        will  end up using the same egress address as before, meaning you won't have to update
+                        whitelist rules for other services, etc.
 
-                                **<u>network.egressPublicIpPrefixId</u>**
+                        **<u>network.egressPublicIpPrefixId</u>**
 
-                                Optionally specifies the ID of an existing public IPv4 prefix to be assigned
-                                to the NAT Gateway to send outboung network traffic.
+                        Optionally specifies the ID of an existing public IPv4 prefix to be assigned
+                        to the NAT Gateway to send outboung network traffic.
 
-                                **IMPORTANT:** This resource must be located in the same region as the cluster.
+                        **IMPORTANT:** This resource must be located in the same region as the cluster.
 
-                                **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster will
-                                end up using the same egress addresses as before, meaning you won't have to update
-                                whitelist rules for other services, etc.
+                        **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster will
+                        end up using the same egress addresses as before, meaning you won't have to update
+                        whitelist rules for other services, etc.
 
-                                **NOTE:** Azure clusters support a maximum of 16 IP addresses per prefix.
+                        **NOTE:** Azure clusters support a maximum of 16 IP addresses per prefix.
 
-                                **<u>network.egressPublicIpPrefixLength</u>**
+                        **<u>network.egressPublicIpPrefixLength</u>**
 
-                                Optionally indicates that a public IPv4 prefix with the specified prefix length should
-                                be created and assigned to the NAT Gateway for outbound traffic.  Set this to a one of
-                                the following non-zero values to enable this:
+                        Optionally indicates that a public IPv4 prefix with the specified prefix length should
+                        be created and assigned to the NAT Gateway for outbound traffic.  Set this to a one of
+                        the following non-zero values to enable this:
 
-                                - **0** - **(default)**   disables prefix creation for the cluster
-                                - **31** - creates a public IPv4 prefix with <b>2</b> public IP addresses
-                                - **30** - creates a public IPv4 prefix with <b>4</b> public IP addresses
-                                - **29** - creates a public IPv4 prefix with <b>8</b> public IP addresses
-                                - **28** - creates a public IPv4 prefix with <b>16</b> public IP addresses (the maximum supported by Azure)
+                        - **0** - **(default)**   disables prefix creation for the cluster
+                        - **31** - creates a public IPv4 prefix with <b>2</b> public IP addresses
+                        - **30** - creates a public IPv4 prefix with <b>4</b> public IP addresses
+                        - **29** - creates a public IPv4 prefix with <b>8</b> public IP addresses
+                        - **28** - creates a public IPv4 prefix with <b>16</b> public IP addresses (the maximum supported by Azure)
 
-                                Larger clusters making lots of external network requests may need to select a prefix with additional IP addresses to avoid
-                                [SNAT Exhaustion](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#outboundrules).
+                        Larger clusters making lots of external network requests may need to select a prefix with additional IP addresses to avoid
+                        [SNAT Exhaustion](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections#outboundrules).
 
-                                **<u>network.ingressPublicIpAddressId</u>**
+                        **<u>network.ingressPublicIpAddressId</u>**
 
-                                Optionally specifies the ID of an existing public IPv4 address to be assigned
-                                to the load balancer to receive inbound network traffic.  A new address will
-                                be created when this isn't specified.
+                        Optionally specifies the ID of an existing public IPv4 address to be assigned
+                        to the load balancer to receive inbound network traffic.  A new address will
+                        be created when this isn't specified.
 
-                                **IMPORTANT:**> This resource must be located in the same region as the cluster.
+                        **IMPORTANT:**> This resource must be located in the same region as the cluster.
 
-                                **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster will
-                                end up with the same public address as before, meaning you won't have to update your
-                                DNS configuration, etc.
+                        **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster will
+                        end up with the same public address as before, meaning you won't have to update your
+                        DNS configuration, etc.
 
-                                **<u>network.maxNatGatewayTcpIdle</u>**
+                        **<u>network.maxNatGatewayTcpIdle</u>**
 
-                                Optionally specifies the maximum time **in minutes** that the cluster's NAT gateway will
-                                retain an idle outbound TCP connection.  This may be set to between **4..120** minutes
-                                inclusive.  This defaults to <b>120 minutes</b>.
+                        Optionally specifies the maximum time **in minutes** that the cluster's NAT gateway will
+                        retain an idle outbound TCP connection.  This may be set to between **4..120** minutes
+                        inclusive.  This defaults to <b>120 minutes</b>.
 
-                                **<u>network.nodeSubnet</u>**
+                        **<u>network.nodeSubnet</u>**
 
-                                Specifies the subnet where the cluster nodes will be provisioned.  This defaults to **10.100.0.0/24**.
+                        Specifies the subnet where the cluster nodes will be provisioned.  This defaults to **10.100.0.0/24**.
 
-                                **NOTE:** **nodeSubnet** must be the same or a subset of **vnetSubnet**.
+                        **NOTE:** **nodeSubnet** must be the same or a subset of **vnetSubnet**.
 
-                                **<u>network.vnetSubnet</u>**
+                        **<u>network.vnetSubnet</u>**
 
-                                Optionally specifies the subnet for the Azure VNET.  This defaults to **10.100.0.0/24**.
+                        Optionally specifies the subnet for the Azure VNET.  This defaults to **10.100.0.0/24**.
 
-                                **NOTE:** **vnetSubnet** must be the same or a superset of **nodeSubnet**.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>region</b></td>
-                            <td>
-                                `string:` Identifies the target Azure region (e.g. **westus**).  This is required.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>resourceGroup</b></td>
-                            <td>
-                                `string:` Optionally spoecifies the Azure resource group where all cluster components
-                                are to be provisioned.  This defaults to **"neon-"** plus the cluster name but can be
-                                customized as required.
+                        **NOTE:** **vnetSubnet** must be the same or a superset of **nodeSubnet**.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>region</b></td>
+                    <td>
+                        `string:` Identifies the target Azure region (e.g. **westus**).  This is required.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>resourceGroup</b></td>
+                    <td>
+                        `string:` Optionally spoecifies the Azure resource group where all cluster components
+                        are to be provisioned.  This defaults to **"neon-"** plus the cluster name but can be
+                        customized as required.
 
-                                **IMPORTANT:** Everything in this resource group will be deleted when the cluster is
-                                removed.  This means that you must be very careful when adding other resources to this
-                                group because they will be deleted as well.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>subscriptionId</b></td>
-                            <td>
-                                `string:` Specifies your Azure account subscription ID.  This is required.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>tenantId</b></td>
-                            <td>
-                                `string:` Specifies your Azure accoount Tenant ID.  This is required.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>updateDomains</b></td>
-                            <td>
-                                `integer:` Optionally specifies the number of Azure update domains the cluster workers will
-                                distributed across.  This defaults to **20**  You may customize this with a value in the
-                                range of: **2...20**
+                        **IMPORTANT:** Everything in this resource group will be deleted when the cluster is
+                        removed.  This means that you must be very careful when adding other resources to this
+                        group because they will be deleted as well.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>subscriptionId</b></td>
+                    <td>
+                        `string:` Specifies your Azure account subscription ID.  This is required.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>tenantId</b></td>
+                    <td>
+                        `string:` Specifies your Azure accoount Tenant ID.  This is required.
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>updateDomains</b></td>
+                    <td>
+                        `integer:` Optionally specifies the number of Azure update domains the cluster workers will
+                        distributed across.  This defaults to **20**  You may customize this with a value in the
+                        range of: **2...20**
 
-                                Azure automatically distributes VMs across the specified number of update
-                                domains and when it's necessary to perform planned maintenance on the underlying
-                                hardware or to relocate a VM to another host, Azure guarantees that it will
-                                reboot hosts in only one update domain at a time and then wait 30 minutes between
-                                update domains to give the application a chance to stabilize.
+                        Azure automatically distributes VMs across the specified number of update
+                        domains and when it's necessary to perform planned maintenance on the underlying
+                        hardware or to relocate a VM to another host, Azure guarantees that it will
+                        reboot hosts in only one update domain at a time and then wait 30 minutes between
+                        update domains to give the application a chance to stabilize.
 
-                                A value of **2** indicates that one half of the cluster servers may be rebooted
-                                at the same time during an update domain upgrade.  A value of **20** indicates
-                                that one twentieth of your VMs may be rebooted in parallel.
+                        A value of **2** indicates that one half of the cluster servers may be rebooted
+                        at the same time during an update domain upgrade.  A value of **20** indicates
+                        that one twentieth of your VMs may be rebooted in parallel.
 
-                                There's no way to specifically assign cluster nodes to specific update domains
-                                in Azure.  This would have been nice for a cluster hosting replicated database
-                                nodes where we'd like to assign replica nodes to different update domains such
-                                that all data would still be available while an update domain was being rebooted.
+                        There's no way to specifically assign cluster nodes to specific update domains
+                        in Azure.  This would have been nice for a cluster hosting replicated database
+                        nodes where we'd like to assign replica nodes to different update domains such
+                        that all data would still be available while an update domain was being rebooted.
 
-                                I imagine Azure doesn't allow this due to the difficuilty of ensuring these
-                                constraints across a very large number of customer deployments.  Azure also
-                                mentions that the disruption of a VM for planned maintenance can be slight
-                                because VMs can be relocated from one host to another while still running.
+                        I imagine Azure doesn't allow this due to the difficuilty of ensuring these
+                        constraints across a very large number of customer deployments.  Azure also
+                        mentions that the disruption of a VM for planned maintenance can be slight
+                        because VMs can be relocated from one host to another while still running.
 
-                                **NOTE:** Manager nodes are always deployed with 20 update domains and since no cluster
-                                should ever need anywhere close this number of managers, we'll be ensured
-                                that only a single manager will be rebooted together during planned Azure
-                                maintenance and the 30 minutes Azure waits after rebooting an update domain
-                                gives the rebooted manager a chance to rejoin the other managers and catch
-                                up on any changes that happened while it was offline.
+                        **NOTE:** Manager nodes are always deployed with 20 update domains and since no cluster
+                        should ever need anywhere close this number of managers, we'll be ensured
+                        that only a single manager will be rebooted together during planned Azure
+                        maintenance and the 30 minutes Azure waits after rebooting an update domain
+                        gives the rebooted manager a chance to rejoin the other managers and catch
+                        up on any changes that happened while it was offline.
 
-                                **NOTE:** NeonKUBE deploys manager and worker nodes in separate Azure availability zones.
-                                This means that there will always be a quorum of managers available as any one
-                                update zone is rebooted.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </tbody>
-
+                        **NOTE:** NeonKUBE deploys manager and worker nodes in separate Azure availability zones.
+                        This means that there will always be a quorum of managers available as any one
+                        update zone is rebooted.
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 </table>

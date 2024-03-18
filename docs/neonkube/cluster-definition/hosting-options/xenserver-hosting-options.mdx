@@ -33,38 +33,35 @@ hosting:
         <th>Property</th>
         <th>Description</th>
     </thead>
-    <tbody>
-        <tr>
-            <td><b>snapshot</b></td>
-            <td>
-                `bool:` Optionally directs XenServer to create the virtual machines using a snapshot of
-                the virtual machine template rather than creating a full copy.  This defaults to **false**.
+    <tr>
+        <td><b>snapshot</b></td>
+        <td>
+            `bool:` Optionally directs XenServer to create the virtual machines using a snapshot of
+            the virtual machine template rather than creating a full copy.  This defaults to **false**.
 
-                Virtual machines created via a snapshot will be ready within seconds where as
-                creation can take something like 4 minutes on a SSD or 9 minutes on a spinning
-                drive.  We don't enable snapshots though by default, because some web posts
-                from around 2014 indicate that operators may encounter problems when something
-                like multiple virtual machines have been created as snapshots from the same template.
+            Virtual machines created via a snapshot will be ready within seconds where as
+            creation can take something like 4 minutes on a SSD or 9 minutes on a spinning
+            drive.  We don't enable snapshots though by default, because some web posts
+            from around 2014 indicate that operators may encounter problems when something
+            like multiple virtual machines have been created as snapshots from the same template.
 
-                We figure that it's best to default to safe setting for production clusters and
-                then allow operators to override this when provisioning temporary test clusters
-                or when provisioning on a storage repository that doesn't have these limitations.
+            We figure that it's best to default to safe setting for production clusters and
+            then allow operators to override this when provisioning temporary test clusters
+            or when provisioning on a storage repository that doesn't have these limitations.
 
-                For snapshots to work, the storage repository must support them and the virtual
-                machine template must reside in the same repository where the virtual machines
-                are being created.  The current **neon-cli** implementation persists the
-                cluster VM templates to the local storage repository, so support for non-local
-                storage repositories is not supported out-of-the-box at this time.
-            </td>
-        </tr>
-        <tr>
-            <td><b>storageRepository</b></td>
-            <td>
-                `string:` Specifies the XenServer storage repository to be used to store the XenServer
-                 node template as well as the cluster virtual machine images.  This defaults to
-                **Local storage**.
-            </td>
-        </tr>
-    </tbody>
-
+            For snapshots to work, the storage repository must support them and the virtual
+            machine template must reside in the same repository where the virtual machines
+            are being created.  The current **neon-cli** implementation persists the
+            cluster VM templates to the local storage repository, so support for non-local
+            storage repositories is not supported out-of-the-box at this time.
+        </td>
+    </tr>
+    <tr>
+        <td><b>storageRepository</b></td>
+        <td>
+            `string:` Specifies the XenServer storage repository to be used to store the XenServer
+                node template as well as the cluster virtual machine images.  This defaults to
+            **Local storage**.
+        </td>
+    </tr>
 </table>
