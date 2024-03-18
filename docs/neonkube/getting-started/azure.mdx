@@ -63,13 +63,13 @@ AZURE-CLI:
 View the offer terms:
 
 ```plain
-az vm image terms show --urn neonforge:neonkube:0-11-0:0.11.0
+az vm image terms show --urn neonforge:neonkube:0-11-0-beta-0:0.11.0
 ```
 
 Accept the terms
 
 ```plain
-az vm image terms accept --urn neonforge:neonkube:0-11-0:0.11.0
+az vm image terms accept --urn neonforge:neonkube:0-11-0-beta-0:0.11.0
 ```
 
 :::note
@@ -79,7 +79,7 @@ Images, so we have to do some version contortions to get this to work. We'll
 probably add a NeonCLI command that figures out the version and then launches
 AZURE-CLI with the correct paramweters.
 
-The **0-11-0:0.11.0** version part of the URN above is formatted with the first
+The **0-11-0-beta-0:0.11.0** version part of the URN above is formatted with the first
 part being the full semantic version of the release _0.11.0_ with all dots
 replaced by dashes like _0-11-0_ and the second part being the **major**,
 **minor**, and **patch** version of the release only.
