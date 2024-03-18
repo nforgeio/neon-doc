@@ -4,12 +4,12 @@ displayed_sidebar: neonkube
 title: AWS
 hide_title: false
 hide_table_of_contents: false
-description: Getting started with NEONKUBE on AWS.
+description: Getting started with NeonKUBE on AWS.
 keywords:
   - aws
   - amazon web services
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -18,20 +18,21 @@ import Image from "@theme/IdealImage";
 import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
 
-# Deploy a NEONKUBE Cluster on AWS
+# Deploy a NeonKUBE Cluster on AWS
 
 ## Prerequisites
 
 - AWS account
-- Accept the [NEONKUBE EULA](https://aws.amazon.com/marketplace/server/procurement?productId=e42b4534-a895-49d0-8c2e-1cafd10df38e)
+- Accept the
+  [NeonKUBE EULA](https://aws.amazon.com/marketplace/server/procurement?productId=e42b4534-a895-49d0-8c2e-1cafd10df38e)
 - Your **AWS Access Key** and **Secret Key**
 
 ## Cluster Definition
 
-First, you'll need to save this cluster definition as a YAML file
-on your machine.  This provisions a single node cluster in **us-west-2a**
-using a **c5.2xlarge** based instance (currently, the NEONKUBE default
-instance size for AWS).
+First, you'll need to save this cluster definition as a YAML file on your
+machine. This provisions a single node cluster in **us-west-2a** using a
+**c5.2xlarge** based instance (currently, the NeonKUBE default instance size for
+AWS).
 
 ```yaml
 name: my-aws-cluster
@@ -47,56 +48,68 @@ nodes:
     role: control-plane
 ```
 
-Save the cluster definition somewhere on your disk, being sure to substitute 
+Save the cluster definition somewhere on your disk, being sure to substitute
 your own AWS credentials for:
 
 - **[ACCESS_KEY_ID]**
 - **[SECRET_ACCESS_KEY]**
 
 :::note
-We plan on eventually integrating with AWS IAM Roles so AWS authntication
-will be more secure.
-::: 
 
-## Cluster Deployment via NEONDESKTOP
+We plan on eventually integrating with AWS IAM Roles so AWS authntication will
+be more secure.
 
-1. Right click the NEONDESKTOP icon in the taskbar > Deploy cluster
-   <Image img={require("./assets/deploy-cluster.png")} style={{ width: 300 }} />
+:::
+
+## Cluster Deployment via NeonDESKTOP
+
+1. Right click the NeonDESKTOP icon in the taskbar > Deploy cluster
+
+   <Image
+     className="max-w-72 w-full"
+     img={require("./assets/deploy-cluster.png")}
+   />
 
 2. Use the file picker to select the cluster definiton file you saved above
 
-3. Grab a coffee and wait for NEONDESKTOP to deploy the cluster.
+3. Grab a coffee and wait for NeonDESKTOP to deploy the cluster.
 
-## Cluster Deployment via NEONCLI
+## Cluster Deployment via NeonCLI
 
 Cluster deployment happens in two phases:
 
-- Configuring the hosting infrastructure, which involves configuring the 
-  **Resource Group**, **VPC**, starting the **Instances**, configuring 
-  the **LoadBalancer**, **IP Addresses**, **Disks**, etc.
+- Configuring the hosting infrastructure, which involves configuring the
+  **Resource Group**, **VPC**, starting the **Instances**, configuring the
+  **LoadBalancer**, **IP Addresses**, **Disks**, etc.
 
-- Setting up the cluster.  This involves configuring Linux and Kubernetes
-  and then installing the necessary cluster components via Helm charts.
+- Setting up the cluster. This involves configuring Linux and Kubernetes and
+  then installing the necessary cluster components via Helm charts.
 
-Execute the commands to deploy this cluster, passing the **PATH** to the
-cluster definition file you saved above and **CLUSTERNAME** to the cluster
-name as defined in the definition:
+Execute the commands to deploy this cluster, passing the **PATH** to the cluster
+definition file you saved above and **CLUSTERNAME** to the cluster name as
+defined in the definition:
+
+Prepare the cluster infrastructure
 
 ```plain
-REM Prepare the cluster infrastructure (change PATH to your cluster definition path)
-neon cluster prepare PATH
+neon cluster prepare /path/to/your/cluster-definition.yaml
+```
 
-REM Setup the cluster
+Setup the cluster
+
+```plain
 neon cluster setup root@my-aws-cluster
 ```
 
 Then wait for cluster setup to complete.
 
 :::note
-These operations are currently coordinated by NEONDESKTOP or NEONCLI 
-running on your machine, so you'll need to keep your computer running
-and connected to the network.
+
+These operations are currently coordinated by NeonDESKTOP or NeonCLI running on
+your machine, so you'll need to keep your computer running and connected to the
+network.
 
 We plan on supporting cloud based deployment in the future where these
 operations will be managed in the cloud, rather than from your computer.
+
 :::

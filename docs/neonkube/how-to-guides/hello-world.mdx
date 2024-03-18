@@ -5,13 +5,13 @@ title: Hello World Example
 hide_title: false
 hide_table_of_contents: false
 description:
-  Demonstrates how to deploy a simple application to a NEONKUBE cluster.
+  Demonstrates how to deploy a simple application to a NeonKUBE cluster.
 keywords:
   - helloworld
   - example
   - howto
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -22,7 +22,7 @@ import Tabs from "@theme/Tabs";
 
 # Hello World Example
 
-This tutorial demonstrates how to deploy a simple application to a NEONKUBE
+This tutorial demonstrates how to deploy a simple application to a NeonKUBE
 cluster.
 
 ## Clone demo repository
@@ -33,7 +33,7 @@ git clone https://github.com/nforgeio/neonKUBE-demos.git
 
 ## Publish images
 
-NEONKUBE Clusters include a built-in container registry to store images for
+NeonKUBE Clusters include a built-in container registry to store images for
 deployment. In this step we'll publish the necessary container images to the
 Cluster Registry.
 
@@ -84,20 +84,20 @@ neon apply -f hello-world.yaml
 
 :::info HTTPS!
 
-Every NEONKUBE Cluster comes with an SSL certificate to make it easy to deploy
+Every NeonKUBE Cluster comes with an SSL certificate to make it easy to deploy
 new services. The Hello World demo is deployed using this certificate.
 
 :::
 
 <Tabs groupId="deployment">
-  <TabItem value="desktop" label="NEONDESKTOP">
+  <TabItem value="desktop" label="NeonDESKTOP">
     Open:{" "}
     <a href="https://hello-world.desktop.neoncluster.io">
       https://hello-world.desktop.neoncluster.io
     </a>
     .
   </TabItem>
-  <TabItem value="kube" label="NEONKUBE">
+  <TabItem value="kube" label="NeonKUBE">
     Use the following command to get the URL for Hello, World!, and open it in
     your browser.
     <br />
@@ -161,4 +161,4 @@ Single Sign On. Users will need cluster credentials to access the demo.
 ### `neonDashboardEnabled`
 
 If set to true, the Operator will add a link to the `hello-world` dashboard to
-the NEONKUBE dashboard.
+the NeonKUBE dashboard.

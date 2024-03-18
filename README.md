@@ -1,6 +1,6 @@
 # Useful Maintainer Information
 
-This page describes how to configure your workstation to work with the NEONFORGE
+This page describes how to configure your workstation to work with the NeonFORGE
 documentation as well as how to build and public it.
 
 ## Maintainer Setup

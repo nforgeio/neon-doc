@@ -5,9 +5,9 @@ displayed_sidebar: neonkube
 title: Cluster Definitions
 hide_title: false
 hide_table_of_contents: true
-description: Getting started with NEONKUBE.
+description: Getting started with NeonKUBE.
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -16,58 +16,68 @@ import Image from "@theme/IdealImage";
 import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
 
-NEONDESKTOP and NEONCLI are used to deploy Kubernetes clusters from your
-workstation or laptop.  After setup and when started for the first time,
-NEONDESKTOP prompts to create a local **desktop cluster** with reasonable
+NeonDESKTOP and NeonCLI are used to deploy Kubernetes clusters from your
+workstation or laptop. After setup and when started for the first time,
+NeonDESKTOP prompts to create a local **desktop cluster** with reasonable
 settings.
 
-NEONDESKTOP and NEONCLI can also deploy clusters on the local machine using 
+NeonDESKTOP and NeonCLI can also deploy clusters on the local machine using
 Windows Hyper-V to host the cluster node virtual machines (VMs) or on-premise
 using one or more [XenServer](https://xenserver.com) or the open source
-[XCP-ng](https://xcp-ng.org) hypervisors running on one or more servers.
-These tools can also deploy to the Amazon AWS or Microsoft Azure clouds.
+[XCP-ng](https://xcp-ng.org) hypervisors running on one or more servers. These
+tools can also deploy to the Amazon AWS or Microsoft Azure clouds.
 
-You'll need a cluster definition to deploy anything besides a NEONDESKTOP
-cluster (that definition is baked into the NEONDESKTOP app).  A cluster 
+You'll need a cluster definition to deploy anything besides a NeonDESKTOP
+cluster (that definition is baked into the NeonDESKTOP app). A cluster
 definition is simply a **YAML** file describing the required nodes, network,
-hosting credentials, and other cluster configuration.  Here's a simple
-cluster definition that deploys a single node cluster hosted by Hyper-V
-on a Windows machine:
+hosting credentials, and other cluster configuration. Here's a simple cluster
+definition that deploys a single node cluster hosted by Hyper-V on a Windows
+machine:
 
-<Image img={require("./assets/cluster-definition/clusterdef-hyperv.png")} style={{ width: 700 }} />
+<Image
+  className="w-full max-w-4xl"
+  img={require("./assets/cluster-definition/clusterdef-hyperv.png")}
+/>
 
-This minimal definition describes a cluster named **my-cluster** that will be 
-hosted by **hyperv** on the local machine.  We specified the local LAN subnet 
-and gateway address and specified the nodes **name**, cluster **role** and IP 
-**address** as well as the **memory**, **disk**, and **virtual CPUs** to be 
+This minimal definition describes a cluster named **my-cluster** that will be
+hosted by **hyperv** on the local machine. We specified the local LAN subnet and
+gateway address and specified the nodes **name**, cluster **role** and IP
+**address** as well as the **memory**, **disk**, and **virtual CPUs** to be
 assigned to the Hyper-V virtual machine created for the node.
 
 :::note
-On-premise hosting environments like Hyper-V and XenServer/XCP-ng need to know 
-about the LAN configuration, including the LAN subnet and upstream gateway's
-IP address.  You also need to specify the IP address for each node.
+
+On-premise hosting environments like Hyper-V and XenServer/XCP-ng need to know
+about the LAN configuration, including the LAN subnet and upstream gateway's IP
+address. You also need to specify the IP address for each node.
 
 This all is optional for cloud environments where we configure the virtual
 network there with default settings and automatically assign node IP addresses.
 This can be custoimized though, if required.
+
 :::
 
-Here's another cluster definition example that deploys a four node cluster
-to Azure:
+Here's another cluster definition example that deploys a four node cluster to
+Azure:
 
-<Image img={require("./assets/cluster-definition/clusterdef-azure.png")} style={{ width: 700 }} />
+<Image
+  className="w-full max-w-4xl"
+  img={require("./assets/cluster-definition/clusterdef-azure.png")}
+/>
 
 You can see that we've selected the **azure** hosting environment and then
 specified additional Azure related settings such as the Azure credentials
-NEONKUBE will need to provison the cluster infrastructure as well as the
-target region and default VM size.
+NeonKUBE will need to provison the cluster infrastructure as well as the target
+region and default VM size.
 
 Notice that we use the `$<env:VARIABLE>` syntax to inject environment variables
-holding the Azure credentials into the cluster definition.  We could have just
+holding the Azure credentials into the cluster definition. We could have just
 pasted the credentials into the definition, but that generally not a good idea.
 
 :::note
-THe NEONFORGE team uses an internal tool that can inject secrets from the 
-[1Password](https://1password.com/) password manager.  We might release
-a public version of this tool if there's interest.
+
+The NeonFORGE team uses an internal tool that can inject secrets from the
+[1Password](https://1password.com/) password manager. We might release a public
+version of this tool if there's interest.
+
 :::

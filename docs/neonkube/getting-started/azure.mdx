@@ -4,11 +4,11 @@ displayed_sidebar: neonkube
 title: Azure
 hide_title: false
 hide_table_of_contents: false
-description: Getting started with NEONKUBE on Azure.
+description: Getting started with NeonKUBE on Azure.
 keywords:
   - azure
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,19 +17,19 @@ import Image from "@theme/IdealImage";
 import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
 
-# Deploy a NEONKUBE Cluster on Azure
+# Deploy a NeonKUBE Cluster on Azure
 
 ## Prerequisites
 
-- Install NEONDESKTOP: [instructions](./neon-desktop)
+- Install NeonDESKTOP: [instructions](./neon-desktop)
 - You'll also need to know your **AZURE_SUBSCRIPTION_ID**
-  
+
   $todo(jefflill): document how to obtain this
 
 ## Azure Subscription Credentials
 
-NEONKUBE will need your Azure subscription credentials so it will be able to
-deploy and manage the cluster.  You'll also need to accept the NEONKUBE offer
+NeonKUBE will need your Azure subscription credentials so it will be able to
+deploy and manage the cluster. You'll also need to accept the NeonKUBE offer
 EULA on Azure.
 
 Install the
@@ -53,29 +53,37 @@ The output will be something like:
 }
 ```
 
-We'll use the **[AZURE_CLIENT_ID]**, **[AZURE_CLIENT_SECRET]**, and **[AZURE_TENANT_ID]** from
-the output plus the **AZURE_SUBSCRIPTION_ID** you already know.
+We'll use the **[AZURE_CLIENT_ID]**, **[AZURE_CLIENT_SECRET]**, and
+**[AZURE_TENANT_ID]** from the output plus the **AZURE_SUBSCRIPTION_ID** you
+already know.
 
-Next, you'll need to accept the NEONKUBE offer terms and EULA, via the AZURE-CLI:
+Next, you'll need to accept the NeonKUBE offer terms and EULA, via the
+AZURE-CLI:
+
+View the offer terms:
 
 ```plain
-REM View the offer terms:
-az vm image terms show --urn neonforge:neonkube:0-11-0-alpha-0:0.11.0
+az vm image terms show --urn neonforge:neonkube:0-11-0:0.11.0
+```
 
-REM Accept the terms
-az vm image terms accept --urn neonforge:neonkube:0-11-0-alpha-0:0.11.0
+Accept the terms
+
+```plain
+az vm image terms accept --urn neonforge:neonkube:0-11-0:0.11.0
 ```
 
 :::note
-Azure doesn't directly support semantic versioning of their Virtual Machine Images,
-so we have to do some version contortions to get this to work.  We'll probably add
-a NEONCLI command that figures out the version and then launches AZURE-CLI with the
-correct paramweters.
 
-The **0-11-0-alpha-0:0.11.0** version part of the URN above is formatted with the
-first part being the full semantic version of the release *0.11.0-alpha.0* with
-all dots replaced by dashes like *0-11-0-alpha-0* and the second part being 
-the **major**, **minor**, and **patch** version of the release only.
+Azure doesn't directly support semantic versioning of their Virtual Machine
+Images, so we have to do some version contortions to get this to work. We'll
+probably add a NeonCLI command that figures out the version and then launches
+AZURE-CLI with the correct paramweters.
+
+The **0-11-0:0.11.0** version part of the URN above is formatted with the first
+part being the full semantic version of the release _0.11.0_ with all dots
+replaced by dashes like _0-11-0_ and the second part being the **major**,
+**minor**, and **patch** version of the release only.
+
 :::
 
 ## Cluster Definition
@@ -84,10 +92,12 @@ Create a
 [Cluster Definition](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html)
 that describes the cluster.
 
-:::caution Warning
+:::warning
+
 Make sure that the Azure account has enough
 [Resource Quota](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 to deploy cluster virtual machines.
+
 :::
 
 Be sure to substitute the following from the previous steps:
@@ -118,45 +128,55 @@ nodes:
 
 Save the modified cluster definition somewhere on your disk.
 
-## Cluster Deployment via NEONDESKTOP
+## Cluster Deployment via NeonDESKTOP
 
-1. Right click the NEONDESKTOP icon in the taskbar > Deploy cluster
-   <Image img={require("./assets/deploy-cluster.png")} style={{ width: 300 }} />
+1. Right click the NeonDESKTOP icon in the taskbar > Deploy cluster
+
+   <Image
+     className="max-w-72 w-full"
+     img={require("./assets/deploy-cluster.png")}
+   />
 
 2. Use the file picker to select the cluster definiton file you saved above
 
-3. Grab a coffee and wait for NEONDESKTOP to deploy the cluster.
+3. Grab a coffee and wait for NeonDESKTOP to deploy the cluster.
 
-## Cluster Deployment via NEONCLI
+## Cluster Deployment via NeonCLI
 
 Cluster deployment happens in two phases:
 
-- Configuring the hosting infrastructure, which involves configuring the 
-  **Resource Group**, **Virtual Networl**, starting the **VMs**, configuring 
-  the **LoadBalancer**, **IP Addresses**, **Disks**, etc.
+- Configuring the hosting infrastructure, which involves configuring the
+  **Resource Group**, **Virtual Networl**, starting the **VMs**, configuring the
+  **LoadBalancer**, **IP Addresses**, **Disks**, etc.
 
-- Setting up the cluster.  This involves configuring Linux and Kubernetes
-  and then installing the necessary cluster components via Helm charts.
+- Setting up the cluster. This involves configuring Linux and Kubernetes and
+  then installing the necessary cluster components via Helm charts.
 
-Execute the commands to deploy this cluster, passing the **PATH** to the
-cluster definition file you saved above and **CLUSTERNAME** to the cluster
-name as defined in the definition:
+Execute the commands to deploy this cluster, passing the **PATH** to the cluster
+definition file you saved above and **CLUSTERNAME** to the cluster name as
+defined in the definition:
+
+Prepare the cluster infrastructure
 
 ```plain
-REM Prepare the cluster infrastructure (change PATH to your cluster definition path)
-neon cluster prepare PATH
+neon cluster prepare /path/to/your/cluster-definition.yaml
+```
 
-REM Setup the cluster
+Setup the cluster
+
+```plain
 neon cluster setup root@my-azure-cluster
 ```
 
 Then wait for cluster setup to complete.
 
 :::note
-These operations are currently coordinated by NEONDESKTOP or NEONCLI 
-running on your machine, so you'll need to keep your computer running
-and connected to the network.
+
+These operations are currently coordinated by NeonDESKTOP or NeonCLI running on
+your machine, so you'll need to keep your computer running and connected to the
+network.
 
 We plan on supporting cloud based deployment in the future where these
 operations will be managed in the cloud, rather than from your computer.
+
 :::

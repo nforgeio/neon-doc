@@ -7,7 +7,7 @@ description: Introduction.
 keywords:
   - introduction
 last_update:
-  author: NEONKUBE Team
+  author: NeonKUBE Team
 ---
 
 # Intro

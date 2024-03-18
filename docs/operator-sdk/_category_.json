@@ -1,8 +1,8 @@
 {
-  "label": "NEONOPERATORSDK",
+  "label": "OperatorSDK",
   "position": 3,
   "link": {
     "type": "generated-index",
-    "description": "NEONOPERATORSDK for Kubernetes"
+    "description": "OperatorSDK for Kubernetes"
   }
 }

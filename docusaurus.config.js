@@ -1,12 +1,12 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer').themes.github;
-const darkCodeTheme = require('prism-react-renderer').themes.dracula;
+const lightCodeTheme = require("prism-react-renderer").themes.github;
+const darkCodeTheme = require("prism-react-renderer").themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "NEONFORGE Documentation",
+  title: "NeonFORGE Documentation",
   tagline: "Kubernetes for the rest of us!",
   url: "https://docs.neonforge.com",
   baseUrl: "/",
@@ -91,25 +91,25 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: "NEONFORGE",
+        title: "NeonFORGE",
         logo: {
-          alt: "NEONKUBE Logo",
+          alt: "NeonKUBE Logo",
           src: "img/favicon.png",
         },
         items: [
           {
             to: "/docs/neonkube",
-            label: "NEONKUBE",
+            label: "NeonKUBE",
             position: "left",
           },
           {
             to: "/docs/neonsdk",
-            label: "NEONSDK",
+            label: "NeonSDK",
             position: "left",
           },
           {
             to: "/docs/operator-sdk",
-            label: "NEONOPERATORSDK",
+            label: "OperatorSDK",
             position: "left",
           },
           {
@@ -152,13 +152,13 @@ const config = {
             title: "More",
             items: [
               {
-                label: "NEONKUBE",
+                label: "NeonKUBE",
                 href: "https://neonkube.io/",
               },
             ],
           },
         ],
-        copyright: `Copyright © 2005-${new Date().getFullYear()} NEONFORGE LLC.`,
+        copyright: `Copyright © 2005-${new Date().getFullYear()} NeonFORGE LLC.`,
       },
       prism: {
         theme: lightCodeTheme,
@@ -216,7 +216,7 @@ const config = {
   ],
   markdown: {
     mermaid: true,
-    format: 'mdx',
+    format: "mdx",
   },
   themes: ["@docusaurus/theme-mermaid"],
 };

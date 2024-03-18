@@ -13,7 +13,7 @@ keywords:
   - custom resource
   - resource controller
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -47,7 +47,9 @@ desired state, which is expressed in the Custom Resource object specification.
 When a reconcile event is triggered, it is always passed the current state of
 the resource to be reconciled.
 
-:::danger A reconciler must be
+:::danger 
+
+A reconciler must be
 [idempotent](https://en.wikipedia.org/wiki/Idempotence)
 
 A function is said to be idempotent if it can be applied multiple times without
