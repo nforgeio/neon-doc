@@ -1,15 +1,14 @@
 ---
 sidebar_position: 2
-slug: /deployment
 displayed_sidebar: neonkube
 title: Deployment Options
 hide_title: false
 hide_table_of_contents: true
-description: Describes cluster definition Container Options
+description: NEONKUBE deployment options
 last_update:
   author: NeonFORGE Team
 ---
-ara
+
 import Admonition from "@theme/Admonition";
 import CodeBlock from "@theme/CodeBlock";
 import Image from "@theme/IdealImage";
@@ -18,7 +17,8 @@ import Tabs from "@theme/Tabs";
 
 # Container Options
 
-Used to customizes the cluster's container registry configuration.
+Here's what the deployment options look like, with the default values or **[required]** 
+for property values that must be specified:
 
 ```yaml
 deployment:
@@ -34,7 +34,7 @@ deployment:
 		<tr>
 			<td><b>registries</b></td>
 			<td>
-				`string`: Optional prefix combined with the cluster name to generate the resource group name
+				`string:` Optional prefix combined with the cluster name to generate the resource group name
 				when deploying the cluster to a cloud environment or combined with the node name
 				for other environments.  This is typically used by unit tests deployed by <b>ClusterFixture</b>
 				but can also be used by custom tools to avoid conflicts when multiple tests may be 

@@ -1,0 +1,54 @@
+---
+sidebar_position: 9
+displayed_sidebar: neonkube
+title: Node Options
+hide_title: false
+hide_table_of_contents: true
+description: NEONKUBE cluster node options
+last_update:
+  author: NEONFORGE Team
+---
+
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Node Options
+
+Describes the options used to configure the host (Linux) configuration
+for cluster nodes.  These apply to all nodes in the cluster.
+
+Here's what the node options look like, with the default values
+or **[required]** for properties that must be specified:
+
+```yaml
+node:
+  allowPackageManagerIPv6: false
+  packageManagerRetries:   5
+```                                       
+
+<table>
+    <thead>
+        <th>Property</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>allowPackageManagerIPv6</b></td>
+            <td>
+                `bool:` Allow the Linux package manager to use IPv6 when communicating with
+                package mirrors.  This defaults to **false** to restrict updates
+                to using IPv4.
+            </td>
+        </tr>
+        <tr>
+            <td><b>packageManagerRetries</b></td>
+            <td>
+                `integer:` Specifies the number of times the host package manager should retry
+                 failed index or package downloads.  This defaults to <b>5</b>
+            </td>
+        </tr>
+    </tbody>
+</table>

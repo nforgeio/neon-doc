@@ -1,0 +1,103 @@
+---
+sidebar_position: 4
+displayed_sidebar: neonkube
+title: Hyper-V
+hide_title: false
+hide_table_of_contents: true
+description: Hyper-V hosting options
+last_update:
+  author: NEONFORGE Team
+---
+
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Hyper-V Hosting Options
+
+Here's what the Hyper-V related hosting options looks like, with the 
+default values or **[required]** for property values that must be specified:
+
+```yaml
+hosting:
+  environment: hyperv
+  hyperv:
+    neonDesktopBuiltIn: false
+    useInternalSwitch:  false
+```
+
+<table>
+    <thead>
+        <th>Property</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>environment</b></td>
+            <td>
+                `string:` Deploys the cluster to Azure.
+            </td>
+        </tr>
+        <tr>
+            <td><b>azure</b></td>
+            <td>
+                `string:` Specifies the Amazon Web Services (AWS) hosting settings.
+
+                <table>
+                    <thead>
+                        <th>Property</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>neonDesktopBuiltIn</b></td>
+                            <td>
+                                `bool:` Controls whether the cluster will be deployed on the internal **neonkube** Hyper-V switch
+                                within the **NeonKubeInternalSubnet**.  Note that any **NetworkOptions.PremiseSubnet**
+                                must be already set to **NeonKubeInternalSubnet** and **NetworkOptions.Gateway** must be 
+                                set to **NeonKubeInternalGateway** when this is **true**.
+
+                                This defaults to **false**.
+
+                                Note that NEONKUBE creates only a single internal Hyper-V switch for the **HyperV**
+                                hosting environment for the **NeonKubeInternalSubnet** (**100.64.0.0/24**).  some
+                                addresses in this subnet are reserved:
+
+                                <table>
+                                    <tr>
+                                        <td>**100.64.0.0**</td>
+                                        <td>Reserved</td>
+                                    </tr>
+                                    <tr>
+                                        <td>**100.64.0.1**</td>
+                                        <td>Gateway for external network access</td>
+                                    </tr>
+                                    <tr>
+                                        <td>**00.64.0.2 ... 253**</td>
+                                        <td>Available for user cluster nodes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>**100.64.0.254**</td>
+                                        <td>Reserved for the NEONDESKTOP single node cluster</td>
+                                    </tr>
+                                    <tr>
+                                        <td>**100.64.0.255**</td>
+                                        <td>Reserved for the subnet UDP broadcast address</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><b>useInternalSwitch</b></td>
+                            <td>
+                                `bool:` Optionally installs Harbor. This defaults to **false**.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

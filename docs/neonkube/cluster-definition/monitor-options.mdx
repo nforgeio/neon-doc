@@ -1,0 +1,63 @@
+---
+sidebar_position: 7
+displayed_sidebar: neonkube
+title: Monitor Options
+hide_title: false
+hide_table_of_contents: true
+description: NEONKUBE observability options
+last_update:
+  author: NEONFORGE Team
+---
+
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Monitor Options
+
+Specifies the options for configuring the NEONKUBE integrated observability stack.
+
+Here's what the observability options look like, with the default values
+or **[required]** for properties that must be specified:
+
+```yaml
+monitor:
+  logs:
+    logRetentionDays:
+  metrics:
+    storage:
+  traces:
+    traceRetentionDays:
+```                                       
+
+<table>
+    <thead>
+        <th>Property</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>logs.logRetentionDays</b></td>
+            <td>
+                `integer:` Trace retention period in days. Traces older than this will be purged.
+                This defaults to: **14 days**
+            </td>
+        </tr>
+        <tr>
+            <td><b>metrics.storage</b></td>
+            <td>
+                `string:` Specifies where Prometheus metrics should be stored. Supported values
+                are **ephermeral** (the default) or **filesystem**.
+            </td>
+        </tr>
+        <tr>
+            <td><b>logs.traceRetentionDays</b></td>
+            <td>
+                `integer:` Specifies the trace retention period in days. Traces older than this will be purged.
+                This defaults to: **14 days**
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -172,13 +172,23 @@ try
                 exit 1
             }
 
-            # Remove all folders from the [$docSiteRoot] repo except for [.git] and [.vs].
+            # Remove all folders from the [$docSiteRoot] repo except for special folders and files.
 
             foreach ($folderPath in [System.IO.Directory]::GetDirectories($docSiteRoot, "*", [System.IO.SearchOption]::TopDirectoryOnly))
             {
                 $folderName = [System.IO.Path]::GetFileName($folderPath);
 
                 if ($folderName -eq ".git")
+                {
+                    continue;
+                }
+
+                if ($folderName -eq ".gitignore")
+                {
+                    continue;
+                }
+
+                if ($folderName -eq ".neon-doc-site")
                 {
                     continue;
                 }

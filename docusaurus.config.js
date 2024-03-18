@@ -56,7 +56,12 @@ const config = {
             "neon, neonforge, neonkube, neondesktop, neon-cli, kubernetes, documentation",
         },
       ],
-      algolia: {
+          docs: {
+            sidebar: {
+              hideable: true,
+          },
+        },
+        algolia: {
         // The application ID provided by Algolia
         appId: "RYA07XNW6G",
 
