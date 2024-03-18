@@ -1,0 +1,65 @@
+---
+sidebar_position: 9
+displayed_sidebar: neonkube
+title: Node Options
+hide_title: false
+hide_table_of_contents: true
+description: NEONKUBE cluster node options
+last_update:
+  author: NEONFORGE Team
+---
+
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Node Options
+
+Describes the network options for a cluster.
+
+Here's what the monitoring options look like, with the default values
+or **[required]** for properties that must be specified:
+
+```yaml
+network:
+  acme:
+    certificateDuration:    "2160h0m0s"
+    certificateRenewBefore: "720h0m0s"
+    issuer:                 null
+  egressAddressRules:       []
+  gateway:                  [second address in premiseSubnet]
+  ingressHealthCheck:
+    intervalSeconds:        10
+    thresholdCount:         2
+  ingressRules:             []
+  managementAddressRules:   []
+  mutalPodTls:              false
+  nameServers:
+  - "8.8.8.8"               [Google DNS for on-premise]
+  - "8.8.4.4"               [otherwise use cloud DNS  ]
+  nodeMtu:                  0
+  premiseSubnet:            [required for on-premise]
+  podSubnet:                "10.254.0.0/16"
+  publicAddresses:          []
+  reservedIngressEndPort:   64999
+  reservedIngressStartPort: 64000
+  serviceSubnet:            "10.253.0.0/16"
+```                                       
+
+<table>
+    <thead>
+        <th>Property</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>acme.certificateDuration</b></td>
+            <td>
+                `string:`  Specifies the maximum lifespan for internal cluster TLS certificates as a GOLANG formatted string.  
+                This defaults to **2160h0m0s** (90 days).
+            </td>
+        </tr>
+    </tbody>
+</table>
