@@ -1,0 +1,152 @@
+---
+sidebar_position: 9
+displayed_sidebar: neonkube
+title: Node Definitions
+hide_title: false
+hide_table_of_contents: true
+description: NEONKUBE cluster node definitions
+last_update:
+  author: NEONFORGE Team
+---
+
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Node Definitions
+
+Describes the machines that need to be deployed for a NEONKUBE cluster.
+This is a map with the machine hostnames mapping to an object specifying
+the requirements for each cluster node.
+
+Here's what the node options look like, with the default values
+or **[required]** for properties that must be specified:
+
+```yaml
+nodes:
+  my-node: {
+    address:               null
+    aws:
+      instanceType:        null
+      ebsOptimized:        "default"
+      placementPartition:  0
+      volumeSize:          "default"
+      storageType:         "default"
+      diskSize:            null
+      openEbsVolumeSize:   "default"
+      openEbsStorageType:  "default"
+      openEbsdiskSize:     null
+    azure:
+      vmSize:              null
+      storageType:         "default"
+      diskSize:            null
+      openEbsStorageType: "default"
+      openEbsDiskSize:     null
+    hypervisor:
+      host:                null
+      vcpus:               0
+      memory:              null
+      osDisk:              null
+      openEbsDisk:         null
+    ingress:               false
+    role:                  "worker"
+    openEbsStorage:        false
+    taints:                []
+  }
+}
+```
+
+The **address** property is required for on-premise hosting environments like **Hyper-V**
+and **XenServer/XCP-ng**.  This is optional for cloud environments like **AWS** and **Azure**
+where NEONKUBE will automatically assign IP addresses to node, but you can also assign
+addresses to cloud nodes explicitly if you wish.
+
+The **aws**, **azure**, and **hypervisor** allow you to override settings from the global 
+cluster definition **hosting.aws**, **hosting.azure**, **hosting.hyperv** and **hosting.xenserver**
+properties for individual cluster nodes.
+
+<table>
+    <thead>
+        <th>Property</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>address</b></td>
+            <td>
+                `string:` Specifies the IP address to be assinged to the node or **null** if addresses are
+                to be automatically assigned durining cluster setup.
+
+                This is required for on-premise clusters deployed to Hype-V or XenServer/XCP-ng
+                but is optional for cloud deployments.
+            </td>
+        </tr>
+        <tr>
+            <td><b>aws</b></td>
+            <td>
+                `object:` **AWS** specific options for the cluster node.  These options can be used to override
+                defaults specified by **hosting.aws** in the cluster definition.  This is ignored
+                for non-AWS deployments.
+            </td>
+        </tr>
+        <tr>
+            <td><b>azure</b></td>
+            <td>
+                `object:` **Azure** specific options for the cluster node.  These options can be used to override
+                defaults specified by **hosting.azure** in the cluster definition.  This is ignored
+                for non-Azure deployments.
+            </td>
+        </tr>
+        <tr>
+            <td><b>hypervisor</b></td>
+            <td>
+                `object:` on-premsise hypervisor specific options for the cluster node.  These options 
+                can be used to override defaults specified by **hosting.azure** in the cluster definition.
+                This is ignored clpoud deployments.
+            </td>
+        </tr>
+        <tr>
+            <td><b>ingress</b></td>
+            <td>
+                `bool:` Optionally specifies that this node should be configured to receive external network
+                traffic on node ports and route that into the cluster.  This defaults to **false**.
+
+                **NOTE:** If all nodes have **ingress: false** and the cluster defines one or more 
+                **network.ingressRules** then NEONKUBE will choose a reasonable set of nodes to handle
+                inbound traffic.
+            </td>
+        </tr>
+        <tr>
+            <td><b>role</b></td>
+            <td>
+                `string:` Optionally spoecifies the node's role in the cluster, supported values are **control-plane**
+                or **worker*  This defaults to **worker**.
+            </td>
+        </tr>
+        <tr>
+            <td><b>openEbsStorage</b></td>
+            <td>
+                `bool:` Optionally specifies that this node will provisioned with a cStor or Mayastor
+                 block device on this node for persistant container storage.  This defaults to **false**.
+                
+                **NOTE:**  When all nodes have **openEbsStorage** set to **false**, NEONKUBE 
+                will automatically choose the nodes that will host the cStor/Mayastor block devices 
+                by configuring up to three nodes with **openEbsStorage: true**, favoring worker nodes o
+                ver control-plane nodes when possible.
+
+                **NOTE:** When all nodes have **openEbsStorage set to **false** and **storage.openEbs.engine**
+                in the cluster definitions is set to **cstor** or **mayastor**, NEONKUBE will automatically
+                choose the nodes that will host the cStor/Maystor block devices by configuring up to three nodes to 
+                do this, favoring **worker** nodes over **control-plane** nodes when possible.
+            </td>
+        </tr>
+        <tr>
+            <td><b>taints</b></td>
+            <td>
+                `array:` Optionally specifies any taints to be assigned to the cluster node.
+            </td>
+        </tr>
+    </tbody>
+</table>
