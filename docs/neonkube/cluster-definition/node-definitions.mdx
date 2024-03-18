@@ -4,7 +4,7 @@ displayed_sidebar: neonkube
 title: Node Definitions
 hide_title: false
 hide_table_of_contents: true
-description: NEONKUBE cluster node definitions
+description: NeonKUBE cluster node definitions
 last_update:
   author: NEONFORGE Team
 ---
@@ -17,7 +17,7 @@ import Tabs from "@theme/Tabs";
 
 # Node Definitions
 
-Describes the machines that need to be deployed for a NEONKUBE cluster.
+Describes the machines that need to be deployed for a NeonKUBE cluster.
 This is a map with the machine hostnames mapping to an object specifying
 the requirements for each cluster node.
 
@@ -60,7 +60,7 @@ nodes:
 
 The **address** property is required for on-premise hosting environments like **Hyper-V**
 and **XenServer/XCP-ng**.  This is optional for cloud environments like **AWS** and **Azure**
-where NEONKUBE will automatically assign IP addresses to node, but you can also assign
+where NeonKUBE will automatically assign IP addresses to node, but you can also assign
 addresses to cloud nodes explicitly if you wish.
 
 The **aws**, **azure**, and **hypervisor** allow you to override settings from the global 
@@ -114,7 +114,7 @@ properties for individual cluster nodes.
                 traffic on node ports and route that into the cluster.  This defaults to **false**.
 
                 **NOTE:** If all nodes have **ingress: false** and the cluster defines one or more 
-                **network.ingressRules** then NEONKUBE will choose a reasonable set of nodes to handle
+                **network.ingressRules** then NeonKUBE will choose a reasonable set of nodes to handle
                 inbound traffic.
             </td>
         </tr>
@@ -131,13 +131,13 @@ properties for individual cluster nodes.
                 `bool:` Optionally specifies that this node will provisioned with a cStor or Mayastor
                  block device on this node for persistant container storage.  This defaults to **false**.
                 
-                **NOTE:**  When all nodes have **openEbsStorage** set to **false**, NEONKUBE 
+                **NOTE:**  When all nodes have **openEbsStorage** set to **false**, NeonKUBE 
                 will automatically choose the nodes that will host the cStor/Mayastor block devices 
                 by configuring up to three nodes with **openEbsStorage: true**, favoring worker nodes o
                 ver control-plane nodes when possible.
 
                 **NOTE:** When all nodes have **openEbsStorage set to **false** and **storage.openEbs.engine**
-                in the cluster definitions is set to **cstor** or **mayastor**, NEONKUBE will automatically
+                in the cluster definitions is set to **cstor** or **mayastor**, NeonKUBE will automatically
                 choose the nodes that will host the cStor/Maystor block devices by configuring up to three nodes to 
                 do this, favoring **worker** nodes over **control-plane** nodes when possible.
             </td>
