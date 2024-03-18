@@ -4,13 +4,13 @@ displayed_sidebar: neonkube
 title: Deploy on XenServer/XCP-ng
 hide_title: false
 hide_table_of_contents: false
-description: Getting started with NEONKUBE on XenServer
+description: Getting started with NeonKUBE on XenServer.
 keywords:
   - XenServer
   - XCP
   - XCP-ng
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -22,14 +22,15 @@ import Tabs from "@theme/Tabs";
 # Deploy on XenServer/XCP-ng
 
 You'll need a machine running either the XenServer or XCP-ng hypervisor.
-[XenServer](https://xenserver.com) is a commercial offering that used to
-have a free edition but now only has a time-limited trial.  [XCP-ng](https://xcp-ng.org)
-is an open source fork of the XenServer project, back when it was open source too.  
+[XenServer](https://xenserver.com) is a commercial offering that used to have a
+free edition but now only has a time-limited trial. [XCP-ng](https://xcp-ng.org)
+is an open source fork of the XenServer project, back when it was open source
+too.  
 XCP-ng is completely free.
 
 We've been using **XCP-ng for about 5 years** now and have been happy with it.
 
-You'll need an AMD64 compatible computer for this.  This doesn't need to be 
+You'll need an AMD64 compatible computer for this. This doesn't need to be
 particularily high powered but should minimially have:
 
 - cpu: 4 cores
@@ -38,28 +39,27 @@ particularily high powered but should minimially have:
 
 **XenServer/XCP-ng v8.2+** is required.
 
-Download and install either **XenServer** or **XCP-ng**, following the instructions
-on the respwctive site.  Make a note of the **IP Address** assigned to the machine
-as well as the **root password** you created.
+Download and install either **XenServer** or **XCP-ng**, following the
+instructions on the respwctive site. Make a note of the **IP Address** assigned
+to the machine as well as the **root password** you created.
 
-# Deploy a NEONKUBE Cluster on AZURE
+# Deploy a NeonKUBE Cluster on AZURE
 
 ### Cluster Definition
 
-First, you'll need to save this cluster definition as a YAML file
-on your machine.  This provisions a single node cluster on your
-Xen machine.
+First, you'll need to save this cluster definition as a YAML file on your
+machine. This provisions a single node cluster on your Xen machine.
 
 Be sure to make these substitutions first:
 
-- **[XEN_HOST_PASSWORD]**: change this to the root password you created when
-  you deployed the Xen machine.
+- **[XEN_HOST_PASSWORD]**: change this to the root password you created when you
+  deployed the Xen machine.
 
 - **[XEN_HOST_ADDRESS]**: change this to the Xen machine's IP address.
 
-- **Network:** change **network.gateway** and **network.premiseSubnet**
-  to the settings for your local LAN and also set **nodes.control-0.address**
-  to an unused address on the LAN.
+- **Network:** change **network.gateway** and **network.premiseSubnet** to the
+  settings for your local LAN and also set **nodes.control-0.address** to an
+  unused address on the LAN.
 
 ```yaml
 name: my-xen-cluster
@@ -86,45 +86,55 @@ nodes:
       osDisk: 64GiB
 ```
 
-## Cluster Deployment via NEONDESKTOP
+## Cluster Deployment via NeonDESKTOP
 
-1. Right click the NEONDESKTOP icon in the taskbar > Deploy cluster
-   <Image img={require("./assets/deploy-cluster.png")} style={{ width: 300 }} />
+1. Right click the NeonDESKTOP icon in the taskbar > Deploy cluster
+
+   <Image
+     className="max-w-72 w-full"
+     img={require("./assets/deploy-cluster.png")}
+   />
 
 2. Use the file picker to select the cluster definiton file you saved above
 
-3. Grab a coffee and wait for NEONDESKTOP to deploy the cluster.
+3. Grab a coffee and wait for NeonDESKTOP to deploy the cluster.
 
-## Cluster Deployment via NEONCLI
+## Cluster Deployment via NeonCLI
 
 Cluster deployment happens in two phases:
 
-- Configuring the hosting infrastructure, which involves configuring the 
-  **Resource Group**, **VPC**, starting the **Instances**, configuring 
-  the **LoadBalancer**, **IP Addresses**, **Disks**, etc.
+- Configuring the hosting infrastructure, which involves configuring the
+  **Resource Group**, **VPC**, starting the **Instances**, configuring the
+  **LoadBalancer**, **IP Addresses**, **Disks**, etc.
 
-- Setting up the cluster.  This involves configuring Linux and Kubernetes
-  and then installing the necessary cluster components via Helm charts.
+- Setting up the cluster. This involves configuring Linux and Kubernetes and
+  then installing the necessary cluster components via Helm charts.
 
-Execute the commands to deploy this cluster, passing the **PATH** to the
-cluster definition file you saved above and **CLUSTERNAME** to the cluster
-name as defined in the definition:
+Execute the commands to deploy this cluster, passing the **PATH** to the cluster
+definition file you saved above and **CLUSTERNAME** to the cluster name as
+defined in the definition:
+
+Prepare the cluster infrastructure (change PATH to your cluster definition path)
 
 ```plain
-REM Prepare the cluster infrastructure (change PATH to your cluster definition path)
-neon cluster prepare PATH
+neon cluster prepare /path/to/your/cluster-definition.yaml
+```
 
-REM Setup the cluster
+Setup the cluster
+
+```plain
 neon cluster setup root@my-xen-cluster
 ```
 
 Then wait for cluster setup to complete.
 
 :::note
-These operations are currently coordinated by NEONDESKTOP or NEONCLI 
-running on your machine, so you'll need to keep your computer running
-and connected to the network.
+
+These operations are currently coordinated by NeonDESKTOP or NeonCLI running on
+your machine, so you'll need to keep your computer running and connected to the
+network.
 
 We plan on supporting cloud based deployment in the future where these
 operations will be managed in the cloud, rather than from your computer.
+
 :::

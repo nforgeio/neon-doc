@@ -1,7 +1,7 @@
 # $note(jefflill):
 #
 # I've disabled this action (by renaming the file) because it doesn't really
-# make sense.  This has been replaced by integration in the NEONKUBE build
+# make sense.  This has been replaced by integration in the NeonKUBE build
 # tools.
 #
 # The problem is that this action publishes the site whenever a commit is

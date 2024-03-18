@@ -6,7 +6,7 @@ hide_title: false
 hide_table_of_contents: true
 description: Hyper-V hosting options
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,8 +17,8 @@ import Tabs from "@theme/Tabs";
 
 # Hyper-V Hosting Options
 
-Here's what the Hyper-V related hosting options looks like, with the 
-default values or **[required]** for property values that must be specified:
+Here's what the Hyper-V related hosting options looks like, with the default
+values or **[required]** for property values that must be specified:
 
 ```yaml
 hosting:
@@ -56,12 +56,12 @@ hosting:
                             <td>
                                 `bool:` Controls whether the cluster will be deployed on the internal **neonkube** Hyper-V switch
                                 within the **NeonKubeInternalSubnet**.  Note that any **NetworkOptions.PremiseSubnet**
-                                must be already set to **NeonKubeInternalSubnet** and **NetworkOptions.Gateway** must be 
+                                must be already set to **NeonKubeInternalSubnet** and **NetworkOptions.Gateway** must be
                                 set to **NeonKubeInternalGateway** when this is **true**.
 
                                 This defaults to **false**.
 
-                                Note that NEONKUBE creates only a single internal Hyper-V switch for the **HyperV**
+                                Note that NeonKUBE creates only a single internal Hyper-V switch for the **HyperV**
                                 hosting environment for the **NeonKubeInternalSubnet** (**100.64.0.0/24**).  some
                                 addresses in this subnet are reserved:
 
@@ -80,7 +80,7 @@ hosting:
                                     </tr>
                                     <tr>
                                         <td>**100.64.0.254**</td>
-                                        <td>Reserved for the NEONDESKTOP single node cluster</td>
+                                        <td>Reserved for the NeonDESKTOP single node cluster</td>
                                     </tr>
                                     <tr>
                                         <td>**100.64.0.255**</td>
@@ -100,4 +100,5 @@ hosting:
             </td>
         </tr>
     </tbody>
+
 </table>

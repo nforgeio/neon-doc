@@ -4,9 +4,9 @@ displayed_sidebar: neonkube
 title: Hosting Options
 hide_title: false
 hide_table_of_contents: true
-description: NEONKUBE cluster hosting options
+description: NeonKUBE cluster hosting options
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,9 +17,9 @@ import Tabs from "@theme/Tabs";
 
 # Hosting Options
 
-Specifies hosting related settings for the cloud or on-premise provider.  You'll
-need to specify the target **hosting.environment** and optionally, any environment
-specific options.
+Specifies hosting related settings for the cloud or on-premise provider. You'll
+need to specify the target **hosting.environment** and optionally, any
+environment specific options.
 
 ```yaml
 hosting:
@@ -27,49 +27,62 @@ hosting:
   aws:
   azure:
   hyperv:
-  xenserver: 
+  xenserver:
 ```
 
 <table>
-    <thead>
-        <th>Property</th>
-        <th>Description</th>
-    </thead>
-    <tbody>
-        <tr>
-            <td><b>hosting</b></td>
-            <td>
-                `string:` Identifies the target hosting environment; one of **aws**, **azure**, **hyperv**, or **xenserver**.
-                This is required.
-            </td>
-        </tr>
-        <tr>
-            <td><b>aws</b></td>
-            <td>
-                `object:` Optionally specifies AWS specific hosting settings.
-                See [AWS Hosting Options](./aws-hosting-options.mdx) for more information.
-            </td>
-        </tr>
-        <tr>
-            <td><b>azure</b></td>
-            <td>
-                `object:` Optionally specifies Azure specific hosting settings.
-                See [Azure Hosting Options](./azure-hosting-options.mdx) for more information.
-            </td>
-        </tr>
-        <tr>
-            <td><b>hyperv</b></td>
-            <td>
-                `object:` Optionally specifies Hyper-V specific hosting settings.
-                See [Hyper-V Hosting Options](./hyperv-hosting-options.mdx) for more information.
-            </td>
-        </tr>
-        <tr>
-            <td><b>xenserver</b></td>
-            <td>
-                `object:` Optionally specifies XenServer/XCP-ng specific hosting settings.
-                See [XenServer Hosting Options](./xenserver-hosting-options.mdx) for more information.
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <th>Property</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <b>hosting</b>
+      </td>
+      <td>
+        `string:` Identifies the target hosting environment; one of **aws**,
+        **azure**, **hyperv**, or **xenserver**. This is required.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>aws</b>
+      </td>
+      <td>
+        `object:` Optionally specifies AWS specific hosting settings. See [AWS
+        Hosting Options](./aws-hosting-options.mdx) for more information.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>azure</b>
+      </td>
+      <td>
+        `object:` Optionally specifies Azure specific hosting settings. See
+        [Azure Hosting Options](./azure-hosting-options.mdx) for more
+        information.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>hyperv</b>
+      </td>
+      <td>
+        `object:` Optionally specifies Hyper-V specific hosting settings. See
+        [Hyper-V Hosting Options](./hyperv-hosting-options.mdx) for more
+        information.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>xenserver</b>
+      </td>
+      <td>
+        `object:` Optionally specifies XenServer/XCP-ng specific hosting
+        settings. See [XenServer Hosting
+        Options](./xenserver-hosting-options.mdx) for more information.
+      </td>
+    </tr>
+  </tbody>
 </table>

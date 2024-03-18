@@ -4,12 +4,12 @@ sidebar_position: 1
 displayed_sidebar: neonkube
 title: Introduction
 hide_title: false
-hide_table_of_contents: false
-description: NEONKUBE introduction
+hide_table_of_contents: true
+description: Introduction.
 keywords:
   - introduction
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -19,71 +19,73 @@ import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
 
 :::note
-The current release is **alpha** quality and is based on Kubernetes v1.24,
-which is somewhat dated.  We're in the process of upgrading to Kubernetes
-v1.29 and are also switching to the [Cilium CNI](https://cilium.io/get-started/)
-which will provide much better networking performance for larger clusters.
+
+The current release is based on Kubernetes v1.24, which is somewhat dated. We're
+in the process of upgrading to Kubernetes v1.29 and are also switching from the
+Calico CNI to the [Cilium CNI](https://cilium.io/get-started/).
+
 :::
 
 # Introduction
 
-NEONKUBE is a full-stack, production-ready Kubernetes distribution that 
-provides a seamless and consistent developer experience across different
-environments. Whether you want to run your applications on your laptop,
-on-premise servers or on the cloud, NEONKUBE can help you deploy and manage
-clusters with ease.
+NeonKUBE is a full-stack, production-ready Kubernetes distribution that provides
+a seamless and consistent developer experience across different environments.
+Whether you want to run your applications on your laptop, on-premise servers or
+on the cloud, NeonKUBE can help you deploy and manage clusters with ease.
 
-Basic Kubernetes isn't really production ready because it doesn't include
-the components required to manage clusters as well as other generally useful
-features.  Kubernetes distributions like NEONKUBE layer useful components
-onto basic Kubernetes and also manage cluster deployment.
+Basic Kubernetes isn't really production ready because it doesn't include the
+components required to manage clusters as well as other generally useful
+features. Kubernetes distributions like NeonKUBE layer useful components onto
+basic Kubernetes and also manage cluster deployment.
 
-NEONKUBE curates several best-of-breed open source components and implements
+NeonKUBE curates several best-of-breed open source components and implements
 cluster deployment to a Windows workstation or laptop, on-premise using
-[XenServer](https://www.xenserver.com/) or a free and compaitible open source 
+[XenServer](https://www.xenserver.com/) or a free and compaitible open source
 alternative [XCP-ng](https://xcp-ng.org/).
 
 **Component Hightlights:**
 
-<Image img={require("./assets/intro/curated.png")} style={{ width: 600 }} />
+<Image
+  className="w-full max-w-xl"
+  img={require("./assets/intro/curated.png")}
+/>
 
-With NEONKUBE, you will enjoy benefits like:
+With NeonKUBE, you will enjoy benefits like:
 
 - **Simplicity:** You don't have to worry about installing and configuring
-  dozens of different tools and components. NEONKUBE handles all of that.
+  dozens of different tools and components. NeonKUBE handles all of that.
 
 - **Consistency:** You don't have to deal with different versions or
   configurations of Kubernetes or its add-ons across different environments or
-  platforms. You can use the same NEONKUBE distribution everywhere.
+  platforms. You can use the same NeonKUBE distribution everywhere.
 
 - **Reliability:** You don't have to worry about compatibility issues or bugs
-  caused by mismatched components or dependencies. You can rely on NEONKUBE's
+  caused by mismatched components or dependencies. You can rely on NeonKUBE's
   tested and stable components.
 
 - **Productivity**: You don't have to waste time on tedious tasks like setting
-  up VPNs or SSH tunnels. You can use NEONDESKTOP's intuitive interface or
-  NEONCLI's powerful commands to access and manage your cluster easily.
+  up VPNs or SSH tunnels. You can use NeonDESKTOP's intuitive interface or
+  NeonCLI's powerful commands to access and manage your cluster easily.
 
-## NEONDESKTOP and NEONCLI
+## NeonDESKTOP and NeonCLI
 
-**NEONKUBE** provides two ways to deploy and interact with Kubernetes clusters.
-**NEONDESKTOP** is a Microsoft Windows GUI application that can deploy and manage
-a local single node cluster on a laptop or workstation with a **500GB+ SSD** and
-at least **16GB RAM** (more is better).  We're planning on eventually releasing
-NEONDESKTOP for the Macintosh and perhaps eventually for Linux Desktop.
+**NeonKUBE** provides two ways to deploy and interact with Kubernetes clusters.
+**NeonDESKTOP** is a Microsoft Windows GUI application that can deploy and
+manage a local single node cluster on a laptop or workstation with a **500GB+
+SSD** and at least **32GB RAM**. We're planning on eventually releasing
+NeonDESKTOP for MacOS and perhaps eventually for Linux Desktop.
 
-**NEONCLI** is our command line management tool.  This is a gently customized
-version of the standard Kubernetes **kubectl** tool, including all of the standard
-commands as well as new NEONKUBE-specific commands.
+**NeonCLI** is our command line management tool. This is a gently customized
+version of the standard Kubernetes **kubectl** tool, including all of the
+standard commands as well as new NeonKUBE-specific commands.
 
-**NEONDESKTOP** is similar to **Docker Desktop** in Kubernetes mode in that
-it can manage a single node cluster on your computer, but **NEONDESKTOP**
-deploys a full-stack cluster with the curated components.  NEONDESKTOP 
-clusters are intended for learning about Kubernetes and these components
-and doing some lite development.  NEONDESKTOP clusters are **not intended
-for production**.
+**NeonDESKTOP** is similar to **Docker Desktop** in Kubernetes mode in that it
+can manage a single node cluster on your computer, but **NeonDESKTOP** deploys a
+full-stack cluster with the curated components. NeonDESKTOP clusters are
+intended for learning about Kubernetes and these components and doing some lite
+development. NeonDESKTOP clusters are **not intended for production**.
 
-We publish two installers, one for NEONDESKTOP which also includes NEONCLI and 
-another that installs only NEONCLI.
+We publish two installers, one for NeonDESKTOP which also includes NeonCLI and
+another that installs only NeonCLI.
 
 https://github.com/nforgeio/neonKUBE/releases

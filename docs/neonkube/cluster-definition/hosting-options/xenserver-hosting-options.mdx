@@ -6,7 +6,7 @@ hide_title: false
 hide_table_of_contents: true
 description: XenServer/XCP-ng hosting options
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,12 +17,12 @@ import Tabs from "@theme/Tabs";
 
 # XenServer/XCP-ng Hosting Options
 
-Here's what the XenServer/XCP-ng related hosting options looks like, with the 
+Here's what the XenServer/XCP-ng related hosting options looks like, with the
 default values or **[required]** for property values that must be specified:
 
 ```yaml
 hosting:
-  environment: xenserver
+  environment:         xenserver
   hypervisor:
     snapshot:          false
     storageRepository: "local storage"
@@ -47,7 +47,7 @@ hosting:
                 like multiple virtual machines have been created as snapshots from the same template.
 
                 We figure that it's best to default to safe setting for production clusters and
-                then allow operators to override this when provisioning temporary test clusters 
+                then allow operators to override this when provisioning temporary test clusters
                 or when provisioning on a storage repository that doesn't have these limitations.
 
                 For snapshots to work, the storage repository must support them and the virtual
@@ -66,4 +66,5 @@ hosting:
             </td>
         </tr>
     </tbody>
+
 </table>

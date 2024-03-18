@@ -27,7 +27,6 @@ kube green #84ffbc */
   --ifm-color-primary-light: #33925d;
   --ifm-color-primary-lighter: #359962;
   --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
@@ -80,7 +79,7 @@ body {
 }
 
 .github_icon_header {
-  @apply h-full w-full fill-gray-100;
+  @apply h-full w-8 desktop:w-full  fill-gray-100;
 }
 .footer--dark {
   --ifm-footer-background-color: #060611;
@@ -111,4 +110,8 @@ article {
 
 .DocSearch-Button-Container {
   @apply w-6 sm:w-64 md:w-96;
+}
+
+code {
+  @apply text-wrap text-sm;
 }

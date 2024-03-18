@@ -6,7 +6,7 @@ hide_title: false
 hide_table_of_contents: true
 description: AWS hosting options
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,13 +17,13 @@ import Tabs from "@theme/Tabs";
 
 # AWS Hosting Options
 
-Here's what the AWS related hosting options looks like, with the 
-default values or **[required]** for property values that must be specified:
+Here's what the AWS related hosting options looks like, with the default values
+or **[required]** for property values that must be specified:
 
 ```yaml
 hosting:
   environment: aws
-  aws: 
+  aws:
     accessKeyId:                     [required]
     availabilityZone:                [required]
     controlPlanePlacementPartitions: -1
@@ -54,7 +54,7 @@ hosting:
             <td><b>accessKeyId</b></td>
             <td>
                 `string:` Specifies the AWS access key ID that identifies the IAM key created 
-                for the IAM user assigned to NEONKUBE for management activities, including creating
+                for the IAM user assigned to NeonKUBE for management activities, including creating
                 the cluster.  This combined with <b>SecretAccessKey</b> will be used to confirm the 
                 identity.  This is required.
             </td>
@@ -75,10 +75,10 @@ hosting:
 
                 AWS provides three different types of <b>placement groups</b> to user help manage
                 where virtual machine instances are provisioned within an AWS availability zone
-                to customize fault tolerance due to AWS hardware failures: 
+                to customize fault tolerance due to AWS hardware failures:
                 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">AWS Placement groups</a>
 
-                NEONKUBE provisions instances using two <b>partition placement groups</b>, one for
+                NeonKUBE provisions instances using two <b>partition placement groups</b>, one for
                 the cluster control-plane nodes and the other for the workers.  The idea is that control-plane
                 nodes should be deployed on separate hardware for fault tolerance because if the
                 majority of control-plane nodes go offline, the entire cluster will be dramatically impacted.
@@ -90,32 +90,32 @@ hosting:
                 limiting the resilience to AWS hardware failures while making it more likely that AWS
                 will be able to actually satisfy the conditions to provision the cluster node instances.
 
-                Unfortunately, AWS may not have enough distinct hardware available to satisfy 
+                Unfortunately, AWS may not have enough distinct hardware available to satisfy
                 your requirements.  In this case, we recommend that you try another availability
                 zone first and if that doesn't work try reducing the number of partitions which
-                can be as low as 1 partition.  
+                can be as low as 1 partition.
             </td>
         </tr>
         <tr>
             <td><b>defaultInstanceType</b></td>
             <td>
             `string:` Identifies the default AWS instance type to be provisioned for cluster nodes that don't
-            specify an instance type.  This defaults to <b>c5.2xlarge</b> which includes 8 virtual cores and 
+            specify an instance type.  This defaults to <b>c5.2xlarge</b> which includes 8 virtual cores and
             16 GiB RAM but can be overridden for specific cluster nodes.
 
-            <b>NOTE:</b> NEONKUBE clusters cannot be deployed to ARM-based AWS instance types.  You must
+            <b>NOTE:</b> NeonKUBE clusters cannot be deployed to ARM-based AWS instance types.  You must
             specify an instance type using a Intel or AMD 64-bit processor.
 
-            <b>NOTE:</b> NEONKUBE requires control-plane and worker instances to have at least 4 CPUs and 8GiB RAM.  Choose
+            <b>NOTE:</b> NeonKUBE requires control-plane and worker instances to have at least 4 CPUs and 8GiB RAM.  Choose
             an AWS instance type that satisfies these requirements.
             </td>
         </tr>
         <tr>
             <td><b>defaultEbsOptimized</b></td>
             <td>
-                `bool:` Specifies whether the cluster instances should be EBS-optimized by default.  
+                `bool:` Specifies whether the cluster instances should be EBS-optimized by default.
                 This defaults to <b>false</b> and can be overidden for specific cluster nodes.
-                See this for more information: <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html">Amazon EBS–optimized instances</a>
+                See this for more information: <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html">Amazon EBSï¿½optimized instances</a>
 
                 Non EBS optimized instances perform disk operation I/O to EBS volumes using the same
                 network used for other network operations.  This means that you may see some disk
@@ -127,7 +127,7 @@ hosting:
                 VM type.
 
                 More modern AWS VM types enable EBS optimization by default and you won't incur any
-                additional charges for these instances and disabling EBS optimization won't have any 
+                additional charges for these instances and disabling EBS optimization won't have any
                 effect.
 
                 Some AWS instance types can be optimized but this is disabled by default.  When you
@@ -143,7 +143,7 @@ hosting:
                 `string:` Specifies the default AWS volume size for the cluster node primary disks.
                 This defaults to <b>128 GiB</b> but can be overridden for specific cluster nodes.
 
-                <b>NOTE:</b> Node disks smaller than 32 GiB are not supported by NEONKUBE.  We'll 
+                <b>NOTE:</b> Node disks smaller than 32 GiB are not supported by NeonKUBE.  We'll
                 automatically round up the disk size when necessary.
             </td>
         </tr>
@@ -158,11 +158,11 @@ hosting:
         <tr>
             <td><b>defaultOpenEbsVolumeSize</b></td>
             <td>
-                `string:` Specifies the default AWS volume size to be used when creating 
-                OpenEBS cStor disks.  This defaults to <b>128 GiB</b> but can be overridden 
+                `string:` Specifies the default AWS volume size to be used when creating
+                OpenEBS cStor disks.  This defaults to <b>128 GiB</b> but can be overridden
                 for specific cluster nodes.
 
-                <b>NOTE:</b> Node disks smaller than 32 GiB are not supported by NEONKUBE.  
+                <b>NOTE:</b> Node disks smaller than 32 GiB are not supported by NeonKUBE.
                 We'll automatically round up the disk size when necessary.
             </td>
         </tr>
@@ -190,12 +190,12 @@ hosting:
                             <td>
                                 `string:` Optionally specifies an existing Elastic IP address to be used by the cluster
                                 load balancer for receiving network traffic.  Set this to your Elastic IP allocation ID
-                                (something like <b>eipalloc-080a1efa9c04ad72</b>).  This is useful for ensuring that your 
+                                (something like <b>eipalloc-080a1efa9c04ad72</b>).  This is useful for ensuring that your
                                 cluster is always provisioned with a known static IP.
 
-                                <b>NOTE:</b> When this isn't specified, the cluster will be configured with new Elastic IPs 
+                                <b>NOTE:</b> When this isn't specified, the cluster will be configured with new Elastic IPs
                                 that will be released when the cluster is deleted.
-                                
+
                                 <b>NOTE:</b> <b>elasticIpIngressId</b> and <b>ElasticIpEgressId</b> must be specified
                                 together or not at all.
                             </td>
@@ -203,12 +203,12 @@ hosting:
                         <tr>
                             <td><b>elasticIpIngressId</b></td>
                             <td>
-                                `string:` Optionally specifies an existing Elastic IP address to be used by the cluster 
-                                load balancer for sending network traffic.  Set this to your Elastic IP allocation ID 
+                                `string:` Optionally specifies an existing Elastic IP address to be used by the cluster
+                                load balancer for sending network traffic.  Set this to your Elastic IP allocation ID
                                 (something like <b>eipalloc-080a1efa9c04ad88</b>).  This is useful for ensuring that your
                                 cluster is always provisioned with a known static IP.
 
-                                <b>NOTE:</b> When this isn't specified, the cluster will be configured with new Elastic IPs 
+                                <b>NOTE:</b> When this isn't specified, the cluster will be configured with new Elastic IPs
                                 that will be released when the cluster is deleted.
 
                                 <b>NOTE:</b> <b>elasticIpIngressId</b> and <b>ElasticIpEgressId</b> must be specified
@@ -259,17 +259,17 @@ hosting:
         <tr>
             <td><b>workerPlacementPartitions</b></td>
             <td>
-                `integer:` Specifies the number of worker placement group partitions the cluster 
+                `integer:` Specifies the number of worker placement group partitions the cluster
                 worker node instances will be deployed to.  This defaults to <b>1</b> trading off
                 resilience to hardware failures against increasing the chance that AWS will actually
                 be able to provision the cluster nodes.  AWS supports a maximum of 7 placement partitions.
 
                 AWS provides three different types of <b>placement groups</b> to user help manage
                 where virtual machine instances are provisioned within an AWS availability zone
-                to customize fault tolerance due to AWS hardware failures.  See: 
+                to customize fault tolerance due to AWS hardware failures.  See:
                 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html">AWS Placement groups</a>
 
-                NEONKUBE provisions instances using two <b>partition placement groups</b>, one for
+                NeonKUBE provisions instances using two <b>partition placement groups</b>, one for
                 the cluster control-plane nodes and the other for the workers.  The idea is that control-plane
                 nodes should be deployed on separate hardware for fault tolerance because if the
                 majority of control-plane nodes go offline, the entire cluster will be dramatically impacted.
@@ -281,11 +281,12 @@ hosting:
                 limiting the resilience to AWS hardware failures while making it more likely that AWS
                 will be able to actually satisfy the conditions to provision the cluster node instances.
 
-                Unfortunately, AWS may not have enough distinct hardware available to satisfy 
+                Unfortunately, AWS may not have enough distinct hardware available to satisfy
                 your requirements.  In this case, we recommend that you try another availability
                 zone first and if that doesn't work try reducing the number of partitions which
                 can be as low as 1 partition.
             </td>
         </tr>
     </tbody>
+
 </table>

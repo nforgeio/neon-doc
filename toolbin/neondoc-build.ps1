@@ -2,7 +2,7 @@
 #------------------------------------------------------------------------------
 # FILE:         neondoc-build.ps1
 # CONTRIBUTOR:  Jeff Lill
-# COPYRIGHT:    Copyright (c) 2005-2024 by NEONFORGE LLC.  All rights reserved.
+# COPYRIGHT:    Copyright (c) 2005-2024 by NeonFORGE LLC.  All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -249,7 +249,7 @@ try
                 exit 1
             }
 
-            git commit -m "Publish documentation, NEONKUBE Version: $neonKubeVersion"
+            git commit -m "Publish documentation, NeonKUBE Version: $neonKubeVersion"
             if (-not $?)
             {
                 Write-Error "*** ERROR: [git commit] failed."

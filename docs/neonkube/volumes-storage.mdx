@@ -4,7 +4,7 @@ displayed_sidebar: neonkube
 title: Volumes and Storage
 hide_title: false
 hide_table_of_contents: false
-description: NEONKUBE persistent storage
+description: Persistent storage on NeonKUBE.
 keywords:
   - persistentvolume
   - persistentvolumeclaim
@@ -12,7 +12,7 @@ keywords:
   - volumes
   - persistence
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -27,7 +27,7 @@ import BlockSvg from "./assets/block-storage.svg";
 # Volumes and Storage
 
 For applications that need to retain data, persistent storage is needed.
-NEONKUBE provides an out-of-the-box solution for persistent storage by including
+NeonKUBE provides an out-of-the-box solution for persistent storage by including
 [OpenEBS](https://openebs.io/) for
 [container attached storage](https://openebs.io/docs/concepts/cas) (CAS), and
 [Minio](https://min.io/) for
@@ -35,7 +35,7 @@ NEONKUBE provides an out-of-the-box solution for persistent storage by including
 
 ## Persistence Types
 
-NEONKUBE provides multiple persistence types for different applications.
+NeonKUBE provides multiple persistence types for different applications.
 
 ### Network File System
 
@@ -88,8 +88,8 @@ database.
 
 ### Object Storage
 
-NEONKUBE provides [Minio](https://min.io/) which provides high-performance, S3
-compatible object storage. NEONKUBE also provides a
+NeonKUBE provides [Minio](https://min.io/) which provides high-performance, S3
+compatible object storage. NeonKUBE also provides a
 [Minio Bucket](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.Resources.Minio.V1MinioBucket.html)
 custom resource for easily managing buckets.
 

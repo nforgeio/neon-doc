@@ -4,9 +4,9 @@ displayed_sidebar: neonkube
 title: Installation
 hide_title: false
 hide_table_of_contents: true
-description: NEONKUBE installation
+description: NeonKUBE installation
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,50 +17,61 @@ import Tabs from "@theme/Tabs";
 
 # Installation
 
-NEONKUBE releases are located in our NEONKUBE GitHub Repository here:
+NeonKUBE releases are located in our NeonKUBE GitHub Repository here:
 
 https://github.com/nforgeio/neonKUBE/releases
 
-Click on a release (generally the most recent) and then scroll down
-to the bottom of the release page to locate the **Assets**:
+Click on a release (generally the most recent) and then scroll down to the
+bottom of the release page to locate the **Assets**:
 
-<Image img={require("./assets/installation/github-release.png")} style={{ width: 700 }} />
+<Image
+  className="w-full max-w-4xl"
+  img={require("./assets/installation/github-release.png")}
+/>
 
-You'll find the two installer downloads there, one that installs the **NEONCLI**
-tool (a gently extended version of the Kubernetes **kubectl** client).  Note that
-this also installs other Kubernetes related tools like **Helm** and **Kustomize**.
-
-:::note
-Both of these installers currently target **only Microsoft Windows**.  We're planning
-on supporting NEONCLI on macOS and Linux (which should be relatively easy) and are
-considering having NEONDESKTOP support macOS in the future (which will be harder).
-:::
-
-Download and run **neon-cli.#-win.amd64.exe** to install **NEONCLI** and then open a 
-new command window to pick up the new environment variables such as **PATH**.
+You'll find the two installer downloads there, one that installs the **NeonCLI**
+tool (a gently extended version of the Kubernetes **kubectl** client). Note that
+this also installs other Kubernetes related tools like **Helm** and
+**Kustomize**.
 
 :::note
-The NEONCLI tool is named: **neon**
+
+Both of these installers currently target **only Microsoft Windows**. We're
+planning on supporting NeonCLI on macOS and Linux (which should be relatively
+easy) and are considering having NeonDESKTOP support macOS in the future (which
+will be harder).
+
 :::
 
-You can verify the installation by having NEONCLI print out its version:
+Download and run **neon-cli.#-win.amd64.exe** to install **NeonCLI** and then
+open a new command window to pick up the new environment variables such as
+**PATH**.
+
+:::note
+
+The NeonCLI tool is named: **neon**
+
+:::
+
+You can verify the installation by having NeonCLI print out its version:
 
 ```plain
 C:\ neon version --client
-WARNING: This version information is deprecated and will be replaced with the output from neon version --short.  Use --output=yaml|json to get the full version.
-Client Version: version.Info{Major:"1", Minor:"24+", GitVersion:"v1.24.14-67+387fe22d102081", GitCommit:"387fe22d1020817d2e77edf640b21d33c5ea97ce", GitTreeState:"clean", BuildDate:"2024-03-10T15:08:56Z", GoVersion:"go1.20.7", Compiler:"gc", Platform:"windows/amd64"}
+Client Version: v1.24.14-68+c20ccd7b9b29b3
 Kustomize Version: v4.5.4
-neon-cli Version: 0.10.0-beta.6
+neon-cli Version: 0.11.0
 Helm Version: 3.12.0
 ```
 
-Download and run **neon-desktop.#-win.amd64.exe** to install **NEONDESKTOP** as
-well as **NEONCLI**, which is included.  Note that NEONDESKTOP lives in the Windows
-taskbar:
+Download and run **neon-desktop.#-win.amd64.exe** to install **NeonDESKTOP** as
+well as **NeonCLI**, which is included. Note that NeonDESKTOP lives in the
+Windows taskbar:
 
-<Image img={require("./assets/installation/desktop-taskbar.png")} style={{ width: 500 }} />
-
-This is the NEONDESKTOP icon.  It will be **green** when connected to a cluster, **blinking 
-yellow** when an operation is in progress, **red** when there's a problem with the current
-cluster, and **clear** when not connected to a cluster.  Right-click on this icon to display 
-the application menu.
+<Image
+  className="w-full max-w-2xl"
+  img={require("./assets/installation/desktop-taskbar.png")}
+/>
+This is the NeonDESKTOP icon. It will be **green** when connected to a cluster, **blinking
+yellow** when an operation is in progress, **red** when there's a problem with the
+current cluster, and **clear** when not connected to a cluster. Right-click on this
+icon to display the application menu.

@@ -26,11 +26,11 @@ const sidebars = {
         {
           type: "link",
           href: "/docs/references/neon-cli", // document ID
-          label: "NEONCLI Commands", // sidebar label
+          label: "NeonCLI Commands", // sidebar label
         },
         {
           type: "link",
-          label: "NEONKUBE API Reference",
+          label: "NeonKUBE API Reference",
           href: "https://api-docs.neonforge.com/neonkube/api/Neon.Kube.html",
         },
       ],

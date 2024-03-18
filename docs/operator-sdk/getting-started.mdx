@@ -10,7 +10,7 @@ keywords:
   - sdk
   - getting started
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -38,7 +38,7 @@ public static partial class Program
     {
         var operator = KubernetesOperatorHost
             .CreateDefaultBuilder(args)
-            .ConfigureNeonKube() // for operators running in NEONKUBE clusters.
+            .ConfigureNeonKube() // for operators running in NeonKUBE clusters.
             .UseStartup<Startup>()
             .Build();
 

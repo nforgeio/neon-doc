@@ -6,7 +6,7 @@ hide_title: false
 hide_table_of_contents: true
 description: Azure hosting options
 last_update:
-  author: NEONFORGE Team
+  author: NeonFORGE Team
 ---
 
 import Admonition from "@theme/Admonition";
@@ -17,8 +17,8 @@ import Tabs from "@theme/Tabs";
 
 # Azure Hosting Options
 
-Here's what the Azure related hosting options looks like, with the 
-default values or **[required]** for property values that must be specified:
+Here's what the Azure related hosting options looks like, with the default
+values or **[required]** for property values that must be specified:
 
 ```yaml
 hosting:
@@ -76,14 +76,14 @@ hosting:
                         <tr>
                             <td><b>clientId</b></td>
                             <td>
-                                `string:` Client/Application ID for the application created to manage Azure access 
-                                to NEONKUBE provisioning and management tools.  This is required.
+                                `string:` Client/Application ID for the application created to manage Azure access
+                                to NeonKUBE provisioning and management tools.  This is required.
                             </td>
                         </tr>
                         <tr>
                             <td><b>clientSecret</b></td>
                             <td>
-                                `string:` ClientSecret/AppPassword generated when creating the neon tool's Azure 
+                                `string:` ClientSecret/AppPassword generated when creating the neon tool's Azure
                                 service principal.  This is required.
                             </td>
                         </tr>
@@ -100,7 +100,7 @@ hosting:
                             <td>
                                 `string:` Specifies the default Azure disk size to be used when cluster node primary disks.
                                  This defaults to <b>128 GiB</b> but this can be overridden for specific cluster nodes.
-                                 
+
                                  This table indicates the disk sizes that can be used for Azure storage types:
 
                                  <table>
@@ -151,7 +151,7 @@ hosting:
                             <td>
                                 `string:` Optionally specifies pecifies the default size for cluster node secondary data disks used for OpenEBS storage.
                                 This defaults to <b>128 GiB</b> but can be overridden for specific cluster nodes
-                                 
+
                                  This table indicates the disk sizes that can be used for Azure storage types:
 
                                  <table>
@@ -201,9 +201,9 @@ hosting:
                             <td><b>defaultOpenEbstorageType</b></td>
                             <td>
                                 `string:` Optionally specifies the default Azure storage type of be used for the cluster node secondary data disks
-                                used for OpenEBS storage.  Supported values are: **standard&#8209;hhd**, **standard&#8209;ssd**, **premium&#8209;ssd**, **premium&#8209;ssd&#8209;v2**, 
+                                used for OpenEBS storage.  Supported values are: **standard&#8209;hhd**, **standard&#8209;ssd**, **premium&#8209;ssd**, **premium&#8209;ssd&#8209;v2**,
                                 or **ultravssd**.
-                                
+
                                 This defaults **standard&#8209;ssd** but this can be overridden for specific cluster nodes.
                             </td>
                         </tr>
@@ -212,7 +212,7 @@ hosting:
                             <td>
                                 `string:` Optionally specifies the default Azure storage type of be used for the cluster node primary OS disk.
                                 Supported values are: **standardvhhd**, **standardvssd**, **premium&#8209;ssd**, **premiumvssdvv2**, or **ultra&#8209;ssd**.
-                                
+
                                 This defaults **standard&#8209;ssd** but this can be overridden for specific cluster nodes.
                             </td>
                         </tr>
@@ -230,14 +230,14 @@ hosting:
                             <td>
                                 `bool:` Optionally disables VM proximity placement.  This defaults to <c>false</c>.
 
-                                NEONKUBE cluster VMs are all deployed within the same Azure [placement group](https://azure.microsoft.com/en-us/blog/introducing-proximity-placement-groups/)
+                                NeonKUBE cluster VMs are all deployed within the same Azure [placement group](https://azure.microsoft.com/en-us/blog/introducing-proximity-placement-groups/)
                                 by default.  This ensures the shortest possible network latency between the cluster VMs.
 
                                 **NOTE:** Proximity placement groups have one downside: they make it more likely that Azure
                                 may not be able to find enough unused VMs to satisfy the proximity constraints.  This
                                 can happen when you first provision a cluster or later on when you try to scale one.
 
-                                For NEONKUBE clusters the additional risk of an Azure provisioning failure is going
+                                For NeonKUBE clusters the additional risk of an Azure provisioning failure is going
                                 to be very low due to how we use availability sets, which is as similar deployment
                                 constraint: control-plane nodes are deployed to one availability set and workers to another.
                                 Without a proximity placement group, Azure could deploy the control-plane nodes to one datacenter
@@ -280,7 +280,7 @@ hosting:
                                 distributed across.  This defaults to **3** which should not be increased
                                 without making sure that your subscription supports the increase (most won't).
 
-                                **NOTE:** Manager nodes will always be provisioned in three fault domains to 
+                                **NOTE:** Manager nodes will always be provisioned in three fault domains to
                                 ensure that there will always be a quorum after any single fault domain failure.
                             </td>
                         </tr>
@@ -307,7 +307,7 @@ hosting:
 
                                 **IMPORTANT:** This resource must be located in the same region as the cluster.
 
-                                **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster will 
+                                **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster will
                                 end up using the same egress addresses as before, meaning you won't have to update
                                 whitelist rules for other services, etc.
 
@@ -336,7 +336,7 @@ hosting:
 
                                 **IMPORTANT:**> This resource must be located in the same region as the cluster.
 
-                                **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster will 
+                                **NOTE:** Setting this is handy when clusters are reprovisioned because the cluster will
                                 end up with the same public address as before, meaning you won't have to update your
                                 DNS configuration, etc.
 
@@ -369,7 +369,7 @@ hosting:
                             <td><b>resourceGroup</b></td>
                             <td>
                                 `string:` Optionally spoecifies the Azure resource group where all cluster components
-                                are to be provisioned.  This defaults to **"neon-"** plus the cluster name but can be 
+                                are to be provisioned.  This defaults to **"neon-"** plus the cluster name but can be
                                 customized as required.
 
                                 **IMPORTANT:** Everything in this resource group will be deleted when the cluster is
@@ -392,7 +392,7 @@ hosting:
                         <tr>
                             <td><b>updateDomains</b></td>
                             <td>
-                                `integer:` Optionally specifies the number of Azure update domains the cluster workers will 
+                                `integer:` Optionally specifies the number of Azure update domains the cluster workers will
                                 distributed across.  This defaults to **20**  You may customize this with a value in the
                                 range of: **2...20**
 
@@ -403,7 +403,7 @@ hosting:
                                 update domains to give the application a chance to stabilize.
 
                                 A value of **2** indicates that one half of the cluster servers may be rebooted
-                                at the same time during an update domain upgrade.  A value of **20** indicates 
+                                at the same time during an update domain upgrade.  A value of **20** indicates
                                 that one twentieth of your VMs may be rebooted in parallel.
 
                                 There's no way to specifically assign cluster nodes to specific update domains
@@ -422,8 +422,8 @@ hosting:
                                 maintenance and the 30 minutes Azure waits after rebooting an update domain
                                 gives the rebooted manager a chance to rejoin the other managers and catch
                                 up on any changes that happened while it was offline.
-                                
-                                **NOTE:** NEONKUBE deploys manager and worker nodes in separate Azure availability zones.
+
+                                **NOTE:** NeonKUBE deploys manager and worker nodes in separate Azure availability zones.
                                 This means that there will always be a quorum of managers available as any one
                                 update zone is rebooted.
                             </td>
@@ -433,4 +433,5 @@ hosting:
             </td>
         </tr>
     </tbody>
+
 </table>
