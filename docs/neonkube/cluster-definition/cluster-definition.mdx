@@ -234,7 +234,54 @@ ClusterDefinition:
         <td>
             `object:` Specifies cluster storage related options for **Minio** and **OPenEBS**.
 
+            ```yaml
+            storage:
+              minio:
+                volumesPerNode: 4
+                volumeSize:     "2 GiB"
+              openEbs:
+                engine:         "default"
+                nfsSize:        "10 GiB"
+            ```
 
+                <table>
+                    <thead>
+                        <th>Property></th>
+                        <th>Description></th>
+                    </thead>
+                    <tr>
+                        <td>**storage.minio.volumesPerNode**</td>
+                        <td>
+                            Specifies the number of volumes per server. This defaults to **4**.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>**storage.minio.volumeSize**</td>
+                        <td>
+                            The size of each volume to be mounted to each server.  This defaults
+                            to **2 GiB**.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>**storage.openEbs.engine**</td>
+                        <td>
+                            `string:` Specifies which OpenEBS engine will be deployed within the cluster.
+                            Supported values are **default**, **hostpath**, **cstor**, **jiva**, or
+                            **mayastor**.
+
+                            This defaults to **default** where NeonKUBE will try to choose a reasonable
+                            storage engine for your cluster.  Currently, this selects **hostpath** for
+                            single-node clusters or **jiva** for multi-node clusters.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>**storage.openEbs.nfsSize**</td>
+                        <td>
+                            `string:` Specifies the size of the NFS file system to be created for the cluster.
+                            This defaults to **10 GiB** and cannot be any smaller.
+                        </td>
+                    </tr>
+                </table>
         </td>
     </tr>
     <tr>
@@ -249,5 +296,3 @@ ClusterDefinition:
         </td>
     </tr>
 </table>
-
-The following pages will describe the more complex properties.
