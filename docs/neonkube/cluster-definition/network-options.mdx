@@ -1,0 +1,258 @@
+---
+sidebar_position: 8
+displayed_sidebar: neonkube
+title: Network Options
+hide_title: false
+hide_table_of_contents: true
+description: Describes cluster definition Container Options
+last_update:
+  author: NEONFORGE Team
+---
+
+import Admonition from "@theme/Admonition";
+import CodeBlock from "@theme/CodeBlock";
+import Image from "@theme/IdealImage";
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Network Options
+
+Describes the network options for a cluster.
+
+Here's what the monitoring options look like, with the default values
+or **[required]** for properties that must be specified:
+
+```yaml
+network:
+  acme:
+    certificateDuration:    "2160h0m0s"
+    certificateRenewBefore: "720h0m0s"
+    issuer:                 null
+  egressAddressRules:       []
+  gateway:                  [second address in premiseSubnet]
+  ingressHealthCheck:
+    intervalSeconds:        10
+    thresholdCount:         2
+  ingressRules:             []
+  managementAddressRules:   []
+  mutalPodTls:              false
+  nameServers:
+  - "8.8.8.8"               [Google DNS for on-premise]
+  - "8.8.4.4"               [otherwise use cloud DNS  ]
+  nodeMtu:                  0
+  premiseSubnet:            [required for on-premise]
+  podSubnet:                "10.254.0.0/16"
+  publicAddresses:          []
+  reservedIngressEndPort:   64999
+  reservedIngressStartPort: 64000
+  serviceSubnet:            "10.253.0.0/16"
+```                                       
+
+<table>
+    <thead>
+        <th>Property</th>
+        <th>Description</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><b>acme.certificateDuration</b></td>
+            <td>
+                `string:`  Specifies the maximum lifespan for internal cluster TLS certificates as a GOLANG formatted string.  
+                This defaults to **2160h0m0s** (90 days).
+            </td>
+        </tr>
+        <tr>
+            <td><b>acme.certificateRenewBefore</b></td>
+            <td>
+                `string:` specifies the time to wait before attempting to renew internal cluster TLS certificates.
+                This must be less than **acme.certificateDuration** and defaults to **720h0m0s** (24 days).
+            </td>
+        </tr>
+        <tr>
+            <td><b>acme.issuer</b></td>
+            <td>
+                `string:` Optionally specifies the certificate issuer, including any configuration required by the issuer.
+                This defaults to **null** which enables the standard NEONKUBE certificate issuer.
+            </td>
+        </tr>
+        <tr>
+            <td><b>egressAddressRules</b></td>
+            <td>
+                `array:` Optionally specifies whitelisted and/or blacklisted external addresses
+                for outbound traffic.  This defaults to allowing outbound traffic to anywhere 
+                when the property is **null** or empty.  See [Address Rules](#address-rules)
+                below for more information.
+        
+                **NOTE:** Address rules are processed in order from first to last, so you may 
+                consider putting your blacklist rules before your whitelist rules.
+        
+                **NOTE:** These rules currently apply to all network ports.
+        
+                **NOTE:** This is currently supported only for clusters hosted on Azure.  AWS doesn't support
+                this scenario and we currently don't support automatic router configuration for
+                on-premise environments.
+            </td>
+        </tr>
+        <tr>
+            <td><b>gatewy</b></td>
+            <td>
+                `string:`  Specifies the default network gateway address to be configured for cluster nodes.
+                This defaults to the  second usable address in the **premiseSubnet**.  For example,
+                for the **10.0.0.0/24** subnet, this will be default to **10.0.0.1**.
+                
+                **NOTE:** This applies only to on-premise deployments and ignored for cloud hosting.
+            </td>
+        </tr>
+        <tr>
+            <td><b>ingressRules</b></td>
+            <td>
+                `array:` Optionally sets the ingress routing rules for external traffic received by
+                nodes with <see cref="NodeDefinition.Ingress"/> enabled into one or more Istio ingress
+                gateway services which are then responsible for routing to the target Kubernetes 
+                services.  See [Address Rules](#address-rules) below for more information.
+        
+                **NOTE:** Address rules are processed in order from first to last, so you may 
+                consider putting your blacklist rules before your whitelist rules.
+
+                This defaults to allowing all inbound traffic.
+
+                **NOTE:** This is currently supported only for clusters hosted on Azure.  AWS doesn't support
+                this scenario and we currently don't support automatic router configuration for
+                on-premise environments.
+            </td>
+        </tr>
+        <tr>
+            <td><b>managementAddressRules</b></td>
+            <td>
+                `array:`  Optionally specifies whitelisted and/or blacklisted external addresses for
+                node management via SSH NAT rules as well as cluster management via the 
+                Kubernetes API via port 6443.  This defaults to allowing inbound traffic 
+                from anywhere when the property is <c>null</c> or empty.  See [Address Rules](#address-rules)
+                below for more information.
+
+                **NOTE:** Address rules are processed in order from first to last, so you may 
+                consider putting your blacklist rules before your whitelist rules.
+
+                **NOTE:** This is currently supported only for clusters hosted on Azure.  AWS doesn't support
+                this scenario and we currently don't support automatic router configuration for
+                on-premise environments.
+            </td>
+        </tr>
+        <tr>
+            <td><b>mutalPodTls</b></td>
+            <td>
+                `bool:` Optionally enables Istio mutual TLS support for cross pod communication.
+                 This defaults to **false**.
+            </td>
+        </tr>
+        <tr>
+            <td><b>nameServers</b></td>
+            <td>
+                `array:` Optionally specifies the IP addresses of the DNS nameservers to be used by the cluster.
+
+                For cloud environments, this defaults the name servers provided by the cloud.  For on-premise
+                environments, this defaults to the [Google Public DNS](https://developers.google.com/speed/public-dns)
+                servers: **["8.8.8.8", "8.8.4.4" ]**.
+            </td>
+        </tr>
+        <tr>
+            <td><b>nodeMtu</b></td>
+            <td>
+                `integer:`  Optionally overrides the default MTU (maximum transmission unit) 
+                configured for luster node network interfaces.  The default MTU for the hosting environment
+                will be used when set to **0**, otherwise this can be configured as a value between **512-9000**.
+                This defaults to: **0**
+
+                **WARNING:** This is an **advanced setting**.  Only people who really know
+                what they're doing should change this.
+            </td>
+        </tr>
+        <tr>
+            <td><b>premiseSubnet</b></td>
+            <td>
+                `string:` Specifies the subnet for LAN for on-premise deployments.  This is
+                required for on-premise and is ignored for cloud deployments.
+            </td>
+        </tr>
+        <tr>
+            <td><b>podSubnet</b></td>
+            <td>
+                `string:` Optionally specifies the subnet used for cluster pods.  This subnet will be
+                split so that each node will be allocated its own subnet for the pods running there. 
+                This defaults to (**)10.254.0.0/16**.
+            </td>
+        </tr>
+        <tr>
+            <td><b>publicAddresses</b></td>
+            <td>
+                `array:` Optionally specifies the public IP addresses for the cluster.  This is useful
+                for documenting the public IP address for a router that directs traffic
+                into the cluster.
+
+                **NOTE:** This property is informational only and does not affect cluster deployments.
+            </td>
+        </tr>
+        <tr>
+            <td><b>reservedIngressEndPort</b></td>
+            <td>
+                `integer:` Optionally specifies the end of a range of ingress load balancer ports 
+                reserved by NEONKUBE.  These are reserved for temporarily exposing SSH from individual 
+                cluster nodes to the Internet during cluster setup as well as afterwards so that a 
+                cluster node can be accessed remotely by a cluster operator as well as for other
+                purposes and for potential future features such as an integrated
+
+                **NOTE:** The number ports between **reservedIngressStartPort** and **reservedIngressEndPort**
+                must include at least as many ports as there will be nodes deployed to the cluster
+                for the temporary SSH NAT rules plus another 100 ports reserved for other purposes.
+                This range defaults to **64000-64999** which will support a cluster with up to
+                900 nodes.  This default range is unlikely to conflict with ports a cluster is likely
+                to need expose to the Internet like HTTP/HTTPS (80/443).  You can change this range 
+                for your cluster to resolve any conflicts when necessary.
+            </td>
+        </tr>
+        <tr>
+            <td><b>reservedIngressStartPort</b></td>
+            <td>
+                `integer:` Optionally specifies the end of a range of ingress load balancer ports 
+                reserved by NEONKUBE.  These are reserved for temporarily exposing SSH from individual 
+                cluster nodes to the Internet during cluster setup as well as afterwards so 
+                that a cluster node can be accessed remotely by a cluster operator as well
+                as for other purposes and for potential future features such as an integrated
+
+                **NOTE:** The number ports between **reservedIngressStartPort** and **reservedIngressEndPort**
+                must include at least as many ports as there will be nodes deployed to the cluster
+                for the temporary SSH NAT rules plus another 100 ports reserved for other purposes.
+                This range defaults to **64000-64999** which will support a cluster with up to
+                900 nodes.  This default range is unlikely to conflict with ports a cluster is likely
+                to need expose to the Internet like HTTP/HTTPS (80/443).  You can change this range 
+                for your cluster to resolve any conflicts when necessary.
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+## Address Rules
+<a name="address-rules"/>
+
+Address rules can be used white or blacklist external traffic to or from the
+cluster.  The network **egressAddressRules**, **ingressRules**, and **managementAddressRules**
+properties above may be set to an array of address rules to allow or deny traffic
+for a specific IP address or subnet.
+
+Here's what an address rule looks like, with the default values
+or **[required]** for properties that must be specified:
+
+```yaml
+action:          [required]
+addressOrSubnet: [required]
+```
+
+**addressOrSubnet** specifies can specify a single IP address or a CIDR/subnet specifying 
+a range of IP addresses.  This can also be set to **"any"** which matches all possible IP
+addresses.
+
+**action** can be set to **allow** or **deny**, where **allow** lets network flow for the
+IP address(es) and **deny** blocks the traffic.
+
+Rules are applied in the order they appear in the list where the first rule that applies
+to the traffic's IP address will be applied.  Traffic will be allowed when no rule matches.
