@@ -17,12 +17,12 @@ import Tabs from "@theme/Tabs";
 
 # Node Options
 
-Describes the options used to configure the host (Linux) configuration for
-cluster nodes. These apply to all nodes in the cluster.
+Describes the options used to configure the host (Linux) configuration for cluster nodes. These apply to all nodes in
+the cluster.
 
-Here's what the node options look like, with the default values or
-**[required]** for properties that must be specified:
+Here's what the node options look like, with the default values or **[required]** for properties that must be specified:
 
+{/* prettier-ignore */}
 ```yaml
 node:
   allowPackageManagerIPv6: false
@@ -30,27 +30,26 @@ node:
 ```
 
 <table>
-    <thead>
+  <thead>
     <th>Property</th>
     <th>Description</th>
-    </thead>
-    <tr>
-        <td>
-        <b>allowPackageManagerIPv6</b>
-        </td>
-        <td>
-        `bool:` Allow the Linux package manager to use IPv6 when communicating
-        with package mirrors. This defaults to **false** to restrict updates to
-        using IPv4.
-        </td>
-    </tr>
-    <tr>
-        <td>
-        <b>packageManagerRetries</b>
-        </td>
-        <td>
-        `integer:` Specifies the number of times the host package manager should
-        retry failed index or package downloads. This defaults to <b>5</b>
-        </td>
-    </tr>
+  </thead>
+  <tr>
+    <td>
+      <b>allowPackageManagerIPv6</b>
+    </td>
+    <td>
+      `bool:` Allow the Linux package manager to use IPv6 when communicating with package mirrors. This defaults to
+      **false** to restrict updates to using IPv4.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>packageManagerRetries</b>
+    </td>
+    <td>
+      `integer:` Specifies the number of times the host package manager should retry failed index or package downloads.
+      This defaults to <b>5</b>
+    </td>
+  </tr>
 </table>

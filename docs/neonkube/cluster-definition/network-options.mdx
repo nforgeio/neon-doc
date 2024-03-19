@@ -19,9 +19,10 @@ import Tabs from "@theme/Tabs";
 
 Describes the network options for a cluster.
 
-Here's what the network options look like, with the default values or
-**[required]** for properties that must be specified:
+Here's what the network options look like, with the default values or **[required]** for properties that must be
+specified:
 
+{/* prettier-ignore */}
 ```yaml
 network:
   acme:
@@ -340,32 +341,30 @@ network:
             for your cluster to resolve any conflicts when necessary.
         </td>
     </tr>
+
 </table>
 
 ## Address Rules
 
 <a name="address-rules" />
 
-Address rules can be used white or blacklist external traffic to or from the
-cluster. The network **egressAddressRules**, **ingressRules**, and
-**managementAddressRules** properties above may be set to an array of address
-rules to allow or deny traffic for a specific IP address or subnet.
+Address rules can be used white or blacklist external traffic to or from the cluster. The network
+**egressAddressRules**, **ingressRules**, and **managementAddressRules** properties above may be set to an array of
+address rules to allow or deny traffic for a specific IP address or subnet.
 
-Here's what an address rule looks like, with the default values or
-**[required]** for properties that must be specified:
+Here's what an address rule looks like, with the default values or **[required]** for properties that must be specified:
 
+{/* prettier-ignore */}
 ```yaml
 action:          [required]
 addressOrSubnet: [required]
 ```
 
-**addressOrSubnet** specifies can specify a single IP address or a CIDR/subnet
-specifying a range of IP addresses. This can also be set to **"any"** which
-matches all possible IP addresses.
+**addressOrSubnet** specifies can specify a single IP address or a CIDR/subnet specifying a range of IP addresses. This
+can also be set to **"any"** which matches all possible IP addresses.
 
-**action** can be set to **allow** or **deny**, where **allow** lets network
-flow for the IP address(es) and **deny** blocks the traffic.
+**action** can be set to **allow** or **deny**, where **allow** lets network flow for the IP address(es) and **deny**
+blocks the traffic.
 
-Rules are applied in the order they appear in the list where the first rule that
-applies to the traffic's IP address will be applied. Traffic will be allowed
-when no rule matches.
+Rules are applied in the order they appear in the list where the first rule that applies to the traffic's IP address
+will be applied. Traffic will be allowed when no rule matches.

@@ -17,13 +17,12 @@ import Tabs from "@theme/Tabs";
 
 # Node Definitions
 
-Describes the machines that need to be deployed for a NeonKUBE cluster.
-This is a map with the machine hostnames mapping to an object specifying
-the requirements for each cluster node.
+Describes the machines that need to be deployed for a NeonKUBE cluster. This is a map with the machine hostnames mapping
+to an object specifying the requirements for each cluster node.
 
-Here's what the node options look like, with the default values
-or **[required]** for properties that must be specified:
+Here's what the node options look like, with the default values or **[required]** for properties that must be specified:
 
+{/* prettier-ignore */}
 ```yaml
 nodes:
   my-node: {
@@ -58,14 +57,13 @@ nodes:
 }
 ```
 
-The **address** property is required for on-premise hosting environments like **Hyper-V**
-and **XenServer/XCP-ng**.  This is optional for cloud environments like **AWS** and **Azure**
-where NeonKUBE will automatically assign IP addresses to node, but you can also assign
-addresses to cloud nodes explicitly if you wish.
+The **address** property is required for on-premise hosting environments like **Hyper-V** and **XenServer/XCP-ng**. This
+is optional for cloud environments like **AWS** and **Azure** where NeonKUBE will automatically assign IP addresses to
+node, but you can also assign addresses to cloud nodes explicitly if you wish.
 
-The **aws**, **azure**, and **hypervisor** allow you to override settings from the global 
-cluster definition **hosting.aws**, **hosting.azure**, **hosting.hyperv** and **hosting.xenserver**
-properties for individual cluster nodes.
+The **aws**, **azure**, and **hypervisor** allow you to override settings from the global cluster definition
+**hosting.aws**, **hosting.azure**, **hosting.hyperv** and **hosting.xenserver** properties for individual cluster
+nodes.
 
 <table>
     <thead>
@@ -122,7 +120,7 @@ properties for individual cluster nodes.
                     <see cref="AwsHostingOptions.DefaultEbsOptimized"/> won't have any effect.
 
                     Some AWS instance types can be optimized but this is disabled by default.  When you
-                    enable this by setting the cluster definition's **hosting.aws.defaultEbsOptimized** or 
+                    enable this by setting the cluster definition's **hosting.aws.defaultEbsOptimized** or
                     this (**ebsOptiomized**) property to "true", you'll probably an additional AWS hourly fee for
                     these instances.
 
@@ -161,9 +159,9 @@ properties for individual cluster nodes.
                     your database replcates data across multiple worker nodes, you'd like to have the
                     workers hosting the same data be provisioned to different partitions such that if
                     the workers in one partition are lost then the workers in the remaining partitions
-                    will still be able to serve the data.  
+                    will still be able to serve the data.
 
-                    When you specify this for worker nodes, the partition index must be in the range 
+                    When you specify this for worker nodes, the partition index must be in the range
                     of **1...hosting.aws.workerPlanePlacementPartitions**.
                     </td>
                 </tr>
@@ -291,7 +289,7 @@ properties for individual cluster nodes.
     <tr>
         <td>**hypervisor**</td>
         <td>
-            `object:` on-premsise hypervisor specific options for the cluster node.  These options 
+            `object:` on-premsise hypervisor specific options for the cluster node.  These options
             can be used to override defaults specified by **hosting.azure** in the cluster definition.
             This is ignored clpoud deployments.
         </td>
@@ -302,7 +300,7 @@ properties for individual cluster nodes.
             `bool:` Optionally specifies that this node should be configured to receive external network
             traffic on node ports and route that into the cluster.  This defaults to **false**.
 
-            **NOTE:** If all nodes have **ingress: false** and the cluster defines one or more 
+            **NOTE:** If all nodes have **ingress: false** and the cluster defines one or more
             **network.ingressRules** then NeonKUBE will choose a reasonable set of nodes to handle
             inbound traffic.
         </td>
@@ -319,15 +317,15 @@ properties for individual cluster nodes.
         <td>
             `bool:` Optionally specifies that this node will provisioned with a cStor or Mayastor
                 block device on this node for persistant container storage.  This defaults to **false**.
-                
-            **NOTE:**  When all nodes have **openEbsStorage** set to **false**, NeonKUBE 
-            will automatically choose the nodes that will host the cStor/Mayastor block devices 
+
+            **NOTE:**  When all nodes have **openEbsStorage** set to **false**, NeonKUBE
+            will automatically choose the nodes that will host the cStor/Mayastor block devices
             by configuring up to three nodes with **openEbsStorage: true**, favoring worker nodes o
             ver control-plane nodes when possible.
 
             **NOTE:** When all nodes have **openEbsStorage set to **false** and **storage.openEbs.engine**
             in the cluster definitions is set to **cstor** or **mayastor**, NeonKUBE will automatically
-            choose the nodes that will host the cStor/Maystor block devices by configuring up to three nodes to 
+            choose the nodes that will host the cStor/Maystor block devices by configuring up to three nodes to
             do this, favoring **worker** nodes over **control-plane** nodes when possible.
         </td>
     </tr>
@@ -337,4 +335,5 @@ properties for individual cluster nodes.
             `array:` Optionally specifies any taints to be assigned to the cluster node.
         </td>
     </tr>
+
 </table>

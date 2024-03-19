@@ -17,13 +17,13 @@ import Tabs from "@theme/Tabs";
 
 # Kubelet Service Options
 
-Every node in a Kubernetes cluster has a running **Kubelet Service** which is
-responsible for managing the containers scheduled to run on each node. These
-options let you customize some of the cluster-wide Kubelet settings.
+Every node in a Kubernetes cluster has a running **Kubelet Service** which is responsible for managing the containers
+scheduled to run on each node. These options let you customize some of the cluster-wide Kubelet settings.
 
-Here's what the Kubelet options look like, with the default values or
-**[required]** for properties that must be specified:
+Here's what the Kubelet options look like, with the default values or **[required]** for properties that must be
+specified:
 
+{/* prettier-ignore */}
 ```yaml
 kubelet:
   allowPodsOnControlPlane:                false
@@ -39,11 +39,10 @@ kubelet:
   systemReserved:                         [empty map]
 ```
 
-:::note 
+:::note
 
-**allowPodsOnControlPlane** defaults to **false** for cluster that have
-worker nodes or **true** for clusters with only control-plane nodes (such as the
-desktop cluster). 
+**allowPodsOnControlPlane** defaults to **false** for cluster that have worker nodes or **true** for clusters with only
+control-plane nodes (such as the desktop cluster).
 
 :::
 
@@ -174,4 +173,5 @@ desktop cluster).
             This defaults to an **empty map** to use the Kubernetes defaults.
         </td>
     </tr>
+
 </table>

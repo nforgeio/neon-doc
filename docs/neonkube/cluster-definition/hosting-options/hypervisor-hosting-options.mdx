@@ -17,17 +17,15 @@ import Tabs from "@theme/Tabs";
 
 # Common Hypervisor Hosting Options
 
-The NeonKUBE on-premise **xenserver** hosting environment relies on the
-**hypervisorOptions** to locate the host hypervisor servers where the cluster
-node VMs will be provisioned, including their **hostname** (or ip addresses),
-**username** and **password** as well default VM settings such as the number of
-**vCPUs**, **memory**, and **disk** respources to be assigned. This can be
-overriden for specific nodes.
+The NeonKUBE on-premise **xenserver** hosting environment relies on the **hypervisorOptions** to locate the host
+hypervisor servers where the cluster node VMs will be provisioned, including their **hostname** (or ip addresses),
+**username** and **password** as well default VM settings such as the number of **vCPUs**, **memory**, and **disk**
+respources to be assigned. This can be overriden for specific nodes.
 
-Here's what the common on-premise Hypervisor related hosting options looks like,
-with the default values or **[required]** for property values that must be
-specified:
+Here's what the common on-premise Hypervisor related hosting options looks like, with the default values or
+**[required]** for property values that must be specified:
 
+{/* prettier-ignore */}
 ```yaml
 hosting:
   hypervisor:
@@ -164,4 +162,5 @@ hosting:
             </table>
         </td>
     </tr>
+
 </table>

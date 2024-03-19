@@ -17,10 +17,10 @@ import Tabs from "@theme/Tabs";
 
 # Hosting Options
 
-Specifies hosting related settings for the cloud or on-premise provider. You'll
-need to specify the target **hosting.environment** and optionally, any
-environment specific options.
+Specifies hosting related settings for the cloud or on-premise provider. You'll need to specify the target
+**hosting.environment** and optionally, any environment specific options.
 
+{/* prettier-ignore */}
 ```yaml
 hosting:
   environment:
@@ -30,57 +30,55 @@ hosting:
   xenserver:
 ```
 
+{/* prettier-ignore */}
 <table>
   <thead>
     <th>Property</th>
     <th>Description</th>
   </thead>
-<tr>
+  <tr>
     <td>
-    <b>hosting</b>
+      <b>hosting</b>
     </td>
     <td>
-    `string:` Identifies the target hosting environment; one of **aws**,
-    **azure**, **hyperv**, or **xenserver**. This is required.
+      `string:` Identifies the target hosting environment; one of **aws**, **azure**, **hyperv**, or **xenserver**. This
+      is required.
     </td>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td>
-    <b>aws</b>
-    </td>
-    <td>
-    `object:` Optionally specifies AWS specific hosting settings. See [AWS Hosting Options](./aws-hosting-options.mdx)
-    for more information.
-    </td>
-</tr>
-<tr>
-    <td>
-    <b>azure</b>
+      <b>aws</b>
     </td>
     <td>
-    `object:` Optionally specifies Azure specific hosting settings. See
-    [Azure Hosting Options](./azure-hosting-options.mdx) for more
-    information.
+      `object:` Optionally specifies AWS specific hosting settings. See [AWS Hosting Options](./aws-hosting-options.mdx)
+      for more information.
     </td>
-</tr>
-<tr>
+  </tr>
+  <tr>
     <td>
-    <b>hyperv</b>
-    </td>
-    <td>
-    `object:` Optionally specifies Hyper-V specific hosting settings. See
-    [Hyper-V Hosting Options](./hyperv-hosting-options.mdx) for more
-    information.
-    </td>
-</tr>
-<tr>
-    <td>
-    <b>xenserver</b>
+      <b>azure</b>
     </td>
     <td>
-    `object:` Optionally specifies XenServer/XCP-ng specific hosting
-    settings. See [XenServer Hosting Options](./xenserver-hosting-options.mdx)
-    for more information.
+      `object:` Optionally specifies Azure specific hosting settings. See [Azure Hosting
+      Options](./azure-hosting-options.mdx) for more information.
     </td>
-</tr>
+  </tr>
+  <tr>
+    <td>
+      <b>hyperv</b>
+    </td>
+    <td>
+      `object:` Optionally specifies Hyper-V specific hosting settings. See [Hyper-V Hosting
+      Options](./hyperv-hosting-options.mdx) for more information.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>xenserver</b>
+    </td>
+    <td>
+      `object:` Optionally specifies XenServer/XCP-ng specific hosting settings. See [XenServer Hosting
+      Options](./xenserver-hosting-options.mdx) for more information.
+    </td>
+  </tr>
 </table>
