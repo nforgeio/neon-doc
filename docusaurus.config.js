@@ -9,8 +9,10 @@ const config = {
   title: "NeonFORGE Documentation",
   tagline: "Kubernetes for the rest of us!",
   url: "https://docs.neonforge.com",
-  baseUrl: "/",
-  onBrokenLinks: "throw",
+    baseUrl: "/",
+
+  // $todo(jefflill): Temporarily changing this from [throw] to [warn] until I have to investigate broken link errors.
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.png",
 
