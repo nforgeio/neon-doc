@@ -20,7 +20,7 @@
 #
 # USAGE: pwsh -file ./neondoc-build.ps1 [-publish]
 #
-# ARGUMENTS: NONE
+# ARGUMENTS: [OPTIONS]
 #
 # OPTIONS:
 #
@@ -29,7 +29,6 @@
 
 param 
 (
-    [parameter(Mandatory=$true, Position=1)][string]$version,
     [switch]$publish,
     [switch]$skipBrowser
 )
@@ -116,7 +115,7 @@ try
 
     # Build the documentation.
 
-    npm run build
+    npm run build $version
 
     if (-not $?)
     {
