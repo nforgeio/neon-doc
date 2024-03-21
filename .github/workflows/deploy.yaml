@@ -1,25 +1,3 @@
-# $note(jefflill):
-#
-# I've disabled this action (by renaming the file) because it doesn't really
-# make sense.  This has been replaced by integration in the NeonKUBE build
-# tools.
-#
-# The problem is that this action publishes the site whenever a commit is
-# pushed to GitHub for the [master] branch.  This is incorrect because we
-# need to publish the documentation ONLY AFTER the release binaries have
-# been published.  Otherwise, it could easily be possible to publish the
-# docs with links to binaries etc. that don't exist yet.
-#
-# Alternatively, we could standardize on a branching scheme where we have
-# a working branch (that's not [master]) and only ever edit documentation
-# there and have the stage/release tooling merge the working branch into
-# [master], triggering this.
-#
-# That seems problematic, since it seems more natural to work in the [master]
-# branch (like we do everwhere else) and I worry that it will be too easy
-# to edit the master branch by accident and trigger doc publication, and
-# to make things worse, this will all happen silently.
-
 name: Deploy to GitHub Pages
 
 on:
