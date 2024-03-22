@@ -85,23 +85,12 @@ Cluster deployment happens in two phases:
 - Setting up the cluster. This involves configuring Linux and Kubernetes and
   then installing the necessary cluster components via Helm charts.
 
-Execute the commands to deploy this cluster, passing the **PATH** to the cluster
-definition file you saved above and **CLUSTERNAME** to the cluster name as
-defined in the definition:
-
-Prepare the cluster infrastructure
+Execute this command to deploy this cluster, passing the path to the cluster
+definition file you saved above:
 
 ```plain
-neon cluster prepare /path/to/your/cluster-definition.yaml
+neon cluster deploy cluster-definition.yaml
 ```
-
-Setup the cluster
-
-```plain
-neon cluster setup root@my-aws-cluster
-```
-
-Then wait for cluster setup to complete.
 
 :::note
 
