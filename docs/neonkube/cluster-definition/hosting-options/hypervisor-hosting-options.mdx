@@ -124,12 +124,13 @@ hosting:
                     <td><b>namePrefix</b></td>
                     <td>
                         `string:` The prefix to be prepended to virtual machine provisioned to hypervisors for the
-                        **xenserver** enmvironment.  This is used to avoid VM naming conflicts between different clusters.
+                        on-premise hosting environments like **hyperv** and **xenserver**.  This is used to avoid VM
+                        naming conflicts between different clusters running on the same host.
 
-                        When this is **null** (the default), the cluster name followed by a dash will
-                        prefix the provisioned virtual machine names.  When this is a non-empty string, the
-                        value followed by a dash will be used.  If this is an empty string or whitespace then
-                        the machine names will not be prefixed.
+                        When this is **null** (the default) or the empty string, the cluster name followed
+                        by a dash will prefix the provisioned virtual machine names.  When set to **"[none]"**,
+                        the VM named won't be prefixed, otherwise **NamePrefix** followed by a dash
+                        will be used as the VM prefix.
 
                         **NOTE:** Virtual machine name prefixes will always be converted to lowercase.
 
