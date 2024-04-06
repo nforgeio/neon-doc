@@ -83,7 +83,7 @@ jobs:
     schedule:                       "R R 0 ? * *"
   terminatedPodGc:
     enabled:                        true
-    schedule:                       "0 15 * * * *"
+    schedule:                       "0 15 * ? * *"
   terminatedPodGcDelayMilliseconds: 1000
   terminatedPodGcThresholdMinutes:  720
 ```
@@ -134,6 +134,12 @@ jobs:
         <td>
           `object:` Schedules the deletion of pods that have been terminated for at least
           **terminatedPodGcThresholdMinutes**.  This defaults to every 15 minutes.
+
+          **NOTE:** To avoid a potential race condition, <b>neon-cluster-operator</b> only removes
+          pods with what looks like a generated name, including a unique ID suffix.  This
+          avoids situations where the operator identifies a pod to be deleted but before
+          the operator has a chance to delete the pod, something else deletes and then
+          recreates the pod with the same name, resulting in the wrong pod being removed.
         </td>
     </tr>
     <tr>
