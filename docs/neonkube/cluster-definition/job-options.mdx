@@ -67,22 +67,25 @@ Here's what the cluster job options look like, with the default values or
 ```yaml
 jobs:
   controlPlaneCertificateRenewal:
-    enabled:  true
-    schedule: "0 0 0 ? * TUE"
+    enabled:                        true
+    schedule:                       "0 0 0 ? * TUE"
   harborImagePush:
-    enabled:  true
-    schedule: "0 0 0 ? * TUE"
+    enabled:                        true
+    schedule:                       "0 0 0 ? * TUE"
   linuxSecurityPatches:
-    enabled:  true
-    schedule: "0 0 0 ? * TUE"
+    enabled:                        true
+    schedule:                       "0 0 0 ? * TUE"
   nodeCaCertificateRenewal:
-    enabled:  true
-    schedule: "0 0 0 ? * TUE"
+    enabled:                        true
+    schedule:                       "0 0 0 ? * TUE"
   telemetryPing:
-    enabled:  true
-    schedule: "R R 0 ? * *"
-  telemetryPing: "0 15 * * * *"
-  terminatedPodGcThresholdMinutes: 720
+    enabled:                        true
+    schedule:                       "R R 0 ? * *"
+  terminatedPodGc:
+    enabled:                        true
+    schedule:                       "0 15 * * * *"
+  terminatedPodGcDelayMilliseconds: 1000
+  terminatedPodGcThresholdMinutes:  720
 ```
 
 <table>
@@ -131,6 +134,15 @@ jobs:
         <td>
           `object:` Schedules the deletion of pods that have been terminated for at least
           **terminatedPodGcThresholdMinutes**.  This defaults to every 15 minutes.
+        </td>
+    </tr>
+    <tr>
+        <td>**terminatedPodGcDelayMilliseconds**</td>
+        <td>
+          `integer:` Specifies the delay in milliseconds that the terminated pod removal job
+          will pause after scanning a namespace for terminated jobs and also after each job
+          removal to reduce pressure on the API Server.  This defaults to **1000 milliseconds**
+          (1 second).
         </td>
     </tr>
     <tr>
