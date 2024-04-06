@@ -1,10 +1,10 @@
 ---
 sidebar_position: 6
 displayed_sidebar: neonkube
-title: Kubelet Options
+title: Kubernetes Options
 hide_title: false
 hide_table_of_contents: true
-description: NeonKUBE Kubelet options
+description: NeonKUBE Kubernetes options
 last_update:
   author: NeonFORGE Team
 ---
@@ -15,17 +15,13 @@ import Image from "@theme/IdealImage";
 import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
 
-# Kubelet Service Options
+# Kubernetes Options
 
-Every node in a Kubernetes cluster has a running **Kubelet Service** which is
-responsible for managing the containers scheduled to run on each node. These
-options let you customize some of the cluster-wide Kubelet settings.
-
-Here's what the Kubelet options look like, with the default values or
+Here's what the Kubernetes options look like, with the default values or
 **[required]** for properties that must be specified:
 
 ```yaml
-kubelet:
+kubernetes:
   allowPodsOnControlPlane:                false
   apiServer:
     verbosity:                            2
@@ -37,6 +33,7 @@ kubelet:
   shutdownGracePeriodCriticalPodsSeconds: 120
   shutdownGracePeriodSeconds:             360
   systemReserved:                         [empty map]
+  terminatedPodGcThreshold:               500
 ```
 
 :::note 
@@ -92,7 +89,7 @@ desktop cluster).
     <tr>
         <td><b>evictionHard</b></td>
         <td>
-            `map:` Used to specify hard eviction thresholds that Kubelet will use to evict pods with our
+            `map:` Used to specify hard eviction thresholds that Kubernetes will use to evict pods with our
             a grace period.  See [Hard eviction thresholds](https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#hard-eviction-thresholds)
             for more information.
 
@@ -149,7 +146,7 @@ desktop cluster).
     <tr>
         <td><b>shutdownGracePeriodCriticalPodsSeconds</b></td>
         <td>
-            `integer:` Specifies the seconds that Kubelet will delay node shutdown for critical pods.
+            `integer:` Specifies the seconds that Kubernetes will delay node shutdown for critical pods.
             This defaults to **120 seconds** and must be less than **shutdownGracePeriodSeconds**
             and not less than **30 seconds**.
         </td>
@@ -157,7 +154,7 @@ desktop cluster).
     <tr>
         <td><b>shutdownGracePeriodSeconds</b></td>
         <td>
-            `integer:` Specifies seconds Kubelet will delay node shutdown while gracefully terminating pods
+            `integer:` Specifies seconds Kubernetes will delay node shutdown while gracefully terminating pods
             on the node.  This is expressed in seconds and must be at least **30 seconds**.
             This defaults to **360 seconds**.
         </td>
@@ -170,6 +167,16 @@ desktop cluster).
             for more information.
 
             This defaults to an **empty map** to use the Kubernetes defaults.
+        </td>
+    </tr>
+    <tr>
+        <td><b>terminatedPodGcThreshold</b></td>
+        <td>
+            Specifies the threshold at which the terminated pods will start being garbage collected
+            by Kubernetes.  Terminated pods will be deleted once the number of terminated pods exceeds
+            this number.
+
+            This defaults to **500**.
         </td>
     </tr>
 </table>
