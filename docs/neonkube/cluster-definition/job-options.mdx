@@ -66,8 +66,6 @@ Here's what the cluster job options look like, with the default values or
 
 ```yaml
 jobs:
-    enabled:  true
-    schedule: "0 0 0 ? * TUE"
   controlPlaneCertificateRenewal:
     enabled:  true
     schedule: "0 0 0 ? * TUE"
@@ -83,4 +81,65 @@ jobs:
   telemetryPing:
     enabled:  true
     schedule: "R R 0 ? * *"
+  telemetryPing: "0 15 * * * *"
+  terminatedPodGcThresholdMinutes: 720
 ```
+
+<table>
+    <thead>
+        <th>Property</th>
+        <th>Description</th>
+    </thead>
+    <tr>
+        <td>**controlPlaneCertificateRenewal**</td>
+        <td>
+          `object:` Schedules renewal of the Kubernetes cluster certificate.  This defaults
+          to a random time between 12:00am and 1:00am (UTC) on Tuesdays.
+        </td>
+    </tr>
+    <tr>
+        <td>**harborImagePush**</td>
+        <td>
+          `object:` Schedules the persisting of NEONKUBE cluster container images from
+          cluster nodes to Harbor as required.  This defaults to a random time between
+          12:00am and 1:00am (UTC) on Tuesdays.
+        </td>
+    </tr>
+    <tr>
+        <td>**linuxSecurityPatches**</td>
+        <td>
+          `object:` Schedules Kubernetes control plane certificate renewal.   This defaults
+          to a random time between 12:00am and 1:00am (UTC) on Tuesdays.
+        </td>
+    </tr>
+    <tr>
+        <td>**nodeCaCertificateRenewal**</td>
+        <td>
+          `object:` Schedules updates of the public certificate authorities on cluster nodes.
+          This defaults to a random time between 12:00am and 1:00am (UTC) on Tuesdays.
+        </td>
+    </tr>
+    <tr>
+        <td>**telemetryPing**</td>
+        <td>
+          `object:` Schedules the application of Linux security patches on the cluster nodes.
+          This defaults to a random time between 12:00am and 1:00am (UTC) on Tuesdays.
+        </td>
+    </tr>
+    <tr>
+        <td>**terminatedPodGc**</td>
+        <td>
+          `object:` Schedules the deletion of pods that have been terminated for at least
+          **terminatedPodGcThresholdMinutes**.  This defaults to every 15 minutes.
+        </td>
+    </tr>
+    <tr>
+        <td>**terminatedPodGcThresholdMinutes**</td>
+        <td>
+          `integer:` Specifies the number of minutes after a pod terminates sucessfully or not
+          before it becomes eligible for removal by the **neon-cluster-operator**.  This
+          defaults to **720 minutes** (12 hours) to give operations teams a chance to investigate
+          potential recent problems.
+        </td>
+    </tr>
+</table>
