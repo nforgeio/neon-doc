@@ -33,7 +33,6 @@ kubernetes:
   shutdownGracePeriodCriticalPodsSeconds: 120
   shutdownGracePeriodSeconds:             360
   systemReserved:                         [empty map]
-  terminatedPodGcThreshold:               500
 ```
 
 :::note 
@@ -167,16 +166,6 @@ desktop cluster).
             for more information.
 
             This defaults to an **empty map** to use the Kubernetes defaults.
-        </td>
-    </tr>
-    <tr>
-        <td><b>terminatedPodGcThreshold</b></td>
-        <td>
-            Specifies the threshold at which the terminated pods will start being garbage collected
-            by Kubernetes.  Terminated pods will be deleted once the number of terminated pods exceeds
-            this number.
-
-            This defaults to **500**.
         </td>
     </tr>
 </table>
