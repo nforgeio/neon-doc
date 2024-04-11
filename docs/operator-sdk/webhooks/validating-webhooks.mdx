@@ -27,9 +27,8 @@ import Tabs from "@theme/Tabs";
 
 ## Introduction
 
-Validating webhooks can be used to perform validations that go beyond the
-capabilities of OpenAPI schema validation. A validating Webhook can reject the
-request, but it cannot modify the object received in the request.
+Validating webhooks can be used to perform validations that go beyond the capabilities of OpenAPI schema validation. A
+validating Webhook can reject the request, but it cannot modify the object received in the request.
 
 ```mermaid
 flowchart TD
@@ -53,7 +52,7 @@ flowchart TD
     scope: "*")]
 public class PodWebhook : ValidatingWebhookBase<V1Pod>
 {
-    public override async Task<ValidationResult> CreateAsync(V1Pod entity, bool dryRun)
+    public override async Task<ValidationResult> CreateAsync(V1Pod entity, bool dryRun, CancellationToken cancellationToken = default)
     {
         if (entity.Metadata.Name == "invalid-entity")
         {
@@ -63,7 +62,7 @@ public class PodWebhook : ValidatingWebhookBase<V1Pod>
         return ValidationResult.Success();
     }
 
-    public override async Task<ValidationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun)
+    public override async Task<ValidationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun, CancellationToken cancellationToken = default)
     {
         if (entity.Metadata.Name == "invalid-entity")
         {

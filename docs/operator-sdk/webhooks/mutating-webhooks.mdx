@@ -27,9 +27,8 @@ import Tabs from "@theme/Tabs";
 
 ## Introduction
 
-Mutating webhooks are most frequently used for setting default values. They can
-modify objects by creating a patch that will be sent back in the admission
-response.
+Mutating webhooks are most frequently used for setting default values. They can modify objects by creating a patch that
+will be sent back in the admission response.
 
 ```mermaid
 flowchart TD
@@ -53,7 +52,7 @@ public class PodWebhook : MutatingWebhookBase<V1Pod>
 {
     private bool modified = false;
 
-    public override async Task<MutationResult> CreateAsync(V1Pod entity, bool dryRun)
+    public override async Task<MutationResult> CreateAsync(V1Pod entity, bool dryRun, CancellationToken cancellationToken = default)
     {
         if (modified)
         {
@@ -63,7 +62,7 @@ public class PodWebhook : MutatingWebhookBase<V1Pod>
         return await Task.FromResult(MutationResult.NoChanges());
     }
 
-    public override async Task<MutationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun)
+    public override async Task<MutationResult> UpdateAsync(V1Pod entity, V1Pod oldEntity, bool dryRun, CancellationToken cancellationToken = default)
     {
         if (modified)
         {
