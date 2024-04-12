@@ -1,2 +1,2 @@
-# Disable the prettier for all files since it can corrput the docs.
+# Disable the prettier for all files since it can corrupt the docs.
 **/*
