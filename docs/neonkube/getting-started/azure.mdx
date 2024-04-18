@@ -73,7 +73,6 @@ az vm image terms accept --urn neonforge:neonkube:0-11-0-beta-0:0.11.0
 ```
 
 :::note
-
 Azure doesn't directly support semantic versioning of their Virtual Machine
 Images, so we have to do some version contortions to get this to work. We'll
 probably add a NeonCLI command that figures out the version and then launches
@@ -171,12 +170,10 @@ neon cluster setup root@my-azure-cluster
 Then wait for cluster setup to complete.
 
 :::note
-
 These operations are currently coordinated by NeonDESKTOP or NeonCLI running on
 your machine, so you'll need to keep your computer running and connected to the
 network.
 
 We plan on supporting cloud based deployment in the future where these
 operations will be managed in the cloud, rather than from your computer.
-
 :::

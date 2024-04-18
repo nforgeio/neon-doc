@@ -23,7 +23,6 @@ scheduled to run on each node. These options let you customize some of the clust
 Here's what the Kubelet options look like, with the default values or **[required]** for properties that must be
 specified:
 
-{/* prettier-ignore */}
 ```yaml
 kubelet:
   allowPodsOnControlPlane:                false
@@ -40,10 +39,8 @@ kubelet:
 ```
 
 :::note
-
 **allowPodsOnControlPlane** defaults to **false** for cluster that have worker nodes or **true** for clusters with only
 control-plane nodes (such as the desktop cluster).
-
 :::
 
 <table>
