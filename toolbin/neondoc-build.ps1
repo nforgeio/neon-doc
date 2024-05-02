@@ -234,9 +234,10 @@ try
 
             if ($null -eq $response)
             {
-                Write-Output " "
-                Write-Output "** GitHub Pages not published: nothing changed **"
-                Write-Output " "
+                Write-Error " "
+                Write-Error "** GitHub Pages not published: nothing changed **"
+                Write-Error " "
+                exit 0
             }
 
             # Commit and push changes to the [$docSiteRoot] repo.
@@ -247,6 +248,8 @@ try
                 Write-Error "*** ERROR: [git add] failed."
                 exit 1
             }
+
+            # Commit and publish the doc site.
 
             git commit -m "Publish documentation, NeonKUBE Version: $neonKubeVersion"
             if (-not $?)
