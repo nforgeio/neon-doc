@@ -36,7 +36,7 @@ Install the
 [Azure CLI](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html).
 
 Run the following command to obtain your subscription credentials (you'll need to subsitute
-your Azure username for **USER** and your Azure subscription ID for **AZURE_SUBSCRIPTION_ID** below):
+your Azure username for **[USER]** and your Azure subscription ID for **[AZURE_SUBSCRIPTION_ID]** below):
 
 ```plain
 az ad sp create-for-rbac --name USER --role owner --scopes /subscriptions/AZURE_SUBSCRIPTION_ID
@@ -48,7 +48,6 @@ The output will be something like:
 {
   "appId": "[AZURE_CLIENT_ID]",
   "displayName": "example-app-name",
-  "name": "http://example-app-name",
   "password": "[AZURE_CLIENT_SECRET]",
   "tenant": "[AZURE_TENANT_ID]"
 }
