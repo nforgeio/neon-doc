@@ -44,7 +44,7 @@ function Get-KubeVersion
         [string]$name
     )
 
-    $version = $(& neon-build read-version "$env:NK_ROOT\Lib\Neon.Kube\KubeVersions.cs" $name)
+    $version = $(& neon-build read-version "$env:NK_ROOT\Lib\Neon.Kube\KubeVersion.cs" $name)
 
     if ([System.String]::IsNullOrEmpty($version))
     {
