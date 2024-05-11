@@ -35,7 +35,8 @@ EULA on Azure.
 Install the
 [Azure CLI](https://api-docs.neonforge.com/neonkube/api/Neon.Kube.ClusterDef.ClusterDefinition.html).
 
-Run the following command to obtain your subscription credentials:
+Run the following command to obtain your subscription credentials (you'll need to subsitute
+your Azure username for **USER** and your Azure subscription ID for **AZURE_SUBSCRIPTION_ID** below):
 
 ```plain
 az ad sp create-for-rbac --name USER --role owner --scopes /subscriptions/AZURE_SUBSCRIPTION_ID
@@ -82,7 +83,6 @@ The **0-11-0-beta-0:0.11.0** version part of the URN above is formatted with the
 part being the full semantic version of the release _0.11.0_ with all dots
 replaced by dashes like _0-11-0_ and the second part being the **major**,
 **minor**, and **patch** version of the release only.
-
 :::
 
 ## Cluster Definition
@@ -92,11 +92,9 @@ Create a
 that describes the cluster.
 
 :::warning
-
 Make sure that the Azure account has enough
 [Resource Quota](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits)
 to deploy cluster virtual machines.
-
 :::
 
 Be sure to substitute the following from the previous steps:
