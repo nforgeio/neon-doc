@@ -48,41 +48,64 @@ setx ND_ROOT "%ND_ROOT%" /M                               > nul
 setx ND_SITE_ROOT "%NF_REPOS%\nforgeio-docs.github.io" /M > nul
 setx ND_NODEJS_VERSION "%ND_NODEJS_VERSION%" /M           > nul
 
+REM Temporarily add [%NF_ROOT%\neonSDK\ToolBin] to the PATH so
+REM we'll be able to use things like [pathtool].
+REM
+REM NOTE: This assumes that NeonSDK is configured first.
+
+set PATH=%PATH%;%NF_ROOT%\neonSDK\ToolBin
+
 REM Check whether NVM (Node Version Manager) is installed and install
-REM when it's not present.
+REM if it's not present.
 
 where NVM > nul 2> nul
 
-if NOT "%ERRORLEVEL%" == "0" (
-	echo Installing NVM (Node Version Manager)
-	echo.
-	echo *** Answer YES to manage any installed Node.js versions.
-	"%ND_ROOT%\toolbin\nvm-setup.exe" /silent
-	echo.
+if NOT ERRORLEVEL 0 (
+    echo "Installing NVM Node Version Manager"
+    echo.
+    echo "*** Answer YES to manage any installed Node.js versions."
 
+    "%ND_ROOT%\toolbin\nvm-setup.exe" /silent
+
+    echo.
+	
 	REM The NVM environment variables aren't set locally after
 	REM setup, so we'll do this explicitly here.
 
 	set NVM_HOME=%APPDATA%\nvm
 	set NVM_SYMLINK=%ProgramFiles%\nodejs
-	set PATH=%PATH%;%NVM_HOME%;%NVM_SYMLINK%
+	
+	pathtool -dedup -system -add "%NVM_HOME%"
+	pathtool -dedup -system -add "%ProgramFiles%\nodejs"
+	pathtool -dedup -system -add "%NVM_SYMLINK%"
 )
 
 REM Configure the PATH.
 
 pathtool -dedup -system -add "%ND_ROOT%\toolbin"
 
-REM Install the required version of Node.js.
+REM Install the required version of [Node.js] if
+REM it's not already installed.
+
+where node > nul 2> nul
+if NOT ERRORLEVEL 0 goto installNode
+
+node --version | grep --quiet --regexp '%ND_NODEJS_VERSION%\s' 
+if ERRORLEVEL 0 goto nodeInstalled
+
+:installNode
 
 nvm install %ND_NODEJS_VERSION%
 nvm use %ND_NODEJS_VERSION%
 
-REM Install Yarn.
+:nodeInstalled
+
+REM Install Yarn (essentially a NOP if already installed) 
 
 cd %ND_ROOT%
 npm install --global yarn
 
-REM Install the Docusaurus tools.
+REM Install the Docusaurus tools (essentially a NOP if already installed)
 
 cd %ND_ROOT%
 npm install
@@ -91,7 +114,7 @@ REM Update latest browser information.
 
 echo y | npx update-browserslist-db@latest
 
-REM Build the documentation to: ~/build
+REM Build the documentation to: $/build
 REM
 REM NOTE: Publication is performed using the NEONCLOUD neon-kube tool.
 
