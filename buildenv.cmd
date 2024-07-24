@@ -48,6 +48,13 @@ setx ND_ROOT "%ND_ROOT%" /M                               > nul
 setx ND_SITE_ROOT "%NF_REPOS%\nforgeio-docs.github.io" /M > nul
 setx ND_NODEJS_VERSION "%ND_NODEJS_VERSION%" /M           > nul
 
+REM Temporarily add [%NF_ROOT%\neonSDK\ToolBin] to the PATH so
+REM we'll be able to use things like [pathtool].
+REM
+REM NOTE: This assumes that NeonSDK is configured first.
+
+set PATH=%PATH%;%NF_ROOT%\neonSDK\ToolBin
+
 REM Check whether NVM (Node Version Manager) is installed and install
 REM if it's not present.
 
